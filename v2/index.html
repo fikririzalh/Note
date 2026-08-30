@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Informasi Manajemen — Rancangan Sistem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #1E1C18;
+    --panel: #28251E;
+    --panel-2: #322E25;
+    --paper: #F2ECDC;
+    --paper-dim: #B9B098;
+    --yellow: #F2B400;
+    --rust: #C1440E;
+    --steel: #45575A;
+    --steel-light: #7E9092;
+    --radius: 4px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--ink);
+    background-image:
+      radial-gradient(circle at 15% 5%, rgba(242,180,0,0.05), transparent 40%),
+      radial-gradient(circle at 90% 90%, rgba(193,68,14,0.06), transparent 45%);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  ::selection{ background: var(--yellow); color: var(--ink); }
+
+  :focus-visible{
+    outline: 2px solid var(--yellow);
+    outline-offset: 3px;
+  }
+
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  /* ---------- corrugated divider (signature motif) ---------- */
+  .stripe{
+    height: 6px;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--yellow), var(--yellow) 10px,
+      var(--rust) 10px, var(--rust) 20px
+    );
+    opacity: 0.9;
+  }
+
+  /* ---------- topbar ---------- */
+  header.topbar{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--panel);
+    border-bottom: 1px solid rgba(242,236,220,0.1);
+  }
+  .topbar-inner{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 24px 0 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .wordmark-main{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1px;
+    line-height: 1;
+    color: var(--paper);
+  }
+  .wordmark-main span{ color: var(--yellow); }
+  .wordmark-sub{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--paper-dim);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  nav.tabs{
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 0;
+    scrollbar-width: thin;
+  }
+  .tab{
+    background: transparent;
+    border: none;
+    color: var(--paper-dim);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    padding: 10px 14px 12px 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .tab .tab-num{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--steel-light);
+  }
+  .tab:hover{ color: var(--paper); }
+  .tab[aria-selected="true"]{
+    color: var(--paper);
+    border-bottom-color: var(--yellow);
+  }
+  .tab[aria-selected="true"] .tab-num{ color: var(--yellow); }
+
+  /* ---------- layout ---------- */
+  main{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 48px 24px 80px 24px;
+  }
+  .panel{ display: none; animation: fade .35s ease; }
+  .panel.active{ display: block; }
+  @keyframes fade{ from{ opacity:0; transform: translateY(6px); } to{ opacity:1; transform: translateY(0); } }
+
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 10px;
+  }
+  h1.headline{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 0.98;
+    letter-spacing: 0.5px;
+    margin: 0 0 18px 0;
+    max-width: 15ch;
+  }
+  h2.panel-title{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 4vw, 44px);
+    letter-spacing: 0.5px;
+    margin: 0 0 8px 0;
+  }
+  p.lede{
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--paper);
+    max-width: 62ch;
+    margin: 0 0 28px 0;
+  }
+  p.lede.dim{ color: var(--paper-dim); }
+
+  /* ---------- stat chips (hero) ---------- */
+  .chiprow{ display:flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+  .chip{
+    position: relative;
+    background: var(--panel-2);
+    border: 1px dashed rgba(242,236,220,0.28);
+    border-radius: var(--radius);
+    padding: 12px 16px 12px 22px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--paper-dim);
+  }
+  .chip::before{
+    content: '';
+    position: absolute;
+    left: 8px; top: 50%;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 1px solid rgba(242,236,220,0.3);
+    transform: translateY(-50%);
+  }
+  .chip b{ color: var(--paper); font-family: 'Inter',sans-serif; font-weight:700; display:block; font-size: 14px; margin-bottom: 2px; }
+
+  /* ---------- observasi cards ---------- */
+  .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; }
+  @media (max-width: 720px){ .grid-2{ grid-template-columns: 1fr; } }
+
+  .grid-3{ display:grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 8px; }
+  @media (max-width: 900px){ .grid-3{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px){ .grid-3{ grid-template-columns: 1fr; } }
+
+  .clip-card{
+    background: var(--panel);
+    border: 1px solid rgba(242,236,220,0.1);
+    border-radius: var(--radius);
+    padding: 26px 24px 22px 24px;
+    position: relative;
+  }
+  .clip-card::before{
+    content: '';
+    position: absolute;
+    top: -9px; left: 24px;
+    width: 34px; height: 18px;
+    background: var(--steel);
+    border-radius: 3px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  }
+  .clip-card h3{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.4px;
+    margin: 6px 0 4px 0;
+  }
+  .clip-card .tag-small{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .clip-card ul{
+    margin: 14px 0 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .clip-card li{
+    padding: 9px 0;
+    border-top: 1px solid rgba(242,236,220,0.08);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--paper);
+  }
+  .clip-card li:first-of-type{ border-top: none; }
+
+  .insight-box{
+    margin-top: 22px;
+    background: rgba(242,180,0,0.08);
+    border-left: 3px solid var(--yellow);
+    padding: 16px 18px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .insight-box b{ color: var(--yellow); }
+
+  /* ---------- singkatan satuan (abbr grid) ---------- */
+  .abbr-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+  }
+  @media (max-width: 900px){ .abbr-grid{ grid-template-columns: repeat(3,1fr); } }
+  @media (max-width: 560px){ .abbr-grid{ grid-template-columns: repeat(2,1fr); } }
+  .abbr-grid span{
+    display: block;
+    background: var(--panel-2);
+    border: 1px dashed rgba(242,236,220,0.2);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--paper);
+  }
+  .abbr-grid span i{
+    display: block;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--paper-dim);
+    font-size: 11px;
+    margin-top: 3px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- fitur / pegboard ---------- */
+  .legend{ display:flex; gap: 18px; flex-wrap: wrap; margin: 4px 0 22px 0; }
+  .legend-item{ display:flex; align-items:center; gap: 8px; font-size: 13px; color: var(--paper-dim); }
+  .swatch{ width: 12px; height: 12px; border-radius: 2px; display:inline-block; }
+
+  .filters{ display:flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .filter-btn{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: var(--panel-2);
+    color: var(--paper-dim);
+    border: 1px solid rgba(242,236,220,0.15);
+    border-radius: 999px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .filter-btn:hover{ color: var(--paper); border-color: var(--paper-dim); }
+  .filter-btn.active{ background: var(--yellow); color: var(--ink); border-color: var(--yellow); font-weight:600; }
+
+  .tag-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 900px){ .tag-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 560px){ .tag-grid{ grid-template-columns: 1fr; } }
+
+  .tag-card{
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 20px 16px 16px 16px;
+    position: relative;
+    border-top: 4px solid var(--steel);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .tag-card:hover{ transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0,0,0,0.35); }
+  .tag-card::before{
+    content:'';
+    position:absolute; top: -6px; left: 50%; transform: translateX(-50%);
+    width: 10px; height:10px; border-radius: 50%;
+    background: var(--ink); border: 2px solid var(--panel);
+  }
+  .tag-card[data-cat="mvp"]{ border-top-color: var(--rust); }
+  .tag-card[data-cat="tambahan"]{ border-top-color: var(--yellow); }
+  .tag-card[data-cat="pending"]{ border-top-color: var(--steel); }
+  .tag-card[data-cat="cut"]{ border-top-color: var(--steel-light); }
+
+  .tag-card .cat-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+  .tag-card[data-cat="mvp"] .cat-label{ color: var(--rust); }
+  .tag-card[data-cat="tambahan"] .cat-label{ color: var(--yellow); }
+  .tag-card[data-cat="pending"] .cat-label{ color: var(--steel-light); }
+  .tag-card[data-cat="cut"] .cat-label{ color: var(--steel-light); }
+
+  .tag-card h4{
+    font-size: 15.5px;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .tag-card p{
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--paper-dim);
+    margin: 0;
+  }
+
+  /* ---------- arsitektur ---------- */
+  .arch-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 14px; }
+  @media (max-width: 720px){ .arch-row{ grid-template-columns: 1fr; } }
+  .arch-card{
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid rgba(242,236,220,0.1);
+  }
+  .arch-card .badge{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .arch-card.job1 .badge{ background: rgba(69,87,90,0.35); color: var(--steel-light); }
+  .arch-card.job2 .badge{ background: rgba(193,68,14,0.25); color: #E88052; }
+  .arch-card h3{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.4px;
+    margin: 0 0 10px 0;
+  }
+  .arch-card p{ font-size: 14px; line-height: 1.6; color: var(--paper); margin:0; }
+
+  .connector{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--paper-dim);
+    padding: 10px 0 30px 0;
+  }
+  .connector b{ color: var(--yellow); }
+
+  .stack-grid{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+  }
+  @media (max-width: 720px){ .stack-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 480px){ .stack-grid{ grid-template-columns: 1fr; } }
+  .stack-chip{
+    background: var(--panel-2);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    border-left: 3px solid var(--yellow);
+  }
+  .stack-chip b{ display:block; font-size: 14px; margin-bottom: 4px; }
+  .stack-chip span{ font-size: 12.5px; color: var(--paper-dim); line-height: 1.5; }
+
+  /* ---------- timeline ---------- */
+  .tl{ position: relative; margin-top: 10px; padding-left: 4px; }
+  .tl-step{
+    display:grid;
+    grid-template-columns: 60px 1fr;
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1px solid rgba(242,236,220,0.1);
+  }
+  .tl-step:first-child{ border-top:none; }
+  .tl-num{
+    font-family:'Bebas Neue', sans-serif;
+    font-size: 34px;
+    color: var(--yellow);
+    line-height: 1;
+  }
+  .tl-body h4{ font-size: 16px; margin: 0 0 4px 0; }
+  .tl-body .weeks{ font-family:'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--rust); text-transform: uppercase; letter-spacing: 0.05em; }
+  .tl-body p{ font-size: 13.5px; color: var(--paper-dim); margin: 6px 0 0 0; line-height: 1.5; }
+
+  .next-box{
+    margin-top: 40px;
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 26px 24px;
+    border: 1px solid rgba(242,236,220,0.1);
+  }
+  .next-box h3{
+    font-family:'Bebas Neue', sans-serif;
+    font-size: 24px;
+    margin: 0 0 14px 0;
+    letter-spacing: 0.4px;
+  }
+  .next-box ol{ margin:0; padding-left: 20px; }
+  .next-box li{ font-size: 14px; line-height: 1.7; color: var(--paper); padding-left: 4px; }
+
+  footer.foot{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px 40px 24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--paper-dim);
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="stripe"></div>
+  <div class="topbar-inner">
+    <div>
+      <div class="wordmark-main">SIM<span>PRO</span></div>
+      <div class="wordmark-sub">Rancangan Sistem Informasi Manajemen — Proyek Magang/KP</div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Navigasi bagian">
+      <button class="tab" role="tab" aria-selected="true" data-target="panel-1"><span class="tab-num mono">01</span>RINGKASAN</button>
+      <button class="tab" role="tab" aria-selected="false" data-target="panel-2"><span class="tab-num mono">02</span>OBSERVASI</button>
+      <button class="tab" role="tab" aria-selected="false" data-target="panel-3"><span class="tab-num mono">03</span>TEMUAN LAPANGAN</button>
+      <button class="tab" role="tab" aria-selected="false" data-target="panel-4"><span class="tab-num mono">04</span>ANALISIS FITUR</button>
+      <button class="tab" role="tab" aria-selected="false" data-target="panel-5"><span class="tab-num mono">05</span>ARSITEKTUR</button>
+      <button class="tab" role="tab" aria-selected="false" data-target="panel-6"><span class="tab-num mono">06</span>TIMELINE</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- PANEL 1 — RINGKASAN -->
+  <section class="panel active" id="panel-1">
+    <div class="eyebrow">Kerja Praktik · Program Studi IT · Perguruan Tinggi</div>
+    <h1 class="headline">DARI CATATAN TANGAN<br>KE SISTEM TERPUSAT.</h1>
+    <p class="lede">Rancangan Sistem Informasi Manajemen untuk Toko — bukan sekadar website formalitas kampus, tapi sistem yang benar-benar dipakai toko setiap hari: mencatat stok, transaksi, dan laporan yang selama ini masih manual.</p>
+    <p class="lede dim">Dibangun dari observasi langsung di lapangan lebih dulu, baru masuk ke desain dan pengembangan — supaya fitur yang dibuat menjawab masalah nyata toko, bukan asumsi mahasiswa.</p>
+    <div class="chiprow">
+      <div class="chip"><b>2 Tahap</b>Observasi lapangan: awal &amp; lanjutan</div>
+      <div class="chip"><b>20 Fitur</b>Dipetakan &amp; diprioritaskan</div>
+      <div class="chip"><b>2 Jalur Kerja</b>Internal &amp; katalog publik</div>
+      <div class="chip"><b>8–12 Minggu</b>Estimasi durasi KP</div>
+    </div>
+  </section>
+
+  <!-- PANEL 2 — OBSERVASI -->
+  <section class="panel" id="panel-2">
+    <div class="eyebrow">Tahap 01</div>
+    <h2 class="panel-title">Observasi Sebelum Desain</h2>
+    <p class="lede dim">Dua hari pertama difokuskan untuk memahami toko apa adanya, bukan langsung menyodorkan daftar fitur.</p>
+
+    <div class="grid-2">
+      <div class="clip-card">
+        <span class="tag-small mono">Hari 1</span>
+        <h3>Mengamati</h3>
+        <ul>
+          <li>Ikuti alur transaksi kasir dari awal sampai akhir tanpa mengganggu operasional.</li>
+          <li>Catat fakta konkret yang terlihat, bukan kesimpulan atau asumsi pribadi.</li>
+          <li>Kenali bagaimana barang disusun dan bagaimana karyawan sebenarnya bicara soal stok.</li>
+        </ul>
+      </div>
+      <div class="clip-card">
+        <span class="tag-small mono">Hari 2</span>
+        <h3>Memvalidasi</h3>
+        <ul>
+          <li>Konfirmasi dugaan hari pertama langsung ke karyawan dan pemilik secara santai.</li>
+          <li>Amati sisi gudang, penyimpanan, dan proses barang masuk dari supplier.</li>
+          <li>Mulai obrolan semi-terstruktur, dua–tiga pertanyaan spesifik, bukan interogasi penuh.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <b>Temuan awal yang sudah tervalidasi:</b> karyawan mencari barang dengan menyebut nama ("semen masih ada?"), bukan kode atau ID — jadi pencarian berbasis nama harus jadi cara utama, kode barang cukup jadi identitas data di belakang layar.
+    </div>
+  </section>
+
+  <!-- PANEL 3 — TEMUAN LAPANGAN DETAIL -->
+  <section class="panel" id="panel-3">
+    <div class="eyebrow">Tahap 01 — Kunjungan Lanjutan</div>
+    <h2 class="panel-title">Dari Buku Catatan ke Detail Operasional</h2>
+    <p class="lede dim">Kunjungan susulan menggali kebiasaan spesifik yang tidak terlihat dari observasi permukaan — mulai dari sistem kasbon sampai cara paku dibungkus.</p>
+
+    <div class="grid-3">
+      <div class="clip-card">
+        <span class="tag-small mono">Keuangan</span>
+        <h3>Pencatatan Manual</h3>
+        <ul>
+          <li>Buku harian mencatat pemasukan &amp; pengeluaran.</li>
+          <li>Buku mingguan hanya mencatat pemasukan — belum konsisten.</li>
+          <li>Pembuatan nota transaksi bersifat opsional.</li>
+        </ul>
+      </div>
+      <div class="clip-card">
+        <span class="tag-small mono">Harga &amp; Kasbon</span>
+        <h3>Kode Rahasia &amp; Titip Bayar</h3>
+        <ul>
+          <li>Harga ditulis pakai kode huruf rahasia di label fisik — kebiasaan toko, bukan kebutuhan sistem.</li>
+          <li>Tidak ada harga khusus untuk pelanggan tertentu.</li>
+          <li>Sistem kasbon (utang) sudah berjalan, tanpa bunga atau harga berbeda.</li>
+        </ul>
+      </div>
+      <div class="clip-card">
+        <span class="tag-small mono">Retur</span>
+        <h3>Beli Dulu, Coba Dulu</h3>
+        <ul>
+          <li>Pelanggan bayar penuh lebih dulu sebelum barang dicoba di rumah.</li>
+          <li>Kalau cocok, transaksi selesai begitu saja.</li>
+          <li>Kalau tidak cocok, barang &amp; uang sama-sama dikembalikan.</li>
+        </ul>
+      </div>
+      <div class="clip-card">
+        <span class="tag-small mono">Proses Fisik</span>
+        <h3>Pembungkusan &amp; Pengiriman</h3>
+        <ul>
+          <li>Paku dibungkus pakai alat khusus bertakaran tetap — jadi paket siap jual, bukan ditimbang manual tiap transaksi.</li>
+          <li>Alamat pengiriman saat ini hanya diandalkan dari ingatan, disampaikan lisan.</li>
+        </ul>
+      </div>
+      <div class="clip-card">
+        <span class="tag-small mono">Diminta Pemilik</span>
+        <h3>Dua Permintaan Langsung</h3>
+        <ul>
+          <li>Fitur Hutang &amp; Piutang — selaras dengan kasbon yang sudah berjalan.</li>
+          <li>Fitur Cek Stok — pemilik cek manual tiap sore, ingin digantikan sistem.</li>
+          <li>Pemilik setuju transisi ke sistem digital, tidak ada resistensi awal.</li>
+        </ul>
+      </div>
+      <div class="clip-card">
+        <span class="tag-small mono">Layout Toko</span>
+        <h3>Section — Belum Lengkap</h3>
+        <ul>
+          <li>Tercatat: batu bata, pasir (2 titik), kayu, besi, semen, atap plastik+kayu, area dekat kasir (campuran).</li>
+          <li>Sebagian barang ada di toko cabang lain — belum sempat dikunjungi langsung.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:32px;">Singkatan Satuan di Buku Catatan</div>
+    <div class="abbr-grid">
+      <span>psr<i>Pasir</i></span>
+      <span>psg<i>Pasang</i></span>
+      <span>k<i>Kawat</i></span>
+      <span>bh<i>1 Buah</i></span>
+      <span>lbr<i>1 Lembar</i></span>
+      <span>krg<i>1 Karung</i></span>
+      <span>bks<i>1 Bungkus</i></span>
+      <span>btg<i>1 Batang</i></span>
+      <span>btl<i>1 Botol</i></span>
+      <span>Ø6 / q6<i>Besi diameter 6mm</i></span>
+    </div>
+
+    <div class="next-box" style="margin-top:32px;">
+      <h3>Perlu Klarifikasi Lanjutan</h3>
+      <ol>
+        <li>Buy &amp; return berlaku untuk semua barang, atau kategori tertentu saja?</li>
+        <li>Ada batas waktu maksimal untuk buy &amp; return?</li>
+        <li>Kasbon: siapa yang berwenang menyetujui, ada batas nominal?</li>
+        <li>Besi dengan kode diameter (Ø6, dst) — satu produk dengan banyak varian, atau produk terpisah per ukuran?</li>
+        <li>Kunjungan ke toko cabang untuk melengkapi data section &amp; stok.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- PANEL 4 — ANALISIS FITUR -->
+  <section class="panel" id="panel-4">
+    <div class="eyebrow">Tahap 02</div>
+    <h2 class="panel-title">Mana yang Beneran Dibutuhkan?</h2>
+    <p class="lede dim">Semua ide fitur dipetakan lebih dulu, lalu disaring berdasarkan masalah nyata toko — bukan berdasarkan "kelihatan keren".</p>
+
+    <div class="legend">
+      <div class="legend-item"><span class="swatch" style="background:var(--rust)"></span>MVP — wajib ada</div>
+      <div class="legend-item"><span class="swatch" style="background:var(--yellow)"></span>Tambahan — nice-to-have</div>
+      <div class="legend-item"><span class="swatch" style="background:var(--steel)"></span>Perlu klarifikasi</div>
+      <div class="legend-item"><span class="swatch" style="background:var(--steel-light)"></span>Dicoret dulu — di luar scope</div>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Semua (20)</button>
+      <button class="filter-btn" data-filter="mvp">MVP</button>
+      <button class="filter-btn" data-filter="tambahan">Tambahan</button>
+      <button class="filter-btn" data-filter="pending">Perlu Klarifikasi</button>
+      <button class="filter-btn" data-filter="cut">Dicoret Dulu</button>
+    </div>
+
+    <div class="tag-grid" id="tagGrid">
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Pencarian by Nama Barang</h4><p>Cara pegawai benar-benar mencari barang: sebut nama, bukan kode.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Kode/ID Barang</h4><p>Tetap dibuat sebagai identitas data di belakang layar, bukan cara pencarian utama.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Data Stok</h4><p>Dimulai dari satuan pasak/sak; satuan campuran (kg, eceran) divalidasi langsung di lapangan.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>CRUD Data Barang</h4><p>Tambah, ubah, dan hapus data barang oleh admin toko.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Transaksi &amp; Cetak Nota</h4><p>Termasuk hitung kembalian otomatis dari uang yang diberikan pelanggan.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Laporan Penjualan &amp; Stok</h4><p>Rekap harian, mingguan, dan bulanan untuk pemilik toko.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Hutang &amp; Piutang (Kasbon)</h4><p>Mendigitalkan sistem kasbon yang sudah berjalan: status lunas/kasbon dan saldo utang per pelanggan.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Notifikasi Stok Menipis</h4><p>Menggantikan kebiasaan pemilik mengecek stok manual setiap sore.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Pencatatan Alamat Pengiriman</h4><p>Titik rawan human error nyata: alamat kirim saat ini hanya diandalkan dari ingatan.</p></div>
+
+      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Foto Produk</h4><p>Nilai tambah tampilan, bukan penentu jalannya transaksi.</p></div>
+      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Lokasi / Rak Barang</h4><p>Berguna kalau toko cukup besar sampai karyawan sering bingung mencari barang.</p></div>
+      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Status Antar Pesanan</h4><p>Menunggu / Diantar / Selesai — versi sederhana tanpa pelacakan langsung.</p></div>
+      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Retur / Buy &amp; Return Bersyarat</h4><p>Bayar dulu, coba di rumah, kembali barang &amp; uang kalau tidak cocok — cakupannya masih perlu dikonfirmasi.</p></div>
+
+      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Klarifikasi</span><h4>Varian Ukuran / Diameter Barang</h4><p>Besi berkode diameter (Ø6, dst) — satu produk banyak varian, atau produk terpisah? Menentukan struktur tabel item.</p></div>
+      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Klarifikasi</span><h4>Kategori Produk Final</h4><p>Sebagian section toko ada di cabang lain yang belum dikunjungi — daftar kategori belum bisa difinalisasi.</p></div>
+
+      <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Sistem Absensi Karyawan</h4><p>Bukan masalah inti toko; berisiko melebarkan scope proyek jadi dua sistem sekaligus.</p></div>
+      <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Pelacakan GPS Real-time</h4><p>Butuh infrastruktur di luar kemampuan proyek KP satu semester.</p></div>
+      <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Notifikasi WhatsApp Otomatis</h4><p>Butuh API berbayar; manfaatnya belum tentu sepadan untuk versi awal.</p></div>
+      <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Replikasi Kode Harga Rahasia</h4><p>Kode alfabet di label fisik murni kebiasaan toko — sistem cukup simpan harga sebagai angka biasa.</p></div>
+      <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Harga Khusus per Pelanggan</h4><p>Dikonfirmasi tidak diperlukan — harga jual sama untuk semua pelanggan, kasbon hanya menunda pembayaran.</p></div>
+    </div>
+  </section>
+
+  <!-- PANEL 5 — ARSITEKTUR & TEKNOLOGI -->
+  <section class="panel" id="panel-5">
+    <div class="eyebrow">Tahap 03</div>
+    <h2 class="panel-title">Dua Jalur Kerja, Satu Data</h2>
+    <p class="lede dim">Sistem dipecah jadi dua bagian dengan urutan prioritas yang jelas — bukan dikerjakan bersamaan dari nol.</p>
+
+    <div class="arch-row">
+      <div class="arch-card job2">
+        <span class="badge">Prioritas Utama</span>
+        <h3>Job 2 — Manajemen Internal</h3>
+        <p>Menyelesaikan masalah operasional harian: data barang, stok, transaksi, kasbon, dan laporan. Ini yang benar-benar dipakai kasir dan pemilik setiap hari.</p>
+      </div>
+      <div class="arch-card job1">
+        <span class="badge">Menyusul Bertahap</span>
+        <h3>Job 1 — Katalog Publik</h3>
+        <p>Menampilkan produk dan info toko ke calon pembeli. Dibangun setelah data produk dari Job 2 stabil, supaya tidak ada input data dua kali.</p>
+      </div>
+    </div>
+    <p class="connector">Job 2 dikerjakan lebih dulu — <b>di situlah masalah nyata toko berada.</b> Job 1 memakai data yang sama, bukan sistem yang terpisah.</p>
+
+    <div class="eyebrow" style="margin-top:8px;">Teknologi</div>
+    <div class="stack-grid">
+      <div class="stack-chip"><b>Laravel (PHP)</b><span>Framework backend — cepat untuk CRUD, autentikasi, dan role pengguna.</span></div>
+      <div class="stack-chip"><b>MySQL</b><span>Database relasional, cocok untuk data transaksi dan stok yang terstruktur.</span></div>
+      <div class="stack-chip"><b>Blade + Tailwind CSS</b><span>Antarmuka ringan tanpa perlu build tool frontend yang rumit.</span></div>
+      <div class="stack-chip"><b>Alpine.js</b><span>Interaktivitas kecil — filter, modal — tanpa framework berat.</span></div>
+      <div class="stack-chip"><b>Chart.js</b><span>Grafik dashboard: tren penjualan dan produk terlaris.</span></div>
+      <div class="stack-chip"><b>Git &amp; GitHub</b><span>Version control dan pelacakan tugas, menyerupai alur kerja tim sungguhan.</span></div>
+    </div>
+  </section>
+
+  <!-- PANEL 6 — TIMELINE -->
+  <section class="panel" id="panel-6">
+    <div class="eyebrow">Tahap 04</div>
+    <h2 class="panel-title">Rencana 8–12 Minggu</h2>
+    <p class="lede dim">Empat tahap besar, disesuaikan dengan durasi KP resmi kampus.</p>
+
+    <div class="tl">
+      <div class="tl-step">
+        <div class="tl-num mono">01</div>
+        <div class="tl-body">
+          <h4>Observasi &amp; Analisis</h4>
+          <div class="weeks mono">Minggu 1–2</div>
+          <p>Wawancara, validasi masalah, ERD awal, dan backlog fitur.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num mono">02</div>
+        <div class="tl-body">
+          <h4>Modul Inti</h4>
+          <div class="weeks mono">Minggu 3–7</div>
+          <p>Autentikasi &amp; role, data barang, stok, pembelian, dan transaksi penjualan.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num mono">03</div>
+        <div class="tl-body">
+          <h4>Laporan &amp; Dashboard</h4>
+          <div class="weeks mono">Minggu 8</div>
+          <p>Rekap penjualan, notifikasi stok menipis, dan produk terlaris.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num mono">04</div>
+        <div class="tl-body">
+          <h4>UAT &amp; Dokumentasi</h4>
+          <div class="weeks mono">Minggu 9–12</div>
+          <p>Uji coba langsung di toko, revisi, manual pengguna, dan serah terima sistem.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-box">
+      <h3>Langkah Selanjutnya</h3>
+      <ol>
+        <li>Tuntaskan klarifikasi terbuka dari kunjungan lanjutan (lihat Tahap 01 — Temuan Lapangan).</li>
+        <li>Kunjungi toko cabang untuk melengkapi data kategori/section yang masih kosong.</li>
+        <li>Finalisasi skema tabel barang (nama, kategori, satuan, varian) berdasarkan hasil klarifikasi.</li>
+        <li>Mulai desain ERD lengkap dan migration Laravel untuk modul inti (barang, stok, transaksi, kasbon).</li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>Rancangan Sistem Informasi Manajemen — v2, diperbarui usai kunjungan lanjutan ke toko.</span>
+  <span>Gunakan tombol panah kiri/kanan atau klik tab di atas untuk berpindah bagian.</span>
+</footer>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  const panels = Array.from(document.querySelectorAll('.panel'));
+
+  function activate(index){
+    tabs.forEach((t,i)=>{
+      const on = i === index;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    panels.forEach((p,i)=>{
+      p.classList.toggle('active', i === index);
+    });
+  }
+
+  tabs.forEach((tab, i)=>{
+    tab.addEventListener('click', ()=>{
+      activate(i);
+      const target = tab.dataset.target;
+      if(target) history.replaceState(null, '', '#' + target);
+    });
+  });
+
+  // Buka panel yang dirujuk dari halaman indeks pencarian.
+  const initialPanel = location.hash.replace('#','');
+  if(initialPanel){
+    const hashIndex = panels.findIndex(p => p.id === initialPanel);
+    if(hashIndex >= 0) activate(hashIndex);
+  }
+
+  document.addEventListener('keydown', (e)=>{
+    const current = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+    if(e.key === 'ArrowRight'){ activate(Math.min(current+1, tabs.length-1)); }
+    if(e.key === 'ArrowLeft'){ activate(Math.max(current-1, 0)); }
+  });
+
+  // feature filter (panel 4)
+  const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+  const tagCards = Array.from(document.querySelectorAll('.tag-card'));
+
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      filterBtns.forEach(b=> b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      tagCards.forEach(card=>{
+        const match = filter === 'all' || card.dataset.cat === filter;
+        card.style.display = match ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
