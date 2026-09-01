@@ -1,86 +1,773 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIMPRO — Index Catatan KP</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#1E1C18;--panel:#28251E;--panel-2:#322E25;--paper:#F2ECDC;--paper-dim:#B9B098;--yellow:#F2B400;--rust:#C1440E;--steel:#45575A;--steel-light:#7E9092;--radius:4px;}
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;min-height:100vh;background:var(--ink);background-image:radial-gradient(circle at 15% 5%,rgba(242,180,0,.05),transparent 40%),radial-gradient(circle at 90% 90%,rgba(193,68,14,.06),transparent 45%);color:var(--paper);font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
-::selection{background:var(--yellow);color:var(--ink)} :focus-visible{outline:2px solid var(--yellow);outline-offset:3px} .mono{font-family:'IBM Plex Mono',monospace}
-.stripe{height:6px;background:repeating-linear-gradient(-45deg,var(--yellow),var(--yellow) 10px,var(--rust) 10px,var(--rust) 20px);opacity:.9}
-.topbar{background:var(--panel);border-bottom:1px solid rgba(242,236,220,.1)} .topbar-inner{max-width:1180px;margin:auto;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
-.wordmark-main{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;line-height:1} .wordmark-main span{color:var(--yellow)} .wordmark-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--paper-dim);text-transform:uppercase;margin-top:3px}
-.top-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel-light);letter-spacing:.05em;text-transform:uppercase}
-main{max-width:1180px;margin:auto;padding:54px 24px 78px}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px}
-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,7vw,76px);line-height:.95;letter-spacing:.5px;margin:0 0 18px;max-width:13ch} .lede{font-size:16px;line-height:1.65;color:var(--paper-dim);max-width:70ch;margin:0}
-.search-shell{margin-top:34px;background:var(--panel);border:1px solid rgba(242,236,220,.1);padding:18px;border-radius:var(--radius);box-shadow:0 16px 42px rgba(0,0,0,.18)}
-.search-row{display:grid;grid-template-columns:1fr auto;gap:10px} .searchbox{display:flex;align-items:center;gap:12px;background:var(--ink);border:1px solid rgba(242,236,220,.18);padding:0 14px;border-radius:var(--radius)} .searchbox:focus-within{border-color:var(--yellow)} .search-icon{color:var(--yellow);font-family:'IBM Plex Mono',monospace;font-weight:600}
-input{width:100%;height:50px;border:0;outline:0;background:transparent;color:var(--paper);font:600 15px Inter,sans-serif} input::placeholder{color:#827b69}
-kbd{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--paper-dim);border:1px solid rgba(242,236,220,.16);padding:3px 6px;border-radius:3px;background:var(--panel-2)}
-.clear{border:1px solid rgba(242,236,220,.15);background:var(--panel-2);color:var(--paper-dim);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0 16px;border-radius:var(--radius);cursor:pointer} .clear:hover{color:var(--paper);border-color:rgba(242,180,0,.45)}
-.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px} .quick button{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--paper-dim);border:1px dashed rgba(242,236,220,.22);background:transparent;padding:7px 10px;border-radius:var(--radius);cursor:pointer} .quick button:hover{color:var(--yellow);border-color:var(--yellow)}
-.section-head{margin:42px 0 16px;display:flex;justify-content:space-between;align-items:end;gap:15px} h2{font-family:'Bebas Neue',sans-serif;font-size:31px;letter-spacing:.5px;margin:0} .count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel-light)}
-.version-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px} .version-card{position:relative;background:var(--panel);border:1px solid rgba(242,236,220,.1);border-radius:var(--radius);padding:25px;text-decoration:none;color:inherit;transition:transform .15s ease,border-color .15s ease} .version-card:hover{transform:translateY(-2px);border-color:rgba(242,180,0,.5)} .version-card.latest{border-top:3px solid var(--yellow)}
-.v-top{display:flex;justify-content:space-between;align-items:start;gap:16px} .vnum{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:.85;color:var(--paper)} .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:rgba(242,180,0,.1);color:var(--yellow);border:1px solid rgba(242,180,0,.3);padding:5px 7px;border-radius:3px} .version-card p{color:var(--paper-dim);font-size:13.5px;line-height:1.55;margin:18px 0 0} .open{display:inline-block;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow)}
-.results{display:grid;gap:10px} .result{display:grid;grid-template-columns:68px 1fr auto;gap:16px;align-items:center;background:var(--panel);border:1px solid rgba(242,236,220,.09);padding:16px 18px;border-radius:var(--radius);text-decoration:none;color:inherit;transition:border-color .15s ease,background .15s ease} .result:hover{border-color:rgba(242,180,0,.45);background:var(--panel-2)} .result-version{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--yellow);letter-spacing:.7px} .result .minor{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--steel-light);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px} .result-title{font-weight:700;font-size:15px;margin-bottom:5px} .result-snippet{font-size:12.5px;line-height:1.5;color:var(--paper-dim);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden} .arrow{font-family:'IBM Plex Mono',monospace;color:var(--steel-light)} mark{background:rgba(242,180,0,.22);color:var(--paper);padding:0 1px}
-.empty{display:none;background:rgba(193,68,14,.08);border-left:3px solid var(--rust);padding:16px 18px;color:var(--paper-dim);font-size:13.5px;line-height:1.6}
-footer{max-width:1180px;margin:auto;padding:0 24px 36px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--paper-dim)}
-@media(max-width:720px){.version-grid{grid-template-columns:1fr}.search-row{grid-template-columns:1fr}.clear{height:42px}.result{grid-template-columns:50px 1fr}.arrow{display:none}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIMPRO — Index Catatan KP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1E1C18;
+      --panel: #28251E;
+      --panel-2: #322E25;
+      --paper: #F2ECDC;
+      --paper-dim: #B9B098;
+      --yellow: #F2B400;
+      --rust: #C1440E;
+      --steel: #45575A;
+      --steel-light: #7E9092;
+      --radius: 4px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--ink);
+      background-image: radial-gradient(circle at 15% 5%, rgba(242, 180, 0, .05), transparent 40%), radial-gradient(circle at 90% 90%, rgba(193, 68, 14, .06), transparent 45%);
+      color: var(--paper);
+      font-family: Inter, sans-serif;
+      -webkit-font-smoothing: antialiased
+    }
+
+    ::selection {
+      background: var(--yellow);
+      color: var(--ink)
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--yellow);
+      outline-offset: 3px
+    }
+
+    .mono {
+      font-family: 'IBM Plex Mono', monospace
+    }
+
+    .stripe {
+      height: 6px;
+      background: repeating-linear-gradient(-45deg, var(--yellow), var(--yellow) 10px, var(--rust) 10px, var(--rust) 20px);
+      opacity: .9
+    }
+
+    .topbar {
+      background: var(--panel);
+      border-bottom: 1px solid rgba(242, 236, 220, .1)
+    }
+
+    .topbar-inner {
+      max-width: 1180px;
+      margin: auto;
+      padding: 17px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap
+    }
+
+    .wordmark-main {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      letter-spacing: 1px;
+      line-height: 1
+    }
+
+    .wordmark-main span {
+      color: var(--yellow)
+    }
+
+    .wordmark-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .06em;
+      color: var(--paper-dim);
+      text-transform: uppercase;
+      margin-top: 3px
+    }
+
+    .top-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--steel-light);
+      letter-spacing: .05em;
+      text-transform: uppercase
+    }
+
+    main {
+      max-width: 1180px;
+      margin: auto;
+      padding: 54px 24px 78px
+    }
+
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 10px
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: .95;
+      letter-spacing: .5px;
+      margin: 0 0 18px;
+      max-width: 13ch
+    }
+
+    .lede {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--paper-dim);
+      max-width: 70ch;
+      margin: 0
+    }
+
+    .search-shell {
+      margin-top: 34px;
+      background: var(--panel);
+      border: 1px solid rgba(242, 236, 220, .1);
+      padding: 18px;
+      border-radius: var(--radius);
+      box-shadow: 0 16px 42px rgba(0, 0, 0, .18)
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px
+    }
+
+    .searchbox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--ink);
+      border: 1px solid rgba(242, 236, 220, .18);
+      padding: 0 14px;
+      border-radius: var(--radius)
+    }
+
+    .searchbox:focus-within {
+      border-color: var(--yellow)
+    }
+
+    .search-icon {
+      color: var(--yellow);
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600
+    }
+
+    input {
+      width: 100%;
+      height: 50px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--paper);
+      font: 600 15px Inter, sans-serif
+    }
+
+    input::placeholder {
+      color: #827b69
+    }
+
+    kbd {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--paper-dim);
+      border: 1px solid rgba(242, 236, 220, .16);
+      padding: 3px 6px;
+      border-radius: 3px;
+      background: var(--panel-2)
+    }
+
+    .clear {
+      border: 1px solid rgba(242, 236, 220, .15);
+      background: var(--panel-2);
+      color: var(--paper-dim);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      padding: 0 16px;
+      border-radius: var(--radius);
+      cursor: pointer
+    }
+
+    .clear:hover {
+      color: var(--paper);
+      border-color: rgba(242, 180, 0, .45)
+    }
+
+    .quick {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px
+    }
+
+    .quick button {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--paper-dim);
+      border: 1px dashed rgba(242, 236, 220, .22);
+      background: transparent;
+      padding: 7px 10px;
+      border-radius: var(--radius);
+      cursor: pointer
+    }
+
+    .quick button:hover {
+      color: var(--yellow);
+      border-color: var(--yellow)
+    }
+
+    .section-head {
+      margin: 42px 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px
+    }
+
+    h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 31px;
+      letter-spacing: .5px;
+      margin: 0
+    }
+
+    .count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--steel-light)
+    }
+
+    .version-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px
+    }
+
+    .version-card {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid rgba(242, 236, 220, .1);
+      border-radius: var(--radius);
+      padding: 25px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .15s ease, border-color .15s ease
+    }
+
+    .version-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(242, 180, 0, .5)
+    }
+
+    .version-card.latest {
+      border-top: 3px solid var(--yellow)
+    }
+
+    .v-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 16px
+    }
+
+    .vnum {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      line-height: .85;
+      color: var(--paper)
+    }
+
+    .badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: rgba(242, 180, 0, .1);
+      color: var(--yellow);
+      border: 1px solid rgba(242, 180, 0, .3);
+      padding: 5px 7px;
+      border-radius: 3px
+    }
+
+    .version-card p {
+      color: var(--paper-dim);
+      font-size: 13.5px;
+      line-height: 1.55;
+      margin: 18px 0 0
+    }
+
+    .open {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--yellow)
+    }
+
+    .results {
+      display: grid;
+      gap: 10px
+    }
+
+    .result {
+      display: grid;
+      grid-template-columns: 68px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid rgba(242, 236, 220, .09);
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .15s ease, background .15s ease
+    }
+
+    .result:hover {
+      border-color: rgba(242, 180, 0, .45);
+      background: var(--panel-2)
+    }
+
+    .result-version {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      color: var(--yellow);
+      letter-spacing: .7px
+    }
+
+    .result .minor {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--steel-light);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 4px
+    }
+
+    .result-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 5px
+    }
+
+    .result-snippet {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--paper-dim);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden
+    }
+
+    .arrow {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--steel-light)
+    }
+
+    mark {
+      background: rgba(242, 180, 0, .22);
+      color: var(--paper);
+      padding: 0 1px
+    }
+
+    .empty {
+      display: none;
+      background: rgba(193, 68, 14, .08);
+      border-left: 3px solid var(--rust);
+      padding: 16px 18px;
+      color: var(--paper-dim);
+      font-size: 13.5px;
+      line-height: 1.6
+    }
+
+    footer {
+      max-width: 1180px;
+      margin: auto;
+      padding: 0 24px 36px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--paper-dim)
+    }
+
+    @media(max-width:720px) {
+      .version-grid {
+        grid-template-columns: 1fr
+      }
+
+      .search-row {
+        grid-template-columns: 1fr
+      }
+
+      .clear {
+        height: 42px
+      }
+
+      .result {
+        grid-template-columns: 50px 1fr
+      }
+
+      .arrow {
+        display: none
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header class="topbar"><div class="stripe"></div><div class="topbar-inner"><div><div class="wordmark-main">SIM<span>PRO</span> INDEX</div><div class="wordmark-sub">Catatan Kerja Praktik · Pencarian Versi</div></div><div class="top-meta">ROOT / NOTE / INDEX.HTML</div></div></header>
-<main>
-  <div class="eyebrow">Knowledge Index · V1 → V2</div>
-  <h1>CARI CATATAN KP.<br>BUKA VERSI YANG TEPAT.</h1>
-  <p class="lede">Satu pintu masuk untuk menelusuri isi catatan SIMPRO. Cari istilah seperti <b>kasbon</b>, <b>stok</b>, <b>observasi</b>, <b>arsitektur</b>, atau langsung pilih versi.</p>
-
-  <div class="search-shell">
-    <div class="search-row">
-      <label class="searchbox" for="search"><span class="search-icon">⌕</span><input id="search" autocomplete="off" placeholder="Cari isi V1 & V2..." aria-label="Cari isi catatan"><kbd>/</kbd></label>
-      <button class="clear" id="clearBtn" type="button">RESET</button>
+  <header class="topbar">
+    <div class="stripe"></div>
+    <div class="topbar-inner">
+      <div>
+        <div class="wordmark-main">SIM<span>PRO</span> INDEX</div>
+        <div class="wordmark-sub">Catatan Kerja Praktik · Pencarian Versi</div>
+      </div>
+      <div class="top-meta">ROOT / NOTE / INDEX.HTML</div>
     </div>
-    <div class="quick"><button data-q="kasbon">kasbon</button><button data-q="stok">stok</button><button data-q="observasi">observasi</button><button data-q="fitur">fitur</button><button data-q="Laravel">Laravel</button><button data-q="timeline">timeline</button></div>
-  </div>
+  </header>
+  <main>
+    <div class="eyebrow">Knowledge Index · V1 → V2</div>
+    <h1>CARI CATATAN KP.<br>BUKA VERSI YANG TEPAT.</h1>
+    <p class="lede">Satu pintu masuk untuk menelusuri isi catatan SIMPRO. Cari istilah seperti <b>kasbon</b>,
+      <b>stok</b>, <b>observasi</b>, <b>arsitektur</b>, atau langsung pilih versi.
+    </p>
 
-  <div id="versionsBlock">
-    <div class="section-head"><h2>Pilih Versi</h2><span class="count">2 VERSION AVAILABLE</span></div>
-    <div class="version-grid">
-      <a class="version-card" href="./v1/index.html"><div class="v-top"><div class="vnum">V1</div><span class="badge" style="color:var(--paper-dim);border-color:rgba(242,236,220,.18);background:transparent">Rancangan Awal</span></div><p>Versi awal rancangan. Fokus pada ringkasan, observasi, analisis fitur, arsitektur, dan timeline implementasi.</p><span class="open">BUKA V1 →</span></a>
-      <a class="version-card latest" href="./v2/index.html"><div class="v-top"><div class="vnum">V2</div><span class="badge">Terbaru</span></div><p>Versi setelah kunjungan lanjutan. Menambahkan temuan lapangan detail, satuan barang, kasbon, retur, pengiriman, dan klarifikasi lanjutan.</p><span class="open">BUKA V2 →</span></a>
+    <div class="search-shell">
+      <div class="search-row">
+        <label class="searchbox" for="search"><span class="search-icon">⌕</span><input id="search" autocomplete="off"
+            placeholder="Cari isi V1 & V2..." aria-label="Cari isi catatan"><kbd>/</kbd></label>
+        <button class="clear" id="clearBtn" type="button">RESET</button>
+      </div>
+      <div class="quick"><button data-q="kasbon">kasbon</button><button data-q="stok">stok</button><button
+          data-q="observasi">observasi</button><button data-q="fitur">fitur</button><button
+          data-q="Laravel">Laravel</button><button data-q="timeline">timeline</button></div>
     </div>
-  </div>
 
-  <div class="section-head"><h2 id="resultsTitle">Indeks Bagian</h2><span class="count" id="resultCount"></span></div>
-  <div class="results" id="results"></div>
-  <div class="empty" id="empty">Tidak ada bagian yang cocok. Coba istilah yang lebih umum, misalnya “stok”, “barang”, “laporan”, atau “observasi”.</div>
-</main>
-<footer><span>SIMPRO · Index Catatan Kerja Praktik</span><span>Pencarian berjalan lokal tanpa server/database.</span></footer>
-<script>
-const DATA=[{"version": "V1", "versionLower": "v1", "panel": "panel-1", "eyebrow": "Kerja Praktik · Program Studi IT · Perguruan Tinggi", "title": "DARI CATATAN TANGAN KE SISTEM TERPUSAT.", "text": "Kerja Praktik · Program Studi IT · Perguruan Tinggi DARI CATATAN TANGAN KE SISTEM TERPUSAT. Rancangan Sistem Informasi Manajemen untuk Toko — bukan sekadar website formalitas kampus, tapi sistem yang benar-benar dipakai toko setiap hari: mencatat stok, transaksi, dan laporan yang selama ini masih manual. Dibangun dari observasi langsung di lapangan lebih dulu, baru masuk ke desain dan pengembangan — supaya fitur yang dibuat menjawab masalah nyata toko, bukan asumsi mahasiswa. 2 Hari Observasi lapangan awal 12 Fitur Dipetakan & diprioritaskan 2 Jalur Kerja Internal & katalog publik 8–12 Minggu Estimasi durasi KP", "url": "./v1/index.html#panel-1"}, {"version": "V1", "versionLower": "v1", "panel": "panel-2", "eyebrow": "Tahap 01", "title": "Observasi Sebelum Desain", "text": "Tahap 01 Observasi Sebelum Desain Dua hari pertama difokuskan untuk memahami toko apa adanya, bukan langsung menyodorkan daftar fitur. Hari 1 Mengamati Ikuti alur transaksi kasir dari awal sampai akhir tanpa mengganggu operasional. Catat fakta konkret yang terlihat, bukan kesimpulan atau asumsi pribadi. Kenali bagaimana barang disusun dan bagaimana karyawan sebenarnya bicara soal stok. Hari 2 Memvalidasi Konfirmasi dugaan hari pertama langsung ke karyawan dan pemilik secara santai. Amati sisi gudang, penyimpanan, dan proses barang masuk dari supplier. Mulai obrolan semi-terstruktur, dua–tiga pertanyaan spesifik, bukan interogasi penuh. Temuan awal yang sudah tervalidasi: karyawan mencari barang dengan menyebut nama (\"semen masih ada?\"), bukan kode atau ID — jadi pencarian berbasis nama harus jadi cara utama, kode barang cukup jadi identitas data di belakang layar.", "url": "./v1/index.html#panel-2"}, {"version": "V1", "versionLower": "v1", "panel": "panel-3", "eyebrow": "Tahap 02", "title": "Mana yang Beneran Dibutuhkan?", "text": "Tahap 02 Mana yang Beneran Dibutuhkan? Semua ide fitur dipetakan lebih dulu, lalu disaring berdasarkan masalah nyata toko — bukan berdasarkan \"kelihatan keren\". MVP — wajib ada Tambahan — nice-to-have Dicoret dulu — di luar scope Semua (12) MVP Tambahan Dicoret Dulu MVP Pencarian by Nama Barang Cara pegawai benar-benar mencari barang: sebut nama, bukan kode. MVP Kode/ID Barang Tetap dibuat sebagai identitas data di belakang layar, bukan cara pencarian utama. MVP Data Stok Dimulai dari satuan pasak/sak; satuan campuran (kg, eceran) divalidasi langsung di lapangan. MVP CRUD Data Barang Tambah, ubah, dan hapus data barang oleh admin toko. MVP Transaksi & Cetak Nota Termasuk hitung kembalian otomatis dari uang yang diberikan pelanggan. MVP Laporan Penjualan & Stok Rekap harian, mingguan, dan bulanan untuk pemilik toko. Tambahan Foto Produk Nilai tambah tampilan, bukan penentu jalannya transaksi. Tambahan Lokasi / Rak Barang Berguna kalau toko cukup besar sampai karyawan sering bingung mencari barang. Tambahan Status Antar Pesanan Menunggu / Diantar / Selesai — versi sederhana tanpa pelacakan langsung. Dicoret Dulu Sistem Absensi Karyawan Bukan masalah inti toko; berisiko melebarkan scope proyek jadi dua sistem sekaligus. Dicoret Dulu Pelacakan GPS Real-time Butuh infrastruktur di luar kemampuan proyek KP satu semester. Dicoret Dulu Notifikasi WhatsApp Otomatis Butuh API berbayar; manfaatnya belum tentu sepadan untuk versi awal.", "url": "./v1/index.html#panel-3"}, {"version": "V1", "versionLower": "v1", "panel": "panel-4", "eyebrow": "Tahap 03", "title": "Dua Jalur Kerja, Satu Data", "text": "Tahap 03 Dua Jalur Kerja, Satu Data Sistem dipecah jadi dua bagian dengan urutan prioritas yang jelas — bukan dikerjakan bersamaan dari nol. Prioritas Utama Job 2 — Manajemen Internal Menyelesaikan masalah operasional harian: data barang, stok, transaksi, dan laporan. Ini yang benar-benar dipakai kasir dan pemilik setiap hari. Menyusul Bertahap Job 1 — Katalog Publik Menampilkan produk dan info toko ke calon pembeli. Dibangun setelah data produk dari Job 2 stabil, supaya tidak ada input data dua kali. Job 2 dikerjakan lebih dulu — di situlah masalah nyata toko berada. Job 1 memakai data yang sama, bukan sistem yang terpisah. Teknologi Laravel (PHP) Framework backend — cepat untuk CRUD, autentikasi, dan role pengguna. MySQL Database relasional, cocok untuk data transaksi dan stok yang terstruktur. Blade + Tailwind CSS Antarmuka ringan tanpa perlu build tool frontend yang rumit. Alpine.js Interaktivitas kecil — filter, modal — tanpa framework berat. Chart.js Grafik dashboard: tren penjualan dan produk terlaris. Git & GitHub Version control dan pelacakan tugas, menyerupai alur kerja tim sungguhan.", "url": "./v1/index.html#panel-4"}, {"version": "V1", "versionLower": "v1", "panel": "panel-5", "eyebrow": "Tahap 04", "title": "Rencana 8–12 Minggu", "text": "Tahap 04 Rencana 8–12 Minggu Empat tahap besar, disesuaikan dengan durasi KP resmi kampus. 01 Observasi & Analisis Minggu 1–2 Wawancara, validasi masalah, ERD awal, dan backlog fitur. 02 Modul Inti Minggu 3–7 Autentikasi & role, data barang, stok, pembelian, dan transaksi penjualan. 03 Laporan & Dashboard Minggu 8 Rekap penjualan, notifikasi stok menipis, dan produk terlaris. 04 UAT & Dokumentasi Minggu 9–12 Uji coba langsung di toko, revisi, manual pengguna, dan serah terima sistem. Langkah Selanjutnya Validasi tabel prioritas fitur langsung ke pemilik toko — gali masalah nyata, jangan tanya \"mau fitur X atau tidak\". Kumpulkan contoh data barang & satuan yang dipakai sekarang (foto buku/Excel jika ada). Sepakati siapa yang akan memakai sistem sehari-hari dan perangkat apa yang tersedia di toko. Mulai desain database berdasarkan hasil validasi — bukan asumsi di rancangan awal ini.", "url": "./v1/index.html#panel-5"}, {"version": "V2", "versionLower": "v2", "panel": "panel-1", "eyebrow": "Kerja Praktik · Program Studi IT · Perguruan Tinggi", "title": "DARI CATATAN TANGAN KE SISTEM TERPUSAT.", "text": "Kerja Praktik · Program Studi IT · Perguruan Tinggi DARI CATATAN TANGAN KE SISTEM TERPUSAT. Rancangan Sistem Informasi Manajemen untuk Toko — bukan sekadar website formalitas kampus, tapi sistem yang benar-benar dipakai toko setiap hari: mencatat stok, transaksi, dan laporan yang selama ini masih manual. Dibangun dari observasi langsung di lapangan lebih dulu, baru masuk ke desain dan pengembangan — supaya fitur yang dibuat menjawab masalah nyata toko, bukan asumsi mahasiswa. 2 Tahap Observasi lapangan: awal & lanjutan 20 Fitur Dipetakan & diprioritaskan 2 Jalur Kerja Internal & katalog publik 8–12 Minggu Estimasi durasi KP", "url": "./v2/index.html#panel-1"}, {"version": "V2", "versionLower": "v2", "panel": "panel-2", "eyebrow": "Tahap 01", "title": "Observasi Sebelum Desain", "text": "Tahap 01 Observasi Sebelum Desain Dua hari pertama difokuskan untuk memahami toko apa adanya, bukan langsung menyodorkan daftar fitur. Hari 1 Mengamati Ikuti alur transaksi kasir dari awal sampai akhir tanpa mengganggu operasional. Catat fakta konkret yang terlihat, bukan kesimpulan atau asumsi pribadi. Kenali bagaimana barang disusun dan bagaimana karyawan sebenarnya bicara soal stok. Hari 2 Memvalidasi Konfirmasi dugaan hari pertama langsung ke karyawan dan pemilik secara santai. Amati sisi gudang, penyimpanan, dan proses barang masuk dari supplier. Mulai obrolan semi-terstruktur, dua–tiga pertanyaan spesifik, bukan interogasi penuh. Temuan awal yang sudah tervalidasi: karyawan mencari barang dengan menyebut nama (\"semen masih ada?\"), bukan kode atau ID — jadi pencarian berbasis nama harus jadi cara utama, kode barang cukup jadi identitas data di belakang layar.", "url": "./v2/index.html#panel-2"}, {"version": "V2", "versionLower": "v2", "panel": "panel-3", "eyebrow": "Tahap 01 — Kunjungan Lanjutan", "title": "Dari Buku Catatan ke Detail Operasional", "text": "Tahap 01 — Kunjungan Lanjutan Dari Buku Catatan ke Detail Operasional Kunjungan susulan menggali kebiasaan spesifik yang tidak terlihat dari observasi permukaan — mulai dari sistem kasbon sampai cara paku dibungkus. Keuangan Pencatatan Manual Buku harian mencatat pemasukan & pengeluaran. Buku mingguan hanya mencatat pemasukan — belum konsisten. Pembuatan nota transaksi bersifat opsional. Harga & Kasbon Kode Rahasia & Titip Bayar Harga ditulis pakai kode huruf rahasia di label fisik — kebiasaan toko, bukan kebutuhan sistem. Tidak ada harga khusus untuk pelanggan tertentu. Sistem kasbon (utang) sudah berjalan, tanpa bunga atau harga berbeda. Retur Beli Dulu, Coba Dulu Pelanggan bayar penuh lebih dulu sebelum barang dicoba di rumah. Kalau cocok, transaksi selesai begitu saja. Kalau tidak cocok, barang & uang sama-sama dikembalikan. Proses Fisik Pembungkusan & Pengiriman Paku dibungkus pakai alat khusus bertakaran tetap — jadi paket siap jual, bukan ditimbang manual tiap transaksi. Alamat pengiriman saat ini hanya diandalkan dari ingatan, disampaikan lisan. Diminta Pemilik Dua Permintaan Langsung Fitur Hutang & Piutang — selaras dengan kasbon yang sudah berjalan. Fitur Cek Stok — pemilik cek manual tiap sore, ingin digantikan sistem. Pemilik setuju transisi ke sistem digital, tidak ada resistensi awal. Layout Toko Section — Belum Lengkap Tercatat: batu bata, pasir (2 titik), kayu, besi, semen, atap plastik+kayu, area dekat kasir (campuran). Sebagian barang ada di toko cabang lain — belum sempat dikunjungi langsung. Singkatan Satuan di Buku Catatan psr Pasir psg Pasang k Kawat bh 1 Buah lbr 1 Lembar krg 1 Karung bks 1 Bungkus btg 1 Batang btl 1 Botol Ø6 / q6 Besi diameter 6mm Perlu Klarifikasi Lanjutan Buy & return berlaku untuk semua barang, atau kategori tertentu saja? Ada batas waktu maksimal untuk buy & return? Kasbon: siapa yang berwenang menyetujui, ada batas nominal? Besi dengan kode diameter (Ø6, dst) — satu produk dengan banyak varian, atau produk terpisah per ukuran? Kunjungan ke toko cabang untuk melengkapi data section & stok.", "url": "./v2/index.html#panel-3"}, {"version": "V2", "versionLower": "v2", "panel": "panel-4", "eyebrow": "Tahap 02", "title": "Mana yang Beneran Dibutuhkan?", "text": "Tahap 02 Mana yang Beneran Dibutuhkan? Semua ide fitur dipetakan lebih dulu, lalu disaring berdasarkan masalah nyata toko — bukan berdasarkan \"kelihatan keren\". MVP — wajib ada Tambahan — nice-to-have Perlu klarifikasi Dicoret dulu — di luar scope Semua (20) MVP Tambahan Perlu Klarifikasi Dicoret Dulu MVP Pencarian by Nama Barang Cara pegawai benar-benar mencari barang: sebut nama, bukan kode. MVP Kode/ID Barang Tetap dibuat sebagai identitas data di belakang layar, bukan cara pencarian utama. MVP Data Stok Dimulai dari satuan pasak/sak; satuan campuran (kg, eceran) divalidasi langsung di lapangan. MVP CRUD Data Barang Tambah, ubah, dan hapus data barang oleh admin toko. MVP Transaksi & Cetak Nota Termasuk hitung kembalian otomatis dari uang yang diberikan pelanggan. MVP Laporan Penjualan & Stok Rekap harian, mingguan, dan bulanan untuk pemilik toko. MVP Hutang & Piutang (Kasbon) Mendigitalkan sistem kasbon yang sudah berjalan: status lunas/kasbon dan saldo utang per pelanggan. MVP Notifikasi Stok Menipis Menggantikan kebiasaan pemilik mengecek stok manual setiap sore. MVP Pencatatan Alamat Pengiriman Titik rawan human error nyata: alamat kirim saat ini hanya diandalkan dari ingatan. Tambahan Foto Produk Nilai tambah tampilan, bukan penentu jalannya transaksi. Tambahan Lokasi / Rak Barang Berguna kalau toko cukup besar sampai karyawan sering bingung mencari barang. Tambahan Status Antar Pesanan Menunggu / Diantar / Selesai — versi sederhana tanpa pelacakan langsung. Tambahan Retur / Buy & Return Bersyarat Bayar dulu, coba di rumah, kembali barang & uang kalau tidak cocok — cakupannya masih perlu dikonfirmasi. Perlu Klarifikasi Varian Ukuran / Diameter Barang Besi berkode diameter (Ø6, dst) — satu produk banyak varian, atau produk terpisah? Menentukan struktur tabel item. Perlu Klarifikasi Kategori Produk Final Sebagian section toko ada di cabang lain yang belum dikunjungi — daftar kategori belum bisa difinalisasi. Dicoret Dulu Sistem Absensi Karyawan Bukan masalah inti toko; berisiko melebarkan scope proyek jadi dua sistem sekaligus. Dicoret Dulu Pelacakan GPS Real-time Butuh infrastruktur di luar kemampuan proyek KP satu semester. Dicoret Dulu Notifikasi WhatsApp Otomatis Butuh API berbayar; manfaatnya belum tentu sepadan untuk versi awal. Dicoret Dulu Replikasi Kode Harga Rahasia Kode alfabet di label fisik murni kebiasaan toko — sistem cukup simpan harga sebagai angka biasa. Dicoret Dulu Harga Khusus per Pelanggan Dikonfirmasi tidak diperlukan — harga jual sama untuk semua pelanggan, kasbon hanya menunda pembayaran.", "url": "./v2/index.html#panel-4"}, {"version": "V2", "versionLower": "v2", "panel": "panel-5", "eyebrow": "Tahap 03", "title": "Dua Jalur Kerja, Satu Data", "text": "Tahap 03 Dua Jalur Kerja, Satu Data Sistem dipecah jadi dua bagian dengan urutan prioritas yang jelas — bukan dikerjakan bersamaan dari nol. Prioritas Utama Job 2 — Manajemen Internal Menyelesaikan masalah operasional harian: data barang, stok, transaksi, kasbon, dan laporan. Ini yang benar-benar dipakai kasir dan pemilik setiap hari. Menyusul Bertahap Job 1 — Katalog Publik Menampilkan produk dan info toko ke calon pembeli. Dibangun setelah data produk dari Job 2 stabil, supaya tidak ada input data dua kali. Job 2 dikerjakan lebih dulu — di situlah masalah nyata toko berada. Job 1 memakai data yang sama, bukan sistem yang terpisah. Teknologi Laravel (PHP) Framework backend — cepat untuk CRUD, autentikasi, dan role pengguna. MySQL Database relasional, cocok untuk data transaksi dan stok yang terstruktur. Blade + Tailwind CSS Antarmuka ringan tanpa perlu build tool frontend yang rumit. Alpine.js Interaktivitas kecil — filter, modal — tanpa framework berat. Chart.js Grafik dashboard: tren penjualan dan produk terlaris. Git & GitHub Version control dan pelacakan tugas, menyerupai alur kerja tim sungguhan.", "url": "./v2/index.html#panel-5"}, {"version": "V2", "versionLower": "v2", "panel": "panel-6", "eyebrow": "Tahap 04", "title": "Rencana 8–12 Minggu", "text": "Tahap 04 Rencana 8–12 Minggu Empat tahap besar, disesuaikan dengan durasi KP resmi kampus. 01 Observasi & Analisis Minggu 1–2 Wawancara, validasi masalah, ERD awal, dan backlog fitur. 02 Modul Inti Minggu 3–7 Autentikasi & role, data barang, stok, pembelian, dan transaksi penjualan. 03 Laporan & Dashboard Minggu 8 Rekap penjualan, notifikasi stok menipis, dan produk terlaris. 04 UAT & Dokumentasi Minggu 9–12 Uji coba langsung di toko, revisi, manual pengguna, dan serah terima sistem. Langkah Selanjutnya Tuntaskan klarifikasi terbuka dari kunjungan lanjutan (lihat Tahap 01 — Temuan Lapangan). Kunjungi toko cabang untuk melengkapi data kategori/section yang masih kosong. Finalisasi skema tabel barang (nama, kategori, satuan, varian) berdasarkan hasil klarifikasi. Mulai desain ERD lengkap dan migration Laravel untuk modul inti (barang, stok, transaksi, kasbon).", "url": "./v2/index.html#panel-6"}];
-const search=document.getElementById('search');
-const results=document.getElementById('results');
-const count=document.getElementById('resultCount');
-const empty=document.getElementById('empty');
-const versionsBlock=document.getElementById('versionsBlock');
-const resultsTitle=document.getElementById('resultsTitle');
-function normalize(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
-function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function highlight(s,q){if(!q)return esc(s);const terms=q.trim().split(/\s+/).filter(Boolean).map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\$&'));if(!terms.length)return esc(s);return esc(s).replace(new RegExp('('+terms.join('|')+')','ig'),'<mark>$1</mark>')}
-function snippet(text,q){const clean=text.replace(/\s+/g,' ');if(!q)return clean.slice(0,180);const n=normalize(clean), nq=normalize(q).split(/\s+/)[0], pos=n.indexOf(nq);const start=Math.max(0,(pos<0?0:pos)-70);return (start?'…':'')+clean.slice(start,start+210)+(start+210<clean.length?'…':'')}
-function score(item,q){const nq=normalize(q);const terms=nq.split(/\s+/).filter(Boolean);const title=normalize(item.title+' '+item.eyebrow+' '+item.version);const body=normalize(item.text);let total=0;for(const t of terms){if(title.includes(t))total+=8;if(body.includes(t))total+=2;if(normalize(item.versionLower)===t)total+=20;}return total}
-function render(){const q=search.value.trim();let items=DATA.map(x=>({...x,_score:score(x,q)}));if(q)items=items.filter(x=>x._score>0).sort((a,b)=>b._score-a._score||a.version.localeCompare(b.version));
-  versionsBlock.style.display=q?'none':'';resultsTitle.textContent=q?'Hasil Pencarian':'Indeks Bagian';count.textContent=`${items.length} BAGIAN`;
-  results.innerHTML=items.map(x=>`<a class="result" href="${x.url}"><div class="result-version">${x.version}</div><div><div class="minor">${highlight(x.eyebrow||x.panel,q)}</div><div class="result-title">${highlight(x.title,q)}</div><div class="result-snippet">${highlight(snippet(x.text,q),q)}</div></div><div class="arrow">→</div></a>`).join('');
-  empty.style.display=items.length?'none':'block';
-}
-search.addEventListener('input',render);document.getElementById('clearBtn').addEventListener('click',()=>{search.value='';render();search.focus()});document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{search.value=b.dataset.q;render();search.focus()}));document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==search){e.preventDefault();search.focus()}if(e.key==='Escape'&&document.activeElement===search){search.value='';render();search.blur()}});render();
-</script>
+    <div id="versionsBlock">
+      <div class="section-head">
+        <h2>Pilih Versi</h2><span class="count">2 VERSION AVAILABLE</span>
+      </div>
+      <div class="version-grid">
+        <a class="version-card" href="./v1/index.html">
+          <div class="v-top">
+            <div class="vnum">V1</div><span class="badge"
+              style="color:var(--paper-dim);border-color:rgba(242,236,220,.18);background:transparent">Rancangan
+              Awal</span>
+          </div>
+          <p>Versi awal rancangan. Fokus pada ringkasan, observasi, analisis fitur, arsitektur, dan timeline
+            implementasi.</p><span class="open">BUKA V1 →</span>
+        </a>
+        <a class="version-card latest" href="./v2/index.html">
+          <div class="v-top">
+            <div class="vnum">V2</div><span class="badge">Terbaru</span>
+          </div>
+          <p>Versi setelah kunjungan lanjutan. Menambahkan temuan lapangan detail, satuan barang, kasbon, retur,
+            pengiriman, dan klarifikasi lanjutan.</p><span class="open">BUKA V2 →</span>
+        </a>
+        <a class="version-card latest" href="./v3/index.html">
+          <div class="v-top">
+            <div class="vnum">V3</div>
+            <span class="badge">Terbaru</span>
+          </div>
+          <p>Deskripsi singkat perubahan di versi V3...</p>
+          <span class="open">BUKA V3 →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2 id="resultsTitle">Indeks Bagian</h2><span class="count" id="resultCount"></span>
+    </div>
+    <div class="results" id="results"></div>
+    <div class="empty" id="empty">Tidak ada bagian yang cocok. Coba istilah yang lebih umum, misalnya “stok”, “barang”,
+      “laporan”, atau “observasi”.</div>
+  </main>
+  <footer><span>SIMPRO · Index Catatan Kerja Praktik</span><span>Pencarian berjalan lokal tanpa server/database.</span>
+  </footer>
+  <script>
+    const DATA = [
+      {
+        "version": "V1",
+        "versionLower": "v1",
+        "panel": "panel-1",
+        "eyebrow": "Kerja Praktik · Program Studi IT · Perguruan Tinggi",
+        "title": "DARI CATATAN TANGAN KE SISTEM TERPUSAT.",
+        "text": "Kerja Praktik · Program Studi IT · Perguruan Tinggi DARI CATATAN TANGAN KE SISTEM TERPUSAT. Rancangan Sistem Informasi Manajemen untuk Toko — bukan sekadar website formalitas kampus, tapi sistem yang benar-benar dipakai toko setiap hari: mencatat stok, transaksi, dan laporan yang selama ini masih manual. Dibangun dari observasi langsung di lapangan lebih dulu, baru masuk ke desain dan pengembangan — supaya fitur yang dibuat menjawab masalah nyata toko, bukan asumsi mahasiswa. 2 Hari Observasi lapangan awal 12 Fitur Dipetakan & diprioritaskan 2 Jalur Kerja Internal & katalog publik 8–12 Minggu Estimasi durasi KP",
+        "url": "./v1/index.html#panel-1"
+      },
+      {
+        "version": "V1",
+        "versionLower": "v1",
+        "panel": "panel-2",
+        "eyebrow": "Tahap 01",
+        "title": "Observasi Sebelum Desain",
+        "text": "Tahap 01 Observasi Sebelum Desain Dua hari pertama difokuskan untuk memahami toko apa adanya, bukan langsung menyodorkan daftar fitur. Hari 1 Mengamati Ikuti alur transaksi kasir dari awal sampai akhir tanpa mengganggu operasional. Catat fakta konkret yang terlihat, bukan kesimpulan atau asumsi pribadi. Kenali bagaimana barang disusun dan bagaimana karyawan sebenarnya bicara soal stok. Hari 2 Memvalidasi Konfirmasi dugaan hari pertama langsung ke karyawan dan pemilik secara santai. Amati sisi gudang, penyimpanan, dan proses barang masuk dari supplier. Mulai obrolan semi-terstruktur, dua–tiga pertanyaan spesifik, bukan interogasi penuh. Temuan awal yang sudah tervalidasi: karyawan mencari barang dengan menyebut nama (\"semen masih ada?\"), bukan kode atau ID — jadi pencarian berbasis nama harus jadi cara utama, kode barang cukup jadi identitas data di belakang layar.",
+        "url": "./v1/index.html#panel-2"
+      },
+      {
+        "version": "V1",
+        "versionLower": "v1",
+        "panel": "panel-3",
+        "eyebrow": "Tahap 02",
+        "title": "Mana yang Beneran Dibutuhkan?",
+        "text": "Tahap 02 Mana yang Beneran Dibutuhkan? Semua ide fitur dipetakan lebih dulu, lalu disaring berdasarkan masalah nyata toko — bukan berdasarkan \"kelihatan keren\". MVP — wajib ada Tambahan — nice-to-have Dicoret dulu — di luar scope Semua (12) MVP Tambahan Dicoret Dulu MVP Pencarian by Nama Barang Cara pegawai benar-benar mencari barang: sebut nama, bukan kode. MVP Kode/ID Barang Tetap dibuat sebagai identitas data di belakang layar, bukan cara pencarian utama. MVP Data Stok Dimulai dari satuan pasak/sak; satuan campuran (kg, eceran) divalidasi langsung di lapangan. MVP CRUD Data Barang Tambah, ubah, dan hapus data barang oleh admin toko. MVP Transaksi & Cetak Nota Termasuk hitung kembalian otomatis dari uang yang diberikan pelanggan. MVP Laporan Penjualan & Stok Rekap harian, mingguan, dan bulanan untuk pemilik toko. Tambahan Foto Produk Nilai tambah tampilan, bukan penentu jalannya transaksi. Tambahan Lokasi / Rak Barang Berguna kalau toko cukup besar sampai karyawan sering bingung mencari barang. Tambahan Status Antar Pesanan Menunggu / Diantar / Selesai — versi sederhana tanpa pelacakan langsung. Dicoret Dulu Sistem Absensi Karyawan Bukan masalah inti toko; berisiko melebarkan scope proyek jadi dua sistem sekaligus. Dicoret Dulu Pelacakan GPS Real-time Butuh infrastruktur di luar kemampuan proyek KP satu semester. Dicoret Dulu Notifikasi WhatsApp Otomatis Butuh API berbayar; manfaatnya belum tentu sepadan untuk versi awal.",
+        "url": "./v1/index.html#panel-3"
+      },
+      {
+        "version": "V1",
+        "versionLower": "v1",
+        "panel": "panel-4",
+        "eyebrow": "Tahap 03",
+        "title": "Dua Jalur Kerja, Satu Data",
+        "text": "Tahap 03 Dua Jalur Kerja, Satu Data Sistem dipecah jadi dua bagian dengan urutan prioritas yang jelas — bukan dikerjakan bersamaan dari nol. Prioritas Utama Job 2 — Manajemen Internal Menyelesaikan masalah operasional harian: data barang, stok, transaksi, dan laporan. Ini yang benar-benar dipakai kasir dan pemilik setiap hari. Menyusul Bertahap Job 1 — Katalog Publik Menampilkan produk dan info toko ke calon pembeli. Dibangun setelah data produk dari Job 2 stabil, supaya tidak ada input data dua kali. Job 2 dikerjakan lebih dulu — di situlah masalah nyata toko berada. Job 1 memakai data yang sama, bukan sistem yang terpisah. Teknologi Laravel (PHP) Framework backend — cepat untuk CRUD, autentikasi, dan role pengguna. MySQL Database relasional, cocok untuk data transaksi dan stok yang terstruktur. Blade + Tailwind CSS Antarmuka ringan tanpa perlu build tool frontend yang rumit. Alpine.js Interaktivitas kecil — filter, modal — tanpa framework berat. Chart.js Grafik dashboard: tren penjualan dan produk terlaris. Git & GitHub Version control dan pelacakan tugas, menyerupai alur kerja tim sungguhan.",
+        "url": "./v1/index.html#panel-4"
+      },
+      {
+        "version": "V1",
+        "versionLower": "v1",
+        "panel": "panel-5",
+        "eyebrow": "Tahap 04",
+        "title": "Rencana 8–12 Minggu",
+        "text": "Tahap 04 Rencana 8–12 Minggu Empat tahap besar, disesuaikan dengan durasi KP resmi kampus. 01 Observasi & Analisis Minggu 1–2 Wawancara, validasi masalah, ERD awal, dan backlog fitur. 02 Modul Inti Minggu 3–7 Autentikasi & role, data barang, stok, pembelian, dan transaksi penjualan. 03 Laporan & Dashboard Minggu 8 Rekap penjualan, notifikasi stok menipis, dan produk terlaris. 04 UAT & Dokumentasi Minggu 9–12 Uji coba langsung di toko, revisi, manual pengguna, dan serah terima sistem. Langkah Selanjutnya Validasi tabel prioritas fitur langsung ke pemilik toko — gali masalah nyata, jangan tanya \"mau fitur X atau tidak\". Kumpulkan contoh data barang & satuan yang dipakai sekarang (foto buku/Excel jika ada). Sepakati siapa yang akan memakai sistem sehari-hari dan perangkat apa yang tersedia di toko. Mulai desain database berdasarkan hasil validasi — bukan asumsi di rancangan awal ini.",
+        "url": "./v1/index.html#panel-5"
+      },
+      {
+        "version": "V2",
+        "versionLower": "v2",
+        "panel": "panel-1",
+        "eyebrow": "Kerja Praktik · Program Studi IT · Perguruan Tinggi",
+        "title": "DARI CATATAN TANGAN KE SISTEM TERPUSAT.",
+        "text": "Kerja Praktik · Program Studi IT · Perguruan Tinggi DARI CATATAN TANGAN KE SISTEM TERPUSAT. Rancangan Sistem Informasi Manajemen untuk Toko — bukan sekadar website formalitas kampus, tapi sistem yang benar-benar dipakai toko setiap hari: mencatat stok, transaksi, dan laporan yang selama ini masih manual. Dibangun dari observasi langsung di lapangan lebih dulu, baru masuk ke desain dan pengembangan — supaya fitur yang dibuat menjawab masalah nyata toko, bukan asumsi mahasiswa. 2 Tahap Observasi lapangan: awal & lanjutan 20 Fitur Dipetakan & diprioritaskan 2 Jalur Kerja Internal & katalog publik 8–12 Minggu Estimasi durasi KP",
+        "url": "./v2/index.html#panel-1"
+      },
+      {
+        "version": "V2",
+        "versionLower": "v2",
+        "panel": "panel-2",
+        "eyebrow": "Tahap 01",
+        "title": "Observasi Sebelum Desain",
+        "text": "Tahap 01 Observasi Sebelum Desain Dua hari pertama difokuskan untuk memahami toko apa adanya, bukan langsung menyodorkan daftar fitur. Hari 1 Mengamati Ikuti alur transaksi kasir dari awal sampai akhir tanpa mengganggu operasional. Catat fakta konkret yang terlihat, bukan kesimpulan atau asumsi pribadi. Kenali bagaimana barang disusun dan bagaimana karyawan sebenarnya bicara soal stok. Hari 2 Memvalidasi Konfirmasi dugaan hari pertama langsung ke karyawan dan pemilik secara santai. Amati sisi gudang, penyimpanan, dan proses barang masuk dari supplier. Mulai obrolan semi-terstruktur, dua–tiga pertanyaan spesifik, bukan interogasi penuh. Temuan awal yang sudah tervalidasi: karyawan mencari barang dengan menyebut nama (\"semen masih ada?\"), bukan kode atau ID — jadi pencarian berbasis nama harus jadi cara utama, kode barang cukup jadi identitas data di belakang layar.",
+        "url": "./v2/index.html#panel-2"
+      },
+      {
+        "version": "V2",
+        "versionLower": "v2",
+        "panel": "panel-3",
+        "eyebrow": "Tahap 01 — Kunjungan Lanjutan",
+        "title": "Dari Buku Catatan ke Detail Operasional",
+        "text": "Tahap 01 — Kunjungan Lanjutan Dari Buku Catatan ke Detail Operasional Kunjungan susulan menggali kebiasaan spesifik yang tidak terlihat dari observasi permukaan — mulai dari sistem kasbon sampai cara paku dibungkus. Keuangan Pencatatan Manual Buku harian mencatat pemasukan & pengeluaran. Buku mingguan hanya mencatat pemasukan — belum konsisten. Pembuatan nota transaksi bersifat opsional. Harga & Kasbon Kode Rahasia & Titip Bayar Harga ditulis pakai kode huruf rahasia di label fisik — kebiasaan toko, bukan kebutuhan sistem. Tidak ada harga khusus untuk pelanggan tertentu. Sistem kasbon (utang) sudah berjalan, tanpa bunga atau harga berbeda. Retur Beli Dulu, Coba Dulu Pelanggan bayar penuh lebih dulu sebelum barang dicoba di rumah. Kalau cocok, transaksi selesai begitu saja. Kalau tidak cocok, barang & uang sama-sama dikembalikan. Proses Fisik Pembungkusan & Pengiriman Paku dibungkus pakai alat khusus bertakaran tetap — jadi paket siap jual, bukan ditimbang manual tiap transaksi. Alamat pengiriman saat ini hanya diandalkan dari ingatan, disampaikan lisan. Diminta Pemilik Dua Permintaan Langsung Fitur Hutang & Piutang — selaras dengan kasbon yang sudah berjalan. Fitur Cek Stok — pemilik cek manual tiap sore, ingin digantikan sistem. Pemilik setuju transisi ke sistem digital, tidak ada resistensi awal. Layout Toko Section — Belum Lengkap Tercatat: batu bata, pasir (2 titik), kayu, besi, semen, atap plastik+kayu, area dekat kasir (campuran). Sebagian barang ada di toko cabang lain — belum sempat dikunjungi langsung. Singkatan Satuan di Buku Catatan psr Pasir psg Pasang k Kawat bh 1 Buah lbr 1 Lembar krg 1 Karung bks 1 Bungkus btg 1 Batang btl 1 Botol Ø6 / q6 Besi diameter 6mm Perlu Klarifikasi Lanjutan Buy & return berlaku untuk semua barang, atau kategori tertentu saja? Ada batas waktu maksimal untuk buy & return? Kasbon: siapa yang berwenang menyetujui, ada batas nominal? Besi dengan kode diameter (Ø6, dst) — satu produk dengan banyak varian, atau produk terpisah per ukuran? Kunjungan ke toko cabang untuk melengkapi data section & stok.",
+        "url": "./v2/index.html#panel-3"
+      },
+      {
+        "version": "V2",
+        "versionLower": "v2",
+        "panel": "panel-4",
+        "eyebrow": "Tahap 02",
+        "title": "Mana yang Beneran Dibutuhkan?",
+        "text": "Tahap 02 Mana yang Beneran Dibutuhkan? Semua ide fitur dipetakan lebih dulu, lalu disaring berdasarkan masalah nyata toko — bukan berdasarkan \"kelihatan keren\". MVP — wajib ada Tambahan — nice-to-have Perlu klarifikasi Dicoret dulu — di luar scope Semua (20) MVP Tambahan Perlu Klarifikasi Dicoret Dulu MVP Pencarian by Nama Barang Cara pegawai benar-benar mencari barang: sebut nama, bukan kode. MVP Kode/ID Barang Tetap dibuat sebagai identitas data di belakang layar, bukan cara pencarian utama. MVP Data Stok Dimulai dari satuan pasak/sak; satuan campuran (kg, eceran) divalidasi langsung di lapangan. MVP CRUD Data Barang Tambah, ubah, dan hapus data barang oleh admin toko. MVP Transaksi & Cetak Nota Termasuk hitung kembalian otomatis dari uang yang diberikan pelanggan. MVP Laporan Penjualan & Stok Rekap harian, mingguan, dan bulanan untuk pemilik toko. MVP Hutang & Piutang (Kasbon) Mendigitalkan sistem kasbon yang sudah berjalan: status lunas/kasbon dan saldo utang per pelanggan. MVP Notifikasi Stok Menipis Menggantikan kebiasaan pemilik mengecek stok manual setiap sore. MVP Pencatatan Alamat Pengiriman Titik rawan human error nyata: alamat kirim saat ini hanya diandalkan dari ingatan. Tambahan Foto Produk Nilai tambah tampilan, bukan penentu jalannya transaksi. Tambahan Lokasi / Rak Barang Berguna kalau toko cukup besar sampai karyawan sering bingung mencari barang. Tambahan Status Antar Pesanan Menunggu / Diantar / Selesai — versi sederhana tanpa pelacakan langsung. Tambahan Retur / Buy & Return Bersyarat Bayar dulu, coba di rumah, kembali barang & uang kalau tidak cocok — cakupannya masih perlu dikonfirmasi. Perlu Klarifikasi Varian Ukuran / Diameter Barang Besi berkode diameter (Ø6, dst) — satu produk banyak varian, atau produk terpisah? Menentukan struktur tabel item. Perlu Klarifikasi Kategori Produk Final Sebagian section toko ada di cabang lain yang belum dikunjungi — daftar kategori belum bisa difinalisasi. Dicoret Dulu Sistem Absensi Karyawan Bukan masalah inti toko; berisiko melebarkan scope proyek jadi dua sistem sekaligus. Dicoret Dulu Pelacakan GPS Real-time Butuh infrastruktur di luar kemampuan proyek KP satu semester. Dicoret Dulu Notifikasi WhatsApp Otomatis Butuh API berbayar; manfaatnya belum tentu sepadan untuk versi awal. Dicoret Dulu Replikasi Kode Harga Rahasia Kode alfabet di label fisik murni kebiasaan toko — sistem cukup simpan harga sebagai angka biasa. Dicoret Dulu Harga Khusus per Pelanggan Dikonfirmasi tidak diperlukan — harga jual sama untuk semua pelanggan, kasbon hanya menunda pembayaran.",
+        "url": "./v2/index.html#panel-4"
+      },
+      {
+        "version": "V2",
+        "versionLower": "v2",
+        "panel": "panel-5",
+        "eyebrow": "Tahap 03",
+        "title": "Dua Jalur Kerja, Satu Data",
+        "text": "Tahap 03 Dua Jalur Kerja, Satu Data Sistem dipecah jadi dua bagian dengan urutan prioritas yang jelas — bukan dikerjakan bersamaan dari nol. Prioritas Utama Job 2 — Manajemen Internal Menyelesaikan masalah operasional harian: data barang, stok, transaksi, kasbon, dan laporan. Ini yang benar-benar dipakai kasir dan pemilik setiap hari. Menyusul Bertahap Job 1 — Katalog Publik Menampilkan produk dan info toko ke calon pembeli. Dibangun setelah data produk dari Job 2 stabil, supaya tidak ada input data dua kali. Job 2 dikerjakan lebih dulu — di situlah masalah nyata toko berada. Job 1 memakai data yang sama, bukan sistem yang terpisah. Teknologi Laravel (PHP) Framework backend — cepat untuk CRUD, autentikasi, dan role pengguna. MySQL Database relasional, cocok untuk data transaksi dan stok yang terstruktur. Blade + Tailwind CSS Antarmuka ringan tanpa perlu build tool frontend yang rumit. Alpine.js Interaktivitas kecil — filter, modal — tanpa framework berat. Chart.js Grafik dashboard: tren penjualan dan produk terlaris. Git & GitHub Version control dan pelacakan tugas, menyerupai alur kerja tim sungguhan.",
+        "url": "./v2/index.html#panel-5"
+      },
+      {
+        "version": "V2",
+        "versionLower": "v2",
+        "panel": "panel-6",
+        "eyebrow": "Tahap 04",
+        "title": "Rencana 8–12 Minggu",
+        "text": "Tahap 04 Rencana 8–12 Minggu Empat tahap besar, disesuaikan dengan durasi KP resmi kampus. 01 Observasi & Analisis Minggu 1–2 Wawancara, validasi masalah, ERD awal, dan backlog fitur. 02 Modul Inti Minggu 3–7 Autentikasi & role, data barang, stok, pembelian, dan transaksi penjualan. 03 Laporan & Dashboard Minggu 8 Rekap penjualan, notifikasi stok menipis, dan produk terlaris. 04 UAT & Dokumentasi Minggu 9–12 Uji coba langsung di toko, revisi, manual pengguna, dan serah terima sistem. Langkah Selanjutnya Tuntaskan klarifikasi terbuka dari kunjungan lanjutan (lihat Tahap 01 — Temuan Lapangan). Kunjungi toko cabang untuk melengkapi data kategori/section yang masih kosong. Finalisasi skema tabel barang (nama, kategori, satuan, varian) berdasarkan hasil klarifikasi. Mulai desain ERD lengkap dan migration Laravel untuk modul inti (barang, stok, transaksi, kasbon).",
+        "url": "./v2/index.html#panel-6"
+      },
+
+      {
+        "version": "V3",
+        "versionLower": "v3",
+        "panel": "panel-1",
+        "eyebrow": "Tahap V3",
+        "title": "JUDUL BAGIAN V3",
+        "text": "Isi teks pencarian V3...",
+        "url": "./v3/index.html#panel-1"
+      }
+    ];
+
+    // Element Selectors
+    const searchInput = document.getElementById('search');
+    const resultsContainer = document.getElementById('results');
+    const countDisplay = document.getElementById('resultCount');
+    const emptyState = document.getElementById('empty');
+    const versionsBlock = document.getElementById('versionsBlock');
+    const resultsTitle = document.getElementById('resultsTitle');
+    const clearBtn = document.getElementById('clearBtn');
+    const quickSearchBtns = document.querySelectorAll('[data-q]');
+
+    // Helper Functions
+    function normalize(str) {
+      return (str || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"]/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;'
+      }[char]));
+    }
+
+    function highlightText(text, query) {
+      if (!query) return escapeHtml(text);
+
+      const terms = query.trim().split(/\s+/).filter(Boolean).map((t) =>
+        t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      );
+
+      if (!terms.length) return escapeHtml(text);
+
+      const regex = new RegExp('(' + terms.join('|') + ')', 'ig');
+      return escapeHtml(text).replace(regex, '<mark>$1</mark>');
+    }
+
+    function createSnippet(text, query) {
+      const cleanText = text.replace(/\s+/g, ' ');
+      if (!query) return cleanText.slice(0, 180);
+
+      const normalizedText = normalize(cleanText);
+      const firstTerm = normalize(query).split(/\s+/)[0];
+      const matchPosition = normalizedText.indexOf(firstTerm);
+
+      const startPosition = Math.max(0, (matchPosition < 0 ? 0 : matchPosition) - 70);
+      const prefix = startPosition ? '…' : '';
+      const suffix = (startPosition + 210 < cleanText.length) ? '…' : '';
+
+      return prefix + cleanText.slice(startPosition, startPosition + 210) + suffix;
+    }
+
+    function calculateScore(item, query) {
+      const normalizedQuery = normalize(query);
+      const terms = normalizedQuery.split(/\s+/).filter(Boolean);
+      const titleText = normalize(`${item.title} ${item.eyebrow} ${item.version}`);
+      const bodyText = normalize(item.text);
+
+      let totalScore = 0;
+      for (const term of terms) {
+        if (titleText.includes(term)) totalScore += 8;
+        if (bodyText.includes(term)) totalScore += 2;
+        if (normalize(item.versionLower) === term) totalScore += 20;
+      }
+      return totalScore;
+    }
+
+    // Render Search Results
+    function render() {
+      const query = searchInput.value.trim();
+      let filteredItems = DATA.map((item) => ({
+        ...item,
+        _score: calculateScore(item, query)
+      }));
+
+      if (query) {
+        filteredItems = filteredItems
+          .filter((item) => item._score > 0)
+          .sort((a, b) => b._score - a._score || a.version.localeCompare(b.version));
+      }
+
+      // Update Layout UI
+      versionsBlock.style.display = query ? 'none' : '';
+      resultsTitle.textContent = query ? 'Hasil Pencarian' : 'Indeks Bagian';
+      countDisplay.textContent = `${filteredItems.length} BAGIAN`;
+
+      // Update Results Listing
+      resultsContainer.innerHTML = filteredItems
+        .map((item) => `
+        <a class="result" href="${item.url}">
+          <div class="result-version">${item.version}</div>
+          <div>
+            <div class="minor">${highlightText(item.eyebrow || item.panel, query)}</div>
+            <div class="result-title">${highlightText(item.title, query)}</div>
+            <div class="result-snippet">${highlightText(createSnippet(item.text, query), query)}</div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+      `)
+        .join('');
+
+      // Toggle Empty State
+      emptyState.style.display = filteredItems.length ? 'none' : 'block';
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('input', render);
+
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      render();
+      searchInput.focus();
+    });
+
+    quickSearchBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        searchInput.value = btn.dataset.q;
+        render();
+        searchInput.focus();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        render();
+        searchInput.blur();
+      }
+    });
+
+    // Initial Render
+    render();
+  </script>
 </body>
+
 </html>
