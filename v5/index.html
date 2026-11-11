@@ -614,6 +614,9 @@
   }
   .guide-card h5:first-of-type{ margin-top: 14px; }
   .tl-body .weeks .status-pill{ margin-left: 8px; vertical-align: middle; }
+  .status-pill.fix{ background: rgba(193,68,14,0.38); color: #FFB08A; }
+  .price-table td.code{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--yellow); white-space: nowrap; }
+  .price-table td.nowrap{ white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -623,7 +626,7 @@
   <div class="topbar-inner">
     <div>
       <div class="wordmark-main">SIM<span>PRO</span></div>
-      <div class="wordmark-sub">Rancangan Sistem Informasi Manajemen — Proyek KP · v5.0 final Chat 1</div>
+      <div class="wordmark-sub">Rancangan Sistem Informasi Manajemen — Proyek KP · v5.0 · diperbarui 11 Nov 2026</div>
     </div>
     <nav class="tabs" role="tablist" aria-label="Navigasi bagian">
       <button class="tab" role="tab" aria-selected="true" data-target="panel-1"><span class="tab-num mono">01</span>RINGKASAN</button>
@@ -637,7 +640,8 @@
       <button class="tab" role="tab" aria-selected="false" data-target="panel-9"><span class="tab-num mono">09</span>DATA HARGA</button>
       <button class="tab" role="tab" aria-selected="false" data-target="panel-10"><span class="tab-num mono">10</span>STATUS KEPUTUSAN</button>
       <button class="tab" role="tab" aria-selected="false" data-target="panel-11"><span class="tab-num mono">11</span>PANDUAN CHAT</button>
-      <button class="tab" role="tab" aria-selected="false" data-target="panel-12"><span class="tab-num mono">12</span>KUNJUNGAN TERAKHIR</button>
+      <button class="tab" role="tab" aria-selected="false" data-target="panel-12"><span class="tab-num mono">12</span>HASIL KUNJUNGAN</button>
+      <button class="tab" role="tab" aria-selected="false" data-target="panel-13"><span class="tab-num mono">13</span>STOCK OPNAME</button>
     </nav>
   </div>
 </header>
@@ -659,12 +663,13 @@
 
     <div class="grid-2" style="margin-top:34px;">
       <div class="clip-card">
-        <span class="tag-small mono">Posisi per 31 Okt 2026</span>
-        <h3>Minggu ke-8 dari 18</h3>
+        <span class="tag-small mono">Posisi per 11 Nov 2026</span>
+        <h3>Minggu ke-10 dari 18</h3>
         <ul>
-          <li><b>Sudah ada:</b> observasi hari 1–2, kunjungan lanjutan, pendataan 67 baris harga (data mentah), backlog 28 fitur, dan dokumen rancangan ini.</li>
-          <li><b>Belum ada:</b> stock opname, ERD, keputusan skema produk induk + varian, semua modul aplikasi, tahap 3 dan 4.</li>
-          <li>Posisi ini dihitung dari dokumen yang tersimpan di project. Kalau Chat Coding atau Chat Dokumentasi punya kemajuan yang belum tercatat di sini, perbarui bagian ini.</li>
+          <li><b>Sudah ada:</b> observasi hari 1–2, kunjungan lanjutan, pendataan 67 baris harga, kunjungan 8 Nov (12 pertanyaan tab 12 lama dan 13 pertanyaan tambahan Chat 3 sudah dijawab, sebagian masih perlu dicek ulang), stock opname batch 1 (16 baris), analisis Chat 3, dan dokumen rancangan ini.</li>
+          <li><b>Menurut catatan Chat 3:</b> repo sudah berjalan (autentikasi bawaan Breeze, template admin Bootstrap, halaman profil admin, 50 tes otomatis). Belum ada modul barang, stok, transaksi, atau kasbon.</li>
+          <li><b>Belum ada:</b> ERD, tujuh keputusan di tab 10 (K1–K7), stock opname lanjutan, profil toko dan pembimbing lapangan, tahap 3 dan 4.</li>
+          <li>Posisi ini dihitung dari dokumen di project. Kalau ada kemajuan yang belum tercatat, perbarui bagian ini.</li>
         </ul>
       </div>
       <div class="clip-card">
@@ -675,7 +680,7 @@
           <li>Hanya satu keputusan yang ditulis resmi: cakupan MVP toko utama saja.</li>
           <li>Angka di tab 08 adalah ilustrasi, bukan data toko.</li>
           <li>Tab 11 berisi panduan khusus untuk Chat Coding dan Chat Dokumentasi KP.</li>
-          <li>Tab 12 berisi bekal kunjungan terakhir ke toko: pertanyaan, yang diamati, dan yang dibawa pulang.</li>
+          <li>Tab 12 berisi hasil kunjungan 8 Nov (jawaban per pertanyaan), tab 13 berisi stock opname batch 1.</li>
         </ul>
       </div>
     </div>
@@ -735,7 +740,7 @@
         <ul>
           <li>Kode rahasia di label tetap sekadar kebiasaan toko, bukan kebutuhan sistem.</li>
           <li>🔴 Harga <b>memang berbeda per pelanggan</b> — awalnya karena jarak rumah (ongkir disisipkan ke harga).</li>
-          <li>Kadang beda juga karena pemilik lupa harga minggu lalu — dihitung manual dari ingatan, bukan daftar tetap.</li>
+          <li>Kadang beda juga karena pemilik lupa harga minggu lalu — dihitung manual dari ingatan, bukan daftar tetap. Kunjungan 8 Nov: "kadang ingat", kurang dari 10 pelanggan mendapat harga khusus (⚠️ mahasiswa menandai jawaban ini perlu dikonfirmasi ulang).</li>
         </ul>
       </div>
       <div class="clip-card">
@@ -752,8 +757,8 @@
         <h3>Beli Dulu, Coba Dulu</h3>
         <ul>
           <li>Bayar penuh dulu, coba di rumah, kalau cocok selesai, kalau tidak barang &amp; uang dikembalikan.</li>
-          <li>🔴 Durasi maksimalnya <b>belum diketahui</b> — angka "1 minggu" yang sempat dicatat ternyata itu aturan kasbon, salah tempat.</li>
-          <li>Dugaan sementara: kemungkinan tidak berlaku untuk barang curah seperti pasir/semen curah.</li>
+          <li>✅ Kunjungan 8 Nov: <b>tidak ada batas waktu</b> (sudah bayar penuh, kalau tidak dikembalikan dianggap beli). Angka "1 minggu" yang dulu sempat dicatat memang aturan kasbon, salah tempat.</li>
+          <li>Dugaan lama "barang curah dikecualikan" tidak sesuai daftar pemilik. Yang tidak bisa dikembalikan: elektronik, selang air, seng talang, talang karpet, fiber pagar, aneka tambang, aneka kawat (detail di tab 12).</li>
         </ul>
       </div>
       <div class="clip-card">
@@ -761,7 +766,7 @@
         <h3>Kemasan Tidak Seragam</h3>
         <ul>
           <li>Paku kecil pakai alat takaran tetap, tapi paku besar tetap ditimbang manual di rak.</li>
-          <li>✅ Semen kresek kecil dikonfirmasi: <b>5 kg, Rp 13.000</b>.</li>
+          <li>✅ Semen kresek kecil dikonfirmasi: <b>5 kg, Rp 13.000</b>, <b>dibongkar dari sak 50 kg</b> oleh toko sendiri (8 Nov).</li>
           <li>✅ Alamat pengiriman: sebagian tertulis di nota, belum sepenuhnya konsisten.</li>
         </ul>
       </div>
@@ -806,7 +811,7 @@
         <ul>
           <li>Dicatat dua batch (25 dan 27 Okt 2026), disalin apa adanya. Isi lengkap ada di tab 09.</li>
           <li>Satuan jual sangat beragam dan banyak baris tanpa satuan, jadi kuantitas desimal dan multi-satuan terbukti dibutuhkan.</li>
-          <li>🔴 Belum jelas: harga jual atau harga beli, ukuran "kol", ukuran sak semen tiga roda.</li>
+          <li>✅ 8 Nov: harga jual; "kol" = kolbak (muatan mobil); sak semen tiga roda 50 kg. 🔴 Harga beli belum diketahui untuk satu barang pun.</li>
         </ul>
       </div>
     </div>
@@ -815,7 +820,7 @@
     <div class="abbr-grid">
       <span>psr<i>Pasir</i></span>
       <span>psg<i>Pasang</i></span>
-      <span>k<i>Kawat</i></span>
+      <span>k<i>Kunci (untuk "K besi", kata pemilik). Arti "k" di bagian lain buku belum dipastikan</i></span>
       <span>bh<i>1 Buah</i></span>
       <span>lbr<i>1 Lembar</i></span>
       <span>krg<i>1 Karung</i></span>
@@ -823,7 +828,10 @@
       <span>btg<i>1 Batang</i></span>
       <span>btl<i>1 Botol</i></span>
       <span>Ø6/8/10/12/13<i>Besi beton &amp; pipa (mm)</i></span>
-      <span>kol<i>Satuan pasir (ukuran belum diketahui)</i></span>
+      <span>kol<i>Kolbak: satu muatan mobil kolbak, bisa ¼ dan ½</i></span>
+      <span>gg<i>Gagang (Kape gg, Kran gg besi)</i></span>
+      <span>wd<i>Nama merek (Cutting wd)</i></span>
+      <span>ml / brg / uril<i>Istilah di opname 8 Nov: dugaan mm, batang, ulir. Belum dipastikan</i></span>
     </div>
 
     <div class="insight-box" style="margin-top:24px;">
@@ -840,7 +848,7 @@
     <div class="legend">
       <div class="legend-item"><span class="swatch" style="background:var(--rust)"></span>MVP — wajib ada</div>
       <div class="legend-item"><span class="swatch" style="background:var(--yellow)"></span>Tambahan — nice-to-have</div>
-      <div class="legend-item"><span class="swatch" style="background:var(--steel)"></span>Perlu klarifikasi</div>
+      <div class="legend-item"><span class="swatch" style="background:var(--steel)"></span>Perlu klarifikasi / keputusan</div>
       <div class="legend-item"><span class="swatch" style="background:var(--steel-light)"></span>Dicoret dulu — di luar scope</div>
     </div>
 
@@ -848,41 +856,41 @@
       <button class="filter-btn active" data-filter="all">Semua (28)</button>
       <button class="filter-btn" data-filter="mvp">MVP</button>
       <button class="filter-btn" data-filter="tambahan">Tambahan</button>
-      <button class="filter-btn" data-filter="pending">Perlu Klarifikasi</button>
+      <button class="filter-btn" data-filter="pending">Perlu Klarifikasi / Keputusan</button>
       <button class="filter-btn" data-filter="cut">Dicoret Dulu</button>
     </div>
 
     <div class="tag-grid" id="tagGrid">
       <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Pencarian by Nama Barang</h4><p>Cara pegawai benar-benar mencari barang: sebut nama, bukan kode.</p></div>
       <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Kode/ID Barang</h4><p>Tetap dibuat sebagai identitas data di belakang layar, bukan cara pencarian utama.</p></div>
-      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Data Stok</h4><p>Dimulai dari satuan pasak/sak; satuan campuran (kg, eceran) divalidasi langsung di lapangan.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Data Stok</h4><p>Dimulai dari satuan sak. Fakta 8 Nov: stok barang curah (pasir) tidak dihitung; cat dihitung per kemasan tanpa membedakan merek (opname); stok nol tidak boleh membuat transaksi ditolak, cukup diberi peringatan (usulan Chat 3, Chat 1 setuju). Cara menyimpan stok semen (sak dan kresek) menunggu keputusan K2.</p></div>
       <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>CRUD Data Barang</h4><p>Tambah, ubah, dan hapus data barang oleh admin toko.</p></div>
-      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Transaksi &amp; Cetak Nota</h4><p>Termasuk hitung kembalian otomatis dari uang yang diberikan pelanggan.</p></div>
-      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Laporan Penjualan &amp; Stok</h4><p>Rekap harian, mingguan, dan bulanan untuk pemilik toko.</p></div>
-      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Hutang &amp; Piutang (Kasbon)</h4><p>Mendigitalkan sistem kasbon: approval hanya oleh pemilik, tanpa bunga, saldo utang per pelanggan.</p></div>
-      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Notifikasi Stok Menipis</h4><p>Menggantikan kebiasaan pemilik mengecek stok manual setiap sore. Akurat hanya kalau stok juga bertambah lewat barang masuk atau stock opname.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Transaksi &amp; Cetak Nota</h4><p>Termasuk hitung kembalian otomatis. Fakta 8 Nov: nota ditulis tangan, tidak bernomor, tidak ada printer; satu nota boleh banyak barang, tambahan setelah nota ditulis dibuat nota baru. Usulan Chat 3 (menunggu keputusan K4): jadikan "nota siap cetak".</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Laporan Penjualan &amp; Stok</h4><p>Yang diminta pemilik (8 Nov): stok barang tersisa, omzet penjualan harian, dan laporan hutang ke supplier. Tidak ada permintaan grafik. Rekap mingguan dan bulanan belum diminta langsung.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Hutang &amp; Piutang (Kasbon)</h4><p>Mendigitalkan sistem kasbon: approval hanya pemilik, tanpa bunga, saldo utang per pelanggan. Fakta 8 Nov: dicatat per nota, bisa bayar sebagian, pemilik mengirim rekap lewat WhatsApp tiap Sabtu secara manual.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Notifikasi Stok Menipis</h4><p>Menggantikan kebiasaan pemilik mengecek stok manual setiap sore. Akurat hanya kalau stok juga bertambah lewat barang masuk atau stock opname. Barang curah (pasir) tidak dihitung, jadi dikecualikan. Pemilik menolak mencatat barang masuk dua kali (K5).</p></div>
       <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Pencatatan Alamat Pengiriman</h4><p>Titik rawan human error nyata: alamat kirim saat ini hanya diandalkan dari ingatan.</p></div>
-      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Multi-Satuan per Produk</h4><p>Barang sama, kemasan beda: paku besar ditimbang manual, paku kecil per bungkus; semen per sak atau kresek kecil. Daftar harga menambah satuan per meter, kg, dan m3, jadi kuantitas harus bisa desimal.</p></div>
-      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Autentikasi &amp; Role Pengguna</h4><p>Fitur turunan: approval kasbon hanya oleh pemilik, jadi minimal ada pembedaan hak akses. Jumlah karyawan dan hak akses kasir belum diketahui.</p></div>
-      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Data Pelanggan</h4><p>Fitur turunan: dibutuhkan untuk saldo kasbon, alamat kirim, dan harga khusus. Kolom persisnya menunggu konfirmasi.</p></div>
-      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Status Pembayaran</h4><p>Fitur turunan dari temuan "Kolom 2": membedakan tunai, transfer yang belum dicek, dan kasbon, karena ketiganya bukan hal yang sama.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Multi-Satuan per Produk</h4><p>Barang sama, kemasan beda: paku besar ditimbang manual, paku kecil per bungkus; semen per sak 50 kg atau kresek 5 kg (dibongkar dari sak). Pasir dijual per kolbak, ¼, atau ½. Paku seri punya empat ukuran (5, 7, 10, 12). Kuantitas harus bisa desimal.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Autentikasi &amp; Role Pengguna</h4><p>Fakta 8 Nov: 8 orang (6 karyawan lapangan, 2 kasir), hanya pemilik yang boleh "mengubah". Keputusan mahasiswa: dua peran (pemilik, kasir), registrasi publik ditutup, kode verifikasi email dicabut. Belum jelas siapa pemilik, apa yang dimaksud "mengubah", dan apakah dua kasir memakai akun terpisah.</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Data Pelanggan</h4><p>Terkonfirmasi 8 Nov: nama, alamat, nomor telepon. Jumlah pelanggan kasbon aktif belum diketahui (hitung dari buku kasbon).</p></div>
+      <div class="tag-card" data-cat="mvp"><span class="cat-label mono">MVP</span><h4>Status Pembayaran</h4><p>Membedakan tunai, transfer yang belum dicek, dan kasbon. Fakta 8 Nov: transfer dicek oleh pemilik sendiri, jadi perlu tindakan verifikasi khusus pemilik (implikasi Chat 1).</p></div>
 
       <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Foto Produk</h4><p>Nilai tambah tampilan, bukan penentu jalannya transaksi.</p></div>
       <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Lokasi / Rak Barang</h4><p>Berguna kalau toko cukup besar sampai karyawan sering bingung mencari barang.</p></div>
       <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Status Antar Pesanan</h4><p>Menunggu / Diantar / Selesai — versi sederhana tanpa pelacakan langsung.</p></div>
-      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Retur / Buy &amp; Return Bersyarat</h4><p>Bayar dulu, coba di rumah, kembali barang &amp; uang kalau tidak cocok — durasi maksimal masih belum diketahui.</p></div>
-      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Riwayat Harga Terakhir Pelanggan</h4><p>Bantu pemilik yang kadang lupa harga minggu lalu — saran fitur, belum diminta langsung.</p></div>
-      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Info Margin di Dashboard</h4><p>Tandai barang fast vs slow moving supaya pemilik lihat mana yang ramai tapi tipis untung.</p></div>
-      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Ekspansi Data Cabang</h4><p>Di luar scope MVP karena jarak — kandidat pengembangan lanjutan setelah toko utama stabil.</p></div>
+      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Retur / Buy &amp; Return Bersyarat</h4><p>Fakta 8 Nov: tidak ada batas waktu. Tidak bisa dikembalikan: elektronik, selang air, seng talang, talang karpet, fiber pagar, aneka tambang, aneka kawat. Tetap fitur tambahan, tidak dibangun di MVP.</p></div>
+      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Riwayat Harga Terakhir Pelanggan</h4><p>Bantu pemilik yang kadang lupa harga minggu lalu. Harga jarang berubah (pemicu: harga minyak dan kurs dolar) dan harga khusus hanya untuk kurang dari 10 pelanggan, jadi kebutuhannya kecil.</p></div>
+      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Info Margin di Dashboard</h4><p>Tandai barang fast vs slow moving. Belum bisa dihitung: harga beli belum diketahui untuk satu barang pun. Tidak termasuk tiga laporan yang diminta pemilik.</p></div>
+      <div class="tag-card" data-cat="tambahan"><span class="cat-label mono">Tambahan</span><h4>Ekspansi Data Cabang</h4><p>Di luar scope MVP (keputusan resmi). Catatan 8 Nov: stok toko utama bisa diisi dari toko cabang saat habis. Usulan Chat 3 berupa satu kolom sumber pada barang masuk, bukan pengelolaan stok cabang (menunggu keputusan K7).</p></div>
 
-      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Klarifikasi</span><h4>Pola Produk Induk + Varian</h4><p>Besi 6 mm dan 8 mm sudah terkonfirmasi sebagai SKU terpisah. Yang belum diputuskan: apakah semen, paku, dan besi memakai satu pola induk + varian. Daftar harga menambah contoh: Avian ½ kg vs 1 kg, meteran 3/5/7 m, gembok kecil/sedang/besar.</p></div>
-      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Klarifikasi</span><h4>Mekanisme Harga Khusus Pelanggan</h4><p>Dikonfirmasi terjadi (jarak + faktor lupa manual) — mekanisme sistem (manual vs daftar tetap) masih perlu diputuskan.</p></div>
-      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Klarifikasi</span><h4>Hutang ke Supplier (Accounts Payable)</h4><p>Kebalikan piutang — toko berhutang ke supplier. Belum dikonfirmasi apakah pemilik mau ini masuk sistem atau ditangani terpisah.</p></div>
-      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Klarifikasi</span><h4>Pencatatan Barang Masuk (Supplier)</h4><p>Tanpa ini stok hanya turun dan harga beli tidak punya sumber. Opsi sederhana (tanggal, barang, jumlah, harga beli) direkomendasikan, tapi kebiasaan toko belum ditanyakan ke pemilik.</p></div>
+      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Klarifikasi</span><h4>Skema Produk: Satu Tabel + Pengelompokan</h4><p>Keputusan mahasiswa 8 Nov (M6): satu tabel barang dengan kolom pengelompokan, bukan dua tabel induk dan varian. Besi 6 mm dan 8 mm terkonfirmasi SKU terpisah. Kasus semen (satu persediaan, dua bentuk jual) menunggu keputusan K2. Paku seri: satu baris harga mencakup empat ukuran, harga per ukuran belum dipastikan.</p></div>
+      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Klarifikasi</span><h4>Mekanisme Harga Khusus Pelanggan</h4><p>Jawaban 8 Nov: "kadang ingat", kurang dari 10 pelanggan (⚠️ perlu konfirmasi ulang). Chat 3 mengusulkan cukup kolom harga yang bisa diubah di form transaksi, tanpa tabel harga per pelanggan. Siapa yang boleh mengubah harga saat transaksi belum terjawab.</p></div>
+      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Keputusan · Diminta Pemilik</span><h4>Hutang ke Supplier (Accounts Payable)</h4><p>Pemilik meminta fitur ini (8 Nov): ingin tahu hutang ke supplier berapa saja, dan muncul dua kali di daftar laporannya. Bentuknya menunggu keputusan K1 (penuh, sederhana, atau ditunda).</p></div>
+      <div class="tag-card" data-cat="pending"><span class="cat-label mono">Perlu Keputusan</span><h4>Pencatatan Barang Masuk (Supplier)</h4><p>Fakta 8 Nov: barang masuk tidak dicatat, yang ada bon supplier ("sudah punya bonnya, kenapa harus dicatat lagi?"). Padahal laporan stok yang diminta pemilik bergantung pada barang masuk. Ketegangan ini menunggu keputusan K5.</p></div>
 
       <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Sistem Absensi Karyawan</h4><p>Bukan masalah inti toko; berisiko melebarkan scope proyek jadi dua sistem sekaligus.</p></div>
       <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Pelacakan GPS Real-time</h4><p>Butuh infrastruktur di luar kemampuan proyek KP satu semester.</p></div>
-      <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Notifikasi WhatsApp Otomatis</h4><p>Tetap di luar scope meski ada tagihan mingguan via WA — itu tetap dikirim manual oleh pemilik, bukan otomatis dari sistem.</p></div>
+      <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Notifikasi WhatsApp Otomatis</h4><p>Tetap di luar scope: rekap piutang mingguan dikirim manual oleh pemilik lewat WhatsApp tiap Sabtu (dikonfirmasi 8 Nov). Usulan menyiapkan teks rekap yang bisa disalin ada di tab 10 (K7), tanpa integrasi WhatsApp.</p></div>
       <div class="tag-card" data-cat="cut"><span class="cat-label mono">Dicoret Dulu</span><h4>Replikasi Kode Harga Rahasia</h4><p>Kode alfabet di label fisik murni kebiasaan toko — sistem cukup simpan harga sebagai angka biasa.</p></div>
     </div>
   </section>
@@ -911,13 +919,13 @@
     <div class="stack-grid">
       <div class="stack-chip"><b>Laravel (PHP)</b><span>Framework backend — cepat untuk CRUD, autentikasi, dan role pengguna.</span></div>
       <div class="stack-chip"><b>MySQL</b><span>Database relasional, cocok untuk data transaksi dan stok yang terstruktur.</span></div>
-      <div class="stack-chip"><b>Blade + Tailwind CSS</b><span>Antarmuka ringan tanpa perlu build tool frontend yang rumit.</span></div>
+      <div class="stack-chip"><b>Blade + Bootstrap (template admin Zoyothemes)</b><span>Keputusan mahasiswa 8 Nov (M2). Sisa Tailwind dari Breeze masih ada di halaman autentikasi.</span></div>
       <div class="stack-chip"><b>Alpine.js</b><span>Interaktivitas kecil — filter, modal — tanpa framework berat.</span></div>
       <div class="stack-chip"><b>Chart.js</b><span>Grafik dashboard: tren penjualan dan produk terlaris.</span></div>
       <div class="stack-chip"><b>Git &amp; GitHub</b><span>Version control dan pelacakan tugas, menyerupai alur kerja tim sungguhan.</span></div>
     </div>
     <div class="insight-box">
-      <b>Status stack:</b> tertulis di rancangan sebagai dasar kerja, belum ditandai sebagai keputusan resmi. Versi Laravel, PHP, dan MySQL belum dipilih. Cek dokumentasi resmi saat setup, jangan dari ingatan atau contoh lama.
+      <b>Status stack:</b> tertulis di rancangan sebagai dasar kerja, belum ditandai sebagai keputusan resmi. Menurut catatan Chat 3, repo memakai template admin Bootstrap (Zoyothemes) di atas Laravel Breeze, dan frontend dilanjutkan dengan Bootstrap. Versi Laravel, PHP, dan MySQL mengikuti repo dan belum dicatat di dokumen ini. <b>Cek lisensi template</b> sebelum repo dipublikasikan sebagai portofolio, karena template berbayar sering tidak boleh disebar ulang di repo publik. Tempat menjalankan sistem saat uji coba dan serah terima belum diputuskan (K6).
     </div>
   </section>
 
@@ -925,23 +933,23 @@
   <section class="panel" id="panel-6">
     <div class="eyebrow">Tahap 04 · Draft untuk Dosen Pembimbing</div>
     <h2 class="panel-title">Rencana 18 Minggu</h2>
-    <p class="lede dim">7 September 2026 – 9 Januari 2027, empat tahap. Ini draft Bab 1.6 yang per 30 Okt 2026 belum dikirim ke dosen pembimbing, jadi pembagian minggu masih bisa berubah. Status tiap tahap dihitung per 31 Okt 2026 (akhir minggu ke-8) dari dokumen yang ada di project.</p>
+    <p class="lede dim">7 September 2026 – 9 Januari 2027, empat tahap. Ini draft Bab 1.6; per 30 Okt belum dikirim ke dosen pembimbing dan status terbarunya belum diketahui Chat 1. Hari ini (11 Nov) adalah minggu ke-10, minggu pertama tahap 2 menurut rencana. Status tiap tahap dihitung dari dokumen di project.</p>
 
     <div class="tl">
       <div class="tl-step">
         <div class="tl-num mono">01</div>
         <div class="tl-body">
           <h4>Observasi &amp; Analisis</h4>
-          <div class="weeks mono">7 Sep – 7 Nov 2026 · Minggu 1–9 <span class="status-pill warn">Sebagian</span></div>
-          <p>Observasi alur transaksi dan penyimpanan, wawancara, pemeriksaan buku catatan, pendataan daftar harga, backlog fitur, stock opname toko utama, dan perancangan ERD. Yang sudah ada: observasi, wawancara, buku catatan, 67 baris harga, backlog. Yang belum: stock opname dan ERD.</p>
+          <div class="weeks mono">7 Sep – 7 Nov 2026 · Minggu 1–9 <span class="status-pill warn">Melewati rencana</span></div>
+          <p>Sudah ada: observasi, wawancara, buku catatan, 67 baris harga, backlog fitur, kunjungan 8 Nov, dan stock opname batch 1 (16 baris). Belum ada: ERD, stock opname lanjutan (semen tiga roda, bata ringan, koreksi data cat), harga besi beton dan cat, serta profil toko dan pembimbing lapangan.</p>
         </div>
       </div>
       <div class="tl-step">
         <div class="tl-num mono">02</div>
         <div class="tl-body">
           <h4>Modul Inti</h4>
-          <div class="weeks mono">9 Nov – 12 Des 2026 · Minggu 10–14 <span class="status-pill open">Belum mulai</span></div>
-          <p>Autentikasi dan role, data barang (multi-satuan dan varian), stok, transaksi penjualan, kasbon (piutang pelanggan), dan pencatatan barang masuk dari supplier sesuai hasil konfirmasi pemilik.</p>
+          <div class="weeks mono">9 Nov – 12 Des 2026 · Minggu 10–14 <span class="status-pill info">Dasar proyek jalan</span></div>
+          <p>Menurut catatan Chat 3: autentikasi bawaan Breeze, template admin Bootstrap, halaman profil admin, dan 50 tes otomatis sudah ada. Belum ada modul data barang, stok, transaksi, kasbon, dan hutang supplier (bentuknya menunggu K1). Modul autentikasi dan role bisa dilanjutkan tanpa menunggu keputusan apa pun.</p>
         </div>
       </div>
       <div class="tl-step">
@@ -949,7 +957,7 @@
         <div class="tl-body">
           <h4>Laporan &amp; Dashboard</h4>
           <div class="weeks mono">14 – 26 Des 2026 · Minggu 15–16 <span class="status-pill open">Belum mulai</span></div>
-          <p>Rekap penjualan dan stok, notifikasi stok menipis, dan produk terlaris.</p>
+          <p>Tiga laporan yang diminta pemilik: stok barang tersisa, omzet penjualan harian, dan hutang ke supplier. Produk terlaris dan grafik tren tidak diminta pemilik, jadi diperlakukan sebagai tambahan.</p>
         </div>
       </div>
       <div class="tl-step">
@@ -957,23 +965,24 @@
         <div class="tl-body">
           <h4>UAT &amp; Dokumentasi</h4>
           <div class="weeks mono">28 Des 2026 – 9 Jan 2027 · Minggu 17–18 <span class="status-pill open">Belum mulai</span></div>
-          <p>Uji coba langsung di toko, revisi, manual pengguna, dan serah terima.</p>
+          <p>Uji coba langsung di toko, revisi, manual pengguna, dan serah terima. Toko menulis nota tangan dan tidak punya printer, jadi saat uji coba nota tetap ditulis tangan.</p>
         </div>
       </div>
     </div>
 
     <div class="insight-box">
-      <b>Risiko jadwal:</b> (1) tahap 2 hanya 5 minggu untuk enam modul, padahal skema database belum diputuskan; (2) tahap 4 jatuh di akhir tahun, jadi hari efektif uji coba bisa berkurang; (3) batas pengumpulan laporan dan jadwal sidang belum diketahui, kalau jatuh sebelum 9 Jan maka tahap 4 harus dimajukan. Kalau mepet, potong fitur di tahap 3 (grafik bisa menyusul), jangan potong waktu uji.
+      <b>Risiko jadwal:</b> (1) tahap 2 hanya 5 minggu untuk enam modul, dan kini ditambah hutang supplier: Chat 3 memperkirakan +3–4 hari untuk bentuk sederhana dan +1,5–2 minggu untuk bentuk penuh (perkiraan, belum diuji); (2) tahap 4 jatuh di akhir tahun, jadi hari efektif uji coba bisa berkurang; (3) batas pengumpulan laporan dan jadwal sidang belum diketahui, kalau jatuh sebelum 9 Jan maka tahap 4 harus dimajukan; (4) belum ada keputusan tempat menjalankan sistem untuk uji coba dan serah terima, sekarang hanya laptop mahasiswa (K6); (5) nota tetap tulis tangan, jadi sistem berisiko menjadi pekerjaan ganda bagi kasir (K5). Kalau mepet, potong fitur di tahap 3 (grafik bisa menyusul), jangan potong waktu uji.
     </div>
 
     <div class="next-box">
       <h3>Langkah Selanjutnya (Berurutan)</h3>
       <ol>
-        <li>Tanyakan ke pemilik: barang masuk, ukuran "kol", ukuran sak semen, harga jual atau beli, singkatan yang belum jelas (daftar di tab 07).</li>
-        <li>Kirim draft Bab 1.6 ke dosen pembimbing, sekalian tanyakan batas laporan, jadwal sidang, dan persetujuan toko keluarga sebagai tempat KP.</li>
-        <li>Stock opname fisik toko utama, mulai dari barang fast moving.</li>
-        <li>Putuskan skema produk induk + varian bersama mahasiswa, lalu susun ERD.</li>
-        <li>Draft tabel piutang. Migration Laravel baru dimulai setelah langkah 4 stabil.</li>
+        <li>Putuskan K1–K7 di tab 10, terutama K5 (pekerjaan ganda) dan K1 (hutang supplier).</li>
+        <li>Kirim pertanyaan susulan lewat WhatsApp (tab 07). Utamakan S1–S6 dan C1–C5, karena menentukan bentuk database.</li>
+        <li>Susun ERD setelah K1 dan K2 jelas.</li>
+        <li>Lanjutkan stock opname: semen tiga roda, bata ringan (hebel), dan perbaiki data cat (tab 13).</li>
+        <li>Kejar izin nama toko, pembimbing lapangan, batas laporan dan sidang, serta persetujuan kampus. Ini menghambat laporan, bukan coding.</li>
+        <li>Kirim draft Bab 1.6 ke dosen pembimbing kalau belum.</li>
       </ol>
     </div>
   </section>
@@ -981,68 +990,57 @@
   <!-- PANEL 7 — PERTANYAAN & TINDAKAN -->
   <section class="panel" id="panel-7">
     <div class="eyebrow">Tahap 01 — Tindak Lanjut</div>
-    <h2 class="panel-title">Pertanyaan &amp; Apa yang Harus Dilakukan</h2>
-    <p class="lede dim">Tiga kelompok: yang ditanyakan ke toko, yang ditanyakan ke kampus, dan yang dikerjakan sendiri. Urutan di tiap daftar menunjukkan prioritas.</p>
+    <h2 class="panel-title">Pertanyaan Susulan</h2>
+    <p class="lede dim">Pemilik sudah mengizinkan pertanyaan pendek lewat WhatsApp, jadi tidak perlu kunjungan baru. Kode S1–S19 berasal dari daftar Chat 3 (nomor dipertahankan supaya bisa dirujuk). Kode C1–C8 tambahan Chat 1 setelah membaca hasil kunjungan. Prioritas: S1–S6 dan C1–C5 menentukan bentuk database.</p>
 
-    <div class="grid-3">
-      <div class="clip-card">
-        <span class="tag-small mono">Tanyakan ke Toko</span>
-        <h3>Pemilik &amp; Karyawan</h3>
-        <ul>
-          <li><b>Barang masuk:</b> "Kalau barang datang dari supplier, biasanya dicatat di mana, Pak/Bu? Harga belinya ikut dicatat?" Tanyakan kebiasaannya, jangan tanya mau fitur apa.</li>
-          <li>Daftar harga tadi harga jual atau harga beli?</li>
-          <li>"Kol" itu ukuran apa, dan bisa dijual setengah?</li>
-          <li>Sak semen tiga roda 40 atau 50 kg?</li>
-          <li>Semen kresek 5 kg dibongkar dari sak, atau dibeli sudah terkemas?</li>
-          <li>Kepanjangan: gg (Kape gg, Kran gg besi), wd (Cutting wd), kinik, "K besi", "Paku seri", "Seiv". Jangan ditebak.</li>
-          <li>Harga khusus pelanggan: ditentukan manual tiap transaksi, atau ada daftar tetap per pelanggan?</li>
-          <li>Berapa karyawan, dan apakah kasir dan pemilik beda hak akses?</li>
-          <li>Hutang toko ke supplier ikut dicatat di sistem atau urusan terpisah?</li>
-          <li>Prioritas rendah: durasi maksimal buy &amp; return, sub-kategori 12 kategori besar.</li>
-        </ul>
-      </div>
-      <div class="clip-card">
-        <span class="tag-small mono">Tanyakan ke Kampus</span>
-        <h3>Dosen Pembimbing</h3>
-        <ul>
-          <li>Batas pengumpulan laporan dan jadwal sidang. Belum diketahui, dan menentukan apakah tahap 4 harus dimajukan.</li>
-          <li>Apakah kampus menyetujui toko keluarga sebagai tempat KP, dan siapa pembimbing lapangannya? Belum diketahui.</li>
-          <li>Umpan balik atas draft Bab 1.6 (belum dikirim per 30 Okt).</li>
-          <li>Format dan sistematika laporan yang dipakai kampus.</li>
-        </ul>
-      </div>
-      <div class="clip-card">
-        <span class="tag-small mono">Kerjakan</span>
-        <h3>Langkah Teknis</h3>
-        <ul>
-          <li>Stock opname fisik toko utama, mulai dari barang fast moving.</li>
-          <li>Putuskan skema produk induk + varian (besi, semen, paku, cat, meteran memakai pola yang sama atau tidak).</li>
-          <li>Susun ERD. Draft tabel piutang menunggu konfirmasi kolom tanggal dan saldo.</li>
-          <li>Migration &amp; form admin baru dimulai setelah skema di atas stabil.</li>
-          <li>Pastikan dulu apakah "Pesanan A/B" istilah asli di buku catatan atau hanya cara bercerita. Selama belum pasti, jangan jadi dasar struktur tabel transaksi.</li>
-        </ul>
-      </div>
+    <div class="eyebrow">Tanya lewat WhatsApp · Dari Chat 3</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Kode</th><th>Pertanyaan</th><th>Kenapa penting</th><th>Sumber</th></tr></thead><tbody>
+<tr><td class="code">S1</td><td class="wrap">Selain semen, ada barang lain yang kemasannya dibongkar untuk dijual lebih kecil? Apakah semen instan (bata ringan, keramik, pasangan) juga dibongkar? Kresek dibungkus lebih dulu atau saat ada pembeli?</td><td class="wrap">Menentukan seberapa luas pola "satu persediaan, dua bentuk jual" (K2).</td><td class="wrap">Chat 3 (kalimat kedua dan ketiga ditambah Chat 1)</td></tr>
+<tr><td class="code">S2</td><td class="wrap">Ongkir untuk yang jauh: ditulis sebagai baris sendiri di nota, atau dijumlahkan ke harga barangnya?</td><td class="wrap">Menentukan apakah transaksi butuh kolom atau baris ongkir.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S3</td><td class="wrap">Pasir ¼ kolbak: harganya persis seperempat, atau dibulatkan ke atas?</td><td class="wrap">Harga satuan pecahan.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S4</td><td class="wrap">Beli dari supplier: satuannya sama dengan satuan jual, atau beda (beli per dus, jual per biji)?</td><td class="wrap">Konversi satuan pada barang masuk.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S5</td><td class="wrap">Dua kasir: akun terpisah masing-masing, atau satu akun bersama?</td><td class="wrap">Autentikasi dan jejak siapa yang mencatat.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S6</td><td class="wrap">Enam karyawan lapangan perlu membuka sistem, atau cukup kasir dan pemilik?</td><td class="wrap">Jumlah peran dan akun.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S7</td><td class="wrap">Paku seri 5, 7, 10, 12: harganya sama Rp 20.000/kg, atau beda per ukuran?</td><td class="wrap">Satu atau empat baris barang.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S8</td><td class="wrap">"Seiv" itu merek cat atau jenis?</td><td class="wrap">Pengelompokan barang.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S9</td><td class="wrap">Harga besi beton (6, 8, 10, 12 mm dan 13, 16 ulir).</td><td class="wrap">Stoknya sudah dihitung, harganya belum ada.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S10</td><td class="wrap">Harga cat tembok (galon 5 kg dan pail 25 kg) dan cat batu alam.</td><td class="wrap">Stoknya sudah dihitung, harganya belum ada.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S11</td><td class="wrap">Semen tiga roda tidak ikut terhitung di opname: stoknya berapa?</td><td class="wrap">Barang yang paling banyak dibahas belum punya stok awal.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S12</td><td class="wrap">"Batu alam 1 kg" tercatat dua kali (30 dan 45 kaleng): dua barang berbeda, atau salah tulis?</td><td class="wrap">Periksa catatan asli dulu sebelum bertanya.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S13</td><td class="wrap">Stok cat besi/kayu dihitung gabungan Avian dan Seiv, atau dipisah per merek?</td><td class="wrap">Tingkat rincian stok harus sama dengan tingkat rincian harga.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S14</td><td class="wrap">Di toko ada komputer atau laptop, atau hanya HP? Siapa yang akan memakai sistemnya?</td><td class="wrap">Persiapan uji coba dan tempat menjalankan sistem (K6).</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S15</td><td class="wrap">Internet di toko stabil, kadang mati, atau tidak ada?</td><td class="wrap">Dasar keputusan M4 dan tempat menjalankan sistem.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S16</td><td class="wrap">Ada rencana membeli printer nota, atau tetap tulis tangan?</td><td class="wrap">Menentukan K4. Lebih baik diketahui sekarang daripada di tahap 4.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S17</td><td class="wrap">Hari dan jam paling sepi untuk uji coba?</td><td class="wrap">Jadwal tahap 4. Toko tutup 16.30.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S18</td><td class="wrap">Boleh nama toko disebut di laporan KP? Ada data yang tidak boleh ditulis?</td><td class="wrap">Menghambat penulisan laporan.</td><td class="wrap">Chat 3</td></tr>
+<tr><td class="code">S19</td><td class="wrap">Siapa pembimbing lapangan (nama, jabatan, kontak) yang akan menandatangani penilaian?</td><td class="wrap">Menghambat penulisan laporan.</td><td class="wrap">Chat 3</td></tr>
+</tbody></table></div>
+
+    <div class="eyebrow" style="margin-top:36px;">Tanya lewat WhatsApp · Tambahan Chat 1</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Kode</th><th>Pertanyaan</th><th>Kenapa penting</th><th>Sumber</th></tr></thead><tbody>
+<tr><td class="code">C1</td><td class="wrap">Siapa pemilik toko? Salah satu dari dua kasir (om X dan om Y), atau orang lain? Apa peran istri beliau?</td><td class="wrap">Peran pemilik menentukan kasbon, "mengubah", dan cek transfer. Jawaban 7 Nov ("om dan kadang istri beliau") berbeda dari 8 Nov (dua kasir). Dibutuhkan juga untuk deskripsi perusahaan di laporan.</td><td class="wrap">Chat 1</td></tr>
+<tr><td class="code">C2</td><td class="wrap">"Yang boleh mengubah: pemilik saja" itu mengubah apa: harga, stok, atau nota? Kalau kasir salah tulis nota, siapa yang membetulkan sekarang?</td><td class="wrap">K3. Kalau pembatalan transaksi hanya boleh pemilik, kasir yang salah tulis harus menunggu pemilik.</td><td class="wrap">Chat 1</td></tr>
+<tr><td class="code">C3</td><td class="wrap">Kalau sistem sudah ada, transaksi diketik saat pembeli ada, atau diketik sore setelah toko tutup dari buku nota?</td><td class="wrap">K5. Nota tetap tulis tangan, jadi sistem berarti input kedua. Menentukan seberapa akurat stok sepanjang hari.</td><td class="wrap">Chat 1</td></tr>
+<tr><td class="code">C4</td><td class="wrap">Pembulatan ke bawah: ke kelipatan berapa (ratusan atau ribuan), dan pada total nota atau tiap barang?</td><td class="wrap">Aturan hitung total nota.</td><td class="wrap">Chat 1</td></tr>
+<tr><td class="code">C5</td><td class="wrap">Bon supplier: siapa yang menerima dan memeriksa barang yang datang? Boleh dicatat nominal bon dan jatuh tempo saja, tanpa rincian barang?</td><td class="wrap">K1 dan K5.</td><td class="wrap">Chat 1</td></tr>
+<tr><td class="code">C6</td><td class="wrap">Bata ringan (hebel, per m3) tidak ada di opname: dihitung stoknya atau tidak?</td><td class="wrap">Termasuk barang fast moving. Baris "Bata Ringan" di opname ternyata semen perekat, bukan bata ringannya.</td><td class="wrap">Chat 1</td></tr>
+<tr><td class="code">C7</td><td class="wrap">Boleh buku mingguan (omzet) beberapa bulan terakhir difoto atau disalin sebagai bahan analisis data?</td><td class="wrap">Sistem baru hanya akan punya data beberapa minggu, terlalu sedikit untuk analisis tren. Perlu izin pemilik.</td><td class="wrap">Chat 1</td></tr>
+<tr><td class="code">C8</td><td class="wrap">Kenapa selang, talang, fiber pagar, tambang, dan kawat tidak bisa dikembalikan? Saklar, colokan, dan fitting lampu termasuk "elektronik"?</td><td class="wrap">Pemilik hanya menjelaskan alasan untuk elektronik. Prioritas rendah karena fitur retur tidak dibangun.</td><td class="wrap">Chat 1</td></tr>
+</tbody></table></div>
+
+    <div class="eyebrow" style="margin-top:36px;">Cek Sendiri · Tidak Perlu Bertanya ke Pemilik</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Kode</th><th>Yang dicek</th><th>Kenapa</th></tr></thead><tbody>
+<tr><td class="code">M-a</td><td class="wrap">Periksa catatan opname asli: angka 245 muncul dua kali (cat tembok galon dan cat besi/kayu 1 kg), angka 30 muncul empat kali (tiga semen dan satu batu alam). Hitungan atau perkiraan?</td><td class="wrap">Angka kembar bisa berarti salin tempel.</td></tr>
+<tr><td class="code">M-b</td><td class="wrap">Hitung jumlah pelanggan kasbon aktif dari buku kasbon (nama yang masih punya saldo), jangan dari ingatan.</td><td class="wrap">Bahan data nyata untuk laporan dan mockup piutang.</td></tr>
+<tr><td class="code">M-c</td><td class="wrap">"Karpet tang 90cm" di daftar harga: salah ketik dari "talang"? Cek tulisan asli.</td><td class="wrap">Menentukan nama barang dan aturan retur.</td></tr>
+<tr><td class="code">M-d</td><td class="wrap">Cek apakah "Pesanan A/B" istilah asli di buku catatan.</td><td class="wrap">Belum jadi dasar struktur tabel transaksi sebelum dipastikan.</td></tr>
+<tr><td class="code">M-e</td><td class="wrap">Cek lisensi template Zoyothemes: boleh masuk repo publik di GitHub?</td><td class="wrap">Berpengaruh pada portofolio.</td></tr>
+<tr><td class="code">M-f</td><td class="wrap">Kampus: batas pengumpulan laporan, jadwal sidang, persetujuan toko keluarga sebagai tempat KP, dan umpan balik draft Bab 1.6.</td><td class="wrap">Menentukan jadwal tahap 4.</td></tr>
+</tbody></table></div>
+
+    <div class="insight-box">
+      <b>Cara bertanya tetap sama:</b> tanyakan kebiasaan dan minta contoh nyata, bukan fitur. Pertanyaan yang jawabannya sudah ada (S1–S19 tidak mengulang T1–T12) tidak perlu ditanyakan lagi; daftar jawabannya ada di tab 12.
     </div>
-
-    <div class="eyebrow" style="margin-top:32px;">Sudah Terjawab — Tidak Perlu Ditanyakan Lagi</div>
-    <ul class="done-list">
-      <li>Besi 6mm/8mm — dikonfirmasi barang/SKU terpisah lewat observasi langsung. Pola induk + varian secara umum tetap keputusan terbuka.</li>
-      <li>Alamat di nota pengiriman — dikonfirmasi sebagian tertulis, belum sepenuhnya konsisten.</li>
-      <li>Berat &amp; harga semen kresek kecil — dikonfirmasi 5kg, Rp13.000.</li>
-      <li>Aturan bayar maksimal 1 minggu kasbon — dikonfirmasi berlaku untuk semua yang berhutang.</li>
-      <li>Penyebab harga berbeda per pelanggan — jarak dan lupa harga minggu lalu. Mekanisme di sistem (manual atau daftar tetap) masih keputusan terbuka.</li>
-      <li>Rincian kategori slow moving — tidak krusial untuk MVP, "sisanya" sudah cukup.</li>
-      <li>Kunjungan ke toko cabang — di-skip untuk MVP, sudah jadi keputusan scope resmi.</li>
-      <li>Ada/tidaknya bunga kasbon — dikonfirmasi tidak ada.</li>
-      <li>Siapa yang berwenang approve kasbon — dikonfirmasi hanya pemilik.</li>
-      <li>Satuan jual pasir — tertulis "kol" di daftar harga. Ukuran "kol" itu sendiri belum diketahui (lihat daftar tanya).</li>
-    </ul>
-
-    <div class="eyebrow" style="margin-top:32px;">Keputusan Sementara — Bukan Konfirmasi</div>
-    <ul class="done-list" style="text-decoration:none;">
-      <li style="text-decoration:none;">Cakupan buy &amp; return — asumsi: barang curah kemungkinan dikecualikan. Belum dikonfirmasi pemilik.</li>
-      <li style="text-decoration:none;">"Modal yang dikeluarkan" — default perhitungan otomatis (stok × harga beli). Belum dikonfirmasi pemilik.</li>
-    </ul>
   </section>
 
   <!-- PANEL 8 — PREVIEW UI -->
@@ -1138,8 +1136,8 @@
           <tr><th>Nama Barang</th><th>Kategori</th><th>Kemasan</th><th>Stok</th><th>Harga Beli</th><th>Harga Jual</th><th>Modal</th><th>Status</th></tr>
         </thead>
         <tbody>
-          <tr><td>Semen tiga roda</td><td>Fast Moving</td><td>Sak (ukuran belum dikonfirmasi)</td><td>45</td><td>Rp 73.000</td><td>Rp 77.000</td><td>Rp 3.285.000</td><td><span class="status-pill ok">Aman</span></td></tr>
-          <tr><td>Semen tiga roda</td><td>Fast Moving</td><td>Kresek 5kg</td><td>60</td><td>Rp 10.000</td><td>Rp 13.000</td><td>Rp 600.000</td><td><span class="status-pill ok">Aman</span></td></tr>
+          <tr><td>Semen tiga roda</td><td>Fast Moving</td><td>Sak 50 kg</td><td>45</td><td>Rp 73.000</td><td>Rp 77.000</td><td>Rp 3.285.000</td><td><span class="status-pill ok">Aman</span></td></tr>
+          <tr><td>Semen tiga roda</td><td>Fast Moving</td><td>Kresek 5kg (dibongkar dari sak)</td><td>(dari stok sak)</td><td>—</td><td>Rp 13.000</td><td>—</td><td><span class="status-pill ok">Aman</span></td></tr>
           <tr><td>Besi Beton Ø8mm</td><td>Fast Moving</td><td>Batang</td><td>12</td><td>Rp 55.000</td><td>Rp 65.000</td><td>Rp 660.000</td><td><span class="status-pill warn">Menipis</span></td></tr>
           <tr><td>Paku</td><td>Fast Moving</td><td>Bungkus (kecil)</td><td>8</td><td>Rp 8.000</td><td>Rp 12.000</td><td>Rp 64.000</td><td><span class="status-pill warn">Menipis</span></td></tr>
           <tr><td>Paku</td><td>Fast Moving</td><td>Kg (besar, timbang manual)</td><td>22</td><td>Rp 18.000</td><td>Rp 22.000</td><td>Rp 396.000</td><td><span class="status-pill ok">Aman</span></td></tr>
@@ -1148,13 +1146,13 @@
       </table>
     </div>
     <div class="insight-box" style="margin-top:16px;">
-      Perhatikan baris "Semen" dan "Paku" muncul 2x dengan kemasan berbeda — ini pola <b>produk induk + varian</b>: satu nama barang, beberapa bentuk jual, masing-masing punya stok &amp; harga sendiri. Modal dihitung dari stok × harga beli (bukan harga jual).
+      Baris semen muncul dua kali karena dijual dalam dua bentuk (sak 50 kg dan kresek 5 kg), tetapi persediaannya <b>satu</b>: kresek dibongkar dari sak (kunjungan 8 Nov), jadi tidak punya harga beli sendiri. Cara menyimpan stoknya menunggu keputusan K2 (tab 10). Baris Paku belum diketahui apakah satu persediaan atau terpisah. Modal dihitung dari stok × harga beli (bukan harga jual).
     </div>
     <div class="insight-box" style="margin-top:16px;">
-      <b>Mana yang nyata, mana ilustrasi (dicek v5.0):</b> harga jual semen Rp 77.000 diambil dari daftar harga (dengan asumsi itu harga jual), dan kresek 5 kg Rp 13.000 terkonfirmasi. Semua harga beli, modal, jumlah stok, dan status di tabel ini adalah ilustrasi. Margin semen sak pada contoh ini sekitar 5,5%, selaras dengan perkiraan pemilik 2,5–7% untuk fast moving.
+      <b>Mana yang nyata, mana ilustrasi (dicek ulang 11 Nov):</b> harga jual semen Rp 77.000 per sak 50 kg dan kresek 5 kg Rp 13.000 berasal dari pemilik (8 Nov). Semua harga beli, modal, jumlah stok, dan status di tabel ini ilustrasi; harga beli belum diketahui untuk satu barang pun. Selisih harga jual per kg antara kresek (Rp 2.600) dan sak (Rp 1.540) adalah +68,8%, <b>bukan margin</b>.
     </div>
 
-    <div class="eyebrow" style="margin-top:36px;">⚠️ Preview — Fitur Hutang ke Supplier <span style="color:var(--paper-dim); text-transform:none; letter-spacing:0; font-family:'Inter',sans-serif; font-size:13px;">(kandidat, menunggu konfirmasi scope)</span></div>
+    <div class="eyebrow" style="margin-top:36px;">⚠️ Preview — Fitur Hutang ke Supplier <span style="color:var(--paper-dim); text-transform:none; letter-spacing:0; font-family:'Inter',sans-serif; font-size:13px;">(diminta pemilik 8 Nov, bentuk menunggu keputusan K1)</span></div>
     <div class="table-wrap">
       <table class="preview-table">
         <thead>
@@ -1168,19 +1166,19 @@
       </table>
     </div>
     <div class="insight-box" style="margin-top:16px;">
-      Ini kebalikan dari Piutang — toko yang berhutang ke supplier, bukan pelanggan ke toko. <b>Belum tentu masuk sistem</b> — perlu ditanyakan dulu ke pemilik apakah ini mau dicatat di sini atau ditangani terpisah.
+      Kebalikan dari Piutang. Pemilik sudah meminta fitur ini (8 Nov): ingin tahu hutang ke supplier berapa saja. Kolom "Barang" hanya ada kalau dipilih bentuk penuh; bentuk sederhana mencatat per bon tanpa rincian barang (tab 10, K1).
     </div>
   </section>
 
 
   <!-- PANEL 9 — DATA HARGA -->
   <section class="panel" id="panel-9">
-    <div class="eyebrow">Data Lapangan — Mentah, Belum Diverifikasi</div>
-    <h2 class="panel-title">Daftar Harga Barang</h2>
-    <p class="lede dim">67 baris dari dua batch (46 dicatat 25 Okt 2026, 21 dicatat 27 Okt 2026), disalin apa adanya dari mahasiswa. Nama barang tidak dirapikan dan satuan tidak ditebak. Sumber di project: <span class="path">daftar-harga-draft.md</span>.</p>
+    <div class="eyebrow">Data Lapangan — Harga Jual, Belum Diverifikasi Satu per Satu</div>
+    <h2 class="panel-title">Daftar Harga Barang (A–Z)</h2>
+    <p class="lede dim">67 baris dari dua batch (46 dicatat 25 Okt 2026, 21 dicatat 27 Okt 2026), disalin apa adanya dari mahasiswa dan diurutkan A–Z menurut nama pada 11 Nov. Kolom "No. asal" menunjuk urutan saat dicatat, dipakai Chat 3 sebagai rujukan (misalnya K besi = No. asal 52). Sumber di project: <span class="path">daftar-harga-draft.md</span>.</p>
 
     <div class="insight-box" style="margin-top:0; margin-bottom:24px;">
-      <b>Jangan dipakai sebagai harga resmi.</b> Belum jelas ini harga jual atau harga beli. Perlakukan sebagai data contoh sampai pemilik mengonfirmasi. Tulisan "rb" dibaca ribu rupiah (77rb = Rp 77.000).
+      <b>Terkonfirmasi 8 Nov: ini harga jual.</b> Harga beli belum diketahui untuk satu barang pun. Daftar juga belum lengkap: belum ada harga besi beton, cat tembok, cat batu alam, seng talang, aneka tambang, dan aneka kawat, padahal barangnya muncul di opname atau di jawaban pemilik. Tulisan "rb" dibaca ribu rupiah (77rb = Rp 77.000).
     </div>
 
     <div class="grid-2">
@@ -1189,8 +1187,8 @@
         <h3>Satuan Jual</h3>
         <ul>
           <li>Satuan yang tertulis (jumlah baris): bh (16), mtr (4), pcs (4), buah (3), lbr (3), btg (2), kol (2), kg (1), klg (1), m3 (1), meter (1), sak (1).</li>
-          <li>28 baris tanpa satuan (semen tiga roda, Avian, Seiv, thinner, Fox klg, dan seluruh batch 2).</li>
-          <li>Kuantitas harus bisa desimal: hebel per m3, selang dan amplas per meter, paku per kg.</li>
+          <li>28 baris tanpa satuan tertulis (semen tiga roda, Avian, Seiv, thinner, Fox klg, dan seluruh batch 2).</li>
+          <li>Kuantitas harus bisa desimal: hebel per m3, selang dan amplas per meter, paku per kg, pasir ¼ dan ½ kolbak.</li>
           <li>"meter" dan "mtr" dipakai bergantian untuk satuan yang sama (dugaan), jadi satuan perlu dibakukan di sistem.</li>
         </ul>
       </div>
@@ -1198,140 +1196,192 @@
         <span class="tag-small mono">Yang memengaruhi desain</span>
         <h3>Ukuran Sebagai Pembeda</h3>
         <ul>
-          <li>Avian ½ kg vs 1 kg, meteran 3/5/7 m, gembok kecil/sedang/besar, karpet talang 55 vs 90 cm, selot jendela/pintu/pvc, saringan wc pvc vs stainless.</li>
-          <li>Ini kandidat pola produk induk + varian, tapi skema <b>belum diputuskan</b>.</li>
+          <li>Avian ½ kg vs 1 kg, meteran 3/5/7 m, gembok kecil/sedang/besar, karpet talang 55 vs 90 cm, selot jendela/pintu/pvc, saringan wc pvc vs stainless, paku seri 5/7/10/12.</li>
+          <li>Keputusan mahasiswa 8 Nov (M6): satu tabel barang dengan kolom pengelompokan, bukan dua tabel induk dan varian. Kasus semen menunggu K2.</li>
           <li>Sebagian ukuran ada di nama (kaso alba 2.5mtr), sebagian di kemasan (thinner botol, Fox klg ¼ kg). Pola penulisannya belum seragam.</li>
         </ul>
       </div>
     </div>
 
-    <div class="eyebrow" style="margin-top:36px;">Seluruh Baris (Sesuai Tulisan Asli)</div>
+    <div class="eyebrow" style="margin-top:36px;">Seluruh Baris, Urut A–Z (Nama Sesuai Tulisan Asli)</div>
     <div class="table-wrap">
       <table class="preview-table price-table">
         <thead>
-          <tr><th>No</th><th>Kelompok</th><th>Nama (apa adanya)</th><th>Harga</th><th>Satuan tertulis</th><th>Catatan</th></tr>
+          <tr><th>No</th><th>Nama (apa adanya)</th><th>Harga jual</th><th>Satuan tertulis</th><th>Kelompok asal</th><th>No. asal</th><th>Catatan</th></tr>
         </thead>
         <tbody>
-          <tr><td class="dim">1</td><td class="dim">Material</td><td>Semen tiga roda</td><td class="num">Rp 77.000</td><td>—</td><td class="wrap dim">Satuan dan ukuran sak belum tertulis (40 atau 50 kg belum dikonfirmasi).</td></tr>
-<tr><td class="dim">2</td><td class="dim">Material</td><td>Pasir pasang</td><td class="num">Rp 165.000</td><td>kol</td><td class="wrap dim">&quot;kol&quot; belum diketahui ukurannya.</td></tr>
-<tr><td class="dim">3</td><td class="dim">Material</td><td>Pasir cor</td><td class="num">Rp 185.000</td><td>kol</td><td class="wrap dim">&quot;kol&quot; belum diketahui ukurannya.</td></tr>
-<tr><td class="dim">4</td><td class="dim">Material</td><td>Hebel</td><td class="num">Rp 650.000</td><td>m3</td><td class="wrap dim">Per m3, jadi kuantitas desimal.</td></tr>
-<tr><td class="dim">5</td><td class="dim">Material</td><td>Semen hebel</td><td class="num">Rp 85.000</td><td>sak</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">6</td><td class="dim">Cat besi kayu</td><td>Avian 1/2kg</td><td class="num">Rp 55.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">7</td><td class="dim">Cat besi kayu</td><td>Avian 1kg</td><td class="num">Rp 92.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">8</td><td class="dim">Cat besi kayu</td><td>Seiv 1kg</td><td class="num">Rp 85.000</td><td>—</td><td class="wrap dim">Merek atau jenis? Belum diketahui.</td></tr>
-<tr><td class="dim">9</td><td class="dim">Cat besi kayu</td><td>Thiner botol</td><td class="num">Rp 10.000</td><td>—</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
-<tr><td class="dim">10</td><td class="dim">Cat besi kayu</td><td>Thiner nd 1ltr</td><td class="num">Rp 35.000</td><td>—</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
-<tr><td class="dim">11</td><td class="dim">Cat besi kayu</td><td>Polytur dx</td><td class="num">Rp 55.000</td><td>klg</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">12</td><td class="dim">Cat besi kayu</td><td>Amplas</td><td class="num">Rp 10.000</td><td>meter</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">13</td><td class="dim">Cat besi kayu</td><td>Paku seri</td><td class="num">Rp 20.000</td><td>kg</td><td class="wrap dim">Arti &quot;seri&quot; belum diketahui. Per kg, jadi kuantitas desimal.</td></tr>
-<tr><td class="dim">14</td><td class="dim">Cat besi kayu</td><td>Rol cet kapal</td><td class="num">Rp 15.000</td><td>pcs</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">15</td><td class="dim">Cat besi kayu</td><td>Rol cet besar</td><td class="num">Rp 35.000</td><td>pcs</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">16</td><td class="dim">Cat besi kayu</td><td>Bak cet</td><td class="num">Rp 10.000</td><td>pcs</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">17</td><td class="dim">Listrik</td><td>Isolasi listrik nitto</td><td class="num">Rp 15.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">18</td><td class="dim">Listrik</td><td>Saklar broco</td><td class="num">Rp 22.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">19</td><td class="dim">Listrik</td><td>Colokan broco</td><td class="num">Rp 15.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">20</td><td class="dim">Listrik</td><td>Fiting lampu broco</td><td class="num">Rp 18.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">21</td><td class="dim">Listrik</td><td>Pipa listrik</td><td class="num">Rp 10.000</td><td>btg</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">22</td><td class="dim">Lain-lain</td><td>Fox klg 1/4kg</td><td class="num">Rp 13.000</td><td>—</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
-<tr><td class="dim">23</td><td class="dim">Lain-lain</td><td>Pacul cap ayam</td><td class="num">Rp 95.000</td><td>pcs</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">24</td><td class="dim">Lain-lain</td><td>Gagang pacul</td><td class="num">Rp 20.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">25</td><td class="dim">Lain-lain</td><td>Kaso alba 2.5mtr</td><td class="num">Rp 10.000</td><td>btg</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">26</td><td class="dim">Lain-lain</td><td>Papan alba 2.5mtr</td><td class="num">Rp 16.000</td><td>lbr</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">27</td><td class="dim">Lain-lain</td><td>Grc</td><td class="num">Rp 50.000</td><td>lbr</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">28</td><td class="dim">Lain-lain</td><td>Papan gypsum</td><td class="num">Rp 62.000</td><td>lbr</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">29</td><td class="dim">Lain-lain</td><td>Karpet talang 55cm</td><td class="num">Rp 10.000</td><td>mtr</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">30</td><td class="dim">Lain-lain</td><td>Karpet tang 90cm</td><td class="num">Rp 15.000</td><td>mtr</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">31</td><td class="dim">Lain-lain</td><td>Fiber pager</td><td class="num">Rp 25.000</td><td>mtr</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">32</td><td class="dim">Lain-lain</td><td>Lem pvc tangit</td><td class="num">Rp 13.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">33</td><td class="dim">Lain-lain</td><td>Selang PE 1/2&quot;</td><td class="num">Rp 6.500</td><td>mtr</td><td class="wrap dim">Ditulis tanpa &quot;rb&quot;, dibaca Rp 6.500 per meter.</td></tr>
-<tr><td class="dim">34</td><td class="dim">Lain-lain</td><td>Sealtape</td><td class="num">Rp 5.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">35</td><td class="dim">Lain-lain</td><td>Benang peniti</td><td class="num">Rp 15.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">36</td><td class="dim">Lain-lain</td><td>Kran 1/2 pvc</td><td class="num">Rp 10.000</td><td>buah</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">37</td><td class="dim">Lain-lain</td><td>Kran model onda</td><td class="num">Rp 15.000</td><td>buah</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">38</td><td class="dim">Lain-lain</td><td>Kran gg besi</td><td class="num">Rp 25.000</td><td>buah</td><td class="wrap dim">Kepanjangan &quot;gg&quot; belum diketahui.</td></tr>
-<tr><td class="dim">39</td><td class="dim">Lain-lain</td><td>Karbit buah</td><td class="num">Rp 8.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">40</td><td class="dim">Lain-lain</td><td>Soda api</td><td class="num">Rp 15.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">41</td><td class="dim">Lain-lain</td><td>Kaporit</td><td class="num">Rp 15.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">42</td><td class="dim">Lain-lain</td><td>Gembok kecil</td><td class="num">Rp 15.000</td><td>bh</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">43</td><td class="dim">Lain-lain</td><td>Gembok sedang</td><td class="num">Rp 25.000</td><td>bh</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">44</td><td class="dim">Lain-lain</td><td>Gembok besar</td><td class="num">Rp 40.000</td><td>bh</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">45</td><td class="dim">Lain-lain</td><td>Pilox</td><td class="num">Rp 30.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">46</td><td class="dim">Lain-lain</td><td>Lem kaca botol</td><td class="num">Rp 35.000</td><td>bh</td><td class="wrap dim"></td></tr>
-<tr><td class="dim">47</td><td class="dim">Perkakas (batch 2)</td><td>Obeng</td><td class="num">Rp 15.000</td><td>—</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
-<tr><td class="dim">48</td><td class="dim">Perkakas (batch 2)</td><td>Sendok tembok</td><td class="num">Rp 15.000</td><td>—</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
-<tr><td class="dim">49</td><td class="dim">Perkakas (batch 2)</td><td>Kape gg</td><td class="num">Rp 20.000</td><td>—</td><td class="wrap dim">Kepanjangan &quot;gg&quot; belum diketahui.</td></tr>
-<tr><td class="dim">50</td><td class="dim">Perkakas (batch 2)</td><td>Sikat kawat</td><td class="num">Rp 15.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">51</td><td class="dim">Perkakas (batch 2)</td><td>Sikat kuningan</td><td class="num">Rp 15.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">52</td><td class="dim">Perkakas (batch 2)</td><td>K besi</td><td class="num">Rp 15.000</td><td>—</td><td class="wrap dim">&quot;k&quot; di buku catatan = kawat. Kawat besi? Belum dipastikan.</td></tr>
-<tr><td class="dim">53</td><td class="dim">Perkakas (batch 2)</td><td>Pahat beton</td><td class="num">Rp 25.000</td><td>—</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
-<tr><td class="dim">54</td><td class="dim">Perkakas (batch 2)</td><td>Saringan wc pvc</td><td class="num">Rp 12.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">55</td><td class="dim">Perkakas (batch 2)</td><td>Saringan wc stainles</td><td class="num">Rp 25.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">56</td><td class="dim">Perkakas (batch 2)</td><td>Meteran 3m</td><td class="num">Rp 15.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">57</td><td class="dim">Perkakas (batch 2)</td><td>Meteran 5m</td><td class="num">Rp 25.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">58</td><td class="dim">Perkakas (batch 2)</td><td>Meteran 7m</td><td class="num">Rp 35.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">59</td><td class="dim">Perkakas (batch 2)</td><td>Kunci pintu</td><td class="num">Rp 55.000</td><td>—</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
-<tr><td class="dim">60</td><td class="dim">Perkakas (batch 2)</td><td>Gantungan burung</td><td class="num">Rp 1.500</td><td>—</td><td class="wrap dim">Ditulis tanpa &quot;rb&quot;, dibaca Rp 1.500.</td></tr>
-<tr><td class="dim">61</td><td class="dim">Perkakas (batch 2)</td><td>Amplas bulat</td><td class="num">Rp 2.000</td><td>—</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
-<tr><td class="dim">62</td><td class="dim">Perkakas (batch 2)</td><td>Cutting wd</td><td class="num">Rp 5.000</td><td>—</td><td class="wrap dim">Kepanjangan &quot;wd&quot; belum diketahui.</td></tr>
-<tr><td class="dim">63</td><td class="dim">Perkakas (batch 2)</td><td>Kinik potong</td><td class="num">Rp 15.000</td><td>—</td><td class="wrap dim">Arti &quot;kinik&quot; belum diketahui.</td></tr>
-<tr><td class="dim">64</td><td class="dim">Perkakas (batch 2)</td><td>Selot jendela</td><td class="num">Rp 8.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">65</td><td class="dim">Perkakas (batch 2)</td><td>Selot pintu</td><td class="num">Rp 15.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">66</td><td class="dim">Perkakas (batch 2)</td><td>Selot pvc</td><td class="num">Rp 5.000</td><td>—</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat produk induk + varian.</td></tr>
-<tr><td class="dim">67</td><td class="dim">Perkakas (batch 2)</td><td>Engsel pvc</td><td class="num">Rp 12.000</td><td>—</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
+<tr><td class="dim">1</td><td>Amplas</td><td class="num">Rp 10.000</td><td>meter</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">12</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">2</td><td>Amplas bulat</td><td class="num">Rp 2.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">61</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
+<tr><td class="dim">3</td><td>Avian 1/2kg</td><td class="num">Rp 55.000</td><td>—</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">6</td><td class="wrap dim">Opname mencatat cat besi/kayu per kemasan, gabungan Avian dan Seiv. Pembeda ukuran: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">4</td><td>Avian 1kg</td><td class="num">Rp 92.000</td><td>—</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">7</td><td class="wrap dim">Opname mencatat cat besi/kayu per kemasan, gabungan Avian dan Seiv. Pembeda ukuran: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">5</td><td>Bak cet</td><td class="num">Rp 10.000</td><td>pcs</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">16</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">6</td><td>Benang peniti</td><td class="num">Rp 15.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">35</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">7</td><td>Colokan broco</td><td class="num">Rp 15.000</td><td>bh</td><td class="dim">Listrik</td><td class="dim nowrap">19</td><td class="wrap dim">Belum dipastikan apakah termasuk &quot;elektronik&quot; yang tidak bisa dikembalikan (C8).</td></tr>
+<tr><td class="dim">8</td><td>Cutting wd</td><td class="num">Rp 5.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">62</td><td class="wrap dim">wd = nama merek (8 Nov), bukan singkatan teknis.</td></tr>
+<tr><td class="dim">9</td><td>Engsel pvc</td><td class="num">Rp 12.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">67</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
+<tr><td class="dim">10</td><td>Fiber pager</td><td class="num">Rp 25.000</td><td>mtr</td><td class="dim">Lain-lain</td><td class="dim nowrap">31</td><td class="wrap dim">Tidak bisa dikembalikan (T12: fiber pagar).</td></tr>
+<tr><td class="dim">11</td><td>Fiting lampu broco</td><td class="num">Rp 18.000</td><td>bh</td><td class="dim">Listrik</td><td class="dim nowrap">20</td><td class="wrap dim">Belum dipastikan apakah termasuk &quot;elektronik&quot; yang tidak bisa dikembalikan (C8).</td></tr>
+<tr><td class="dim">12</td><td>Fox klg 1/4kg</td><td class="num">Rp 13.000</td><td>—</td><td class="dim">Lain-lain</td><td class="dim nowrap">22</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
+<tr><td class="dim">13</td><td>Gagang pacul</td><td class="num">Rp 20.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">24</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">14</td><td>Gantungan burung</td><td class="num">Rp 1.500</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">60</td><td class="wrap dim">Ditulis tanpa &quot;rb&quot;, dibaca Rp 1.500.</td></tr>
+<tr><td class="dim">15</td><td>Gembok besar</td><td class="num">Rp 40.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">44</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">16</td><td>Gembok kecil</td><td class="num">Rp 15.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">42</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">17</td><td>Gembok sedang</td><td class="num">Rp 25.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">43</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">18</td><td>Grc</td><td class="num">Rp 50.000</td><td>lbr</td><td class="dim">Lain-lain</td><td class="dim nowrap">27</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">19</td><td>Hebel</td><td class="num">Rp 650.000</td><td>m3</td><td class="dim">Material</td><td class="dim nowrap">4</td><td class="wrap dim">Per m3, jadi kuantitas desimal. Belum masuk opname (C6).</td></tr>
+<tr><td class="dim">20</td><td>Isolasi listrik nitto</td><td class="num">Rp 15.000</td><td>bh</td><td class="dim">Listrik</td><td class="dim nowrap">17</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">21</td><td>K besi</td><td class="num">Rp 15.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">52</td><td class="wrap dim">K = kunci, jadi &quot;Kunci besi&quot; (pemilik, 8 Nov). Koreksi dari dugaan &quot;kawat&quot;.</td></tr>
+<tr><td class="dim">22</td><td>Kape gg</td><td class="num">Rp 20.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">49</td><td class="wrap dim">gg = gagang, jadi &quot;Kape gagang&quot; (8 Nov).</td></tr>
+<tr><td class="dim">23</td><td>Kaporit</td><td class="num">Rp 15.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">41</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">24</td><td>Karbit buah</td><td class="num">Rp 8.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">39</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">25</td><td>Karpet talang 55cm</td><td class="num">Rp 10.000</td><td>mtr</td><td class="dim">Lain-lain</td><td class="dim nowrap">29</td><td class="wrap dim">Tidak bisa dikembalikan (T12: talang karpet). Pembeda ukuran: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">26</td><td>Karpet tang 90cm</td><td class="num">Rp 15.000</td><td>mtr</td><td class="dim">Lain-lain</td><td class="dim nowrap">30</td><td class="wrap dim">Mungkin salah ketik dari &quot;talang&quot; (belum dipastikan, M-c). T12: talang karpet tidak bisa dikembalikan.</td></tr>
+<tr><td class="dim">27</td><td>Kaso alba 2.5mtr</td><td class="num">Rp 10.000</td><td>btg</td><td class="dim">Lain-lain</td><td class="dim nowrap">25</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">28</td><td>Kinik potong</td><td class="num">Rp 15.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">63</td><td class="wrap dim">Arti &quot;kinik&quot; belum terjawab.</td></tr>
+<tr><td class="dim">29</td><td>Kran 1/2 pvc</td><td class="num">Rp 10.000</td><td>buah</td><td class="dim">Lain-lain</td><td class="dim nowrap">36</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">30</td><td>Kran gg besi</td><td class="num">Rp 25.000</td><td>buah</td><td class="dim">Lain-lain</td><td class="dim nowrap">38</td><td class="wrap dim">gg = gagang, jadi &quot;Kran gagang besi&quot; (8 Nov).</td></tr>
+<tr><td class="dim">31</td><td>Kran model onda</td><td class="num">Rp 15.000</td><td>buah</td><td class="dim">Lain-lain</td><td class="dim nowrap">37</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">32</td><td>Kunci pintu</td><td class="num">Rp 55.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">59</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
+<tr><td class="dim">33</td><td>Lem kaca botol</td><td class="num">Rp 35.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">46</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">34</td><td>Lem pvc tangit</td><td class="num">Rp 13.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">32</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">35</td><td>Meteran 3m</td><td class="num">Rp 15.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">56</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">36</td><td>Meteran 5m</td><td class="num">Rp 25.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">57</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">37</td><td>Meteran 7m</td><td class="num">Rp 35.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">58</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">38</td><td>Obeng</td><td class="num">Rp 15.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">47</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
+<tr><td class="dim">39</td><td>Pacul cap ayam</td><td class="num">Rp 95.000</td><td>pcs</td><td class="dim">Lain-lain</td><td class="dim nowrap">23</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">40</td><td>Pahat beton</td><td class="num">Rp 25.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">53</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
+<tr><td class="dim">41</td><td>Paku seri</td><td class="num">Rp 20.000</td><td>kg</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">13</td><td class="wrap dim">Seri = ukuran 5, 7, 10, 12 (8 Nov): satu baris harga mencakup 4 ukuran. Harga per ukuran belum dipastikan (S7). Per kg, kuantitas desimal.</td></tr>
+<tr><td class="dim">42</td><td>Papan alba 2.5mtr</td><td class="num">Rp 16.000</td><td>lbr</td><td class="dim">Lain-lain</td><td class="dim nowrap">26</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">43</td><td>Papan gypsum</td><td class="num">Rp 62.000</td><td>lbr</td><td class="dim">Lain-lain</td><td class="dim nowrap">28</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">44</td><td>Pasir cor</td><td class="num">Rp 185.000</td><td>kol</td><td class="dim">Material</td><td class="dim nowrap">3</td><td class="wrap dim">kol = kolbak (muatan satu mobil), bisa ¼ dan ½ (8 Nov). Stok tidak dihitung. Pembulatan ¼ belum ditanyakan (S3).</td></tr>
+<tr><td class="dim">45</td><td>Pasir pasang</td><td class="num">Rp 165.000</td><td>kol</td><td class="dim">Material</td><td class="dim nowrap">2</td><td class="wrap dim">kol = kolbak (muatan satu mobil), bisa ¼ dan ½ (8 Nov). Stok tidak dihitung. Pembulatan ¼ belum ditanyakan (S3).</td></tr>
+<tr><td class="dim">46</td><td>Pilox</td><td class="num">Rp 30.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">45</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">47</td><td>Pipa listrik</td><td class="num">Rp 10.000</td><td>btg</td><td class="dim">Listrik</td><td class="dim nowrap">21</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">48</td><td>Polytur dx</td><td class="num">Rp 55.000</td><td>klg</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">11</td><td class="wrap dim">Kemungkinan sama dengan &quot;Palitur 1 kg&quot; di opname, belum dipastikan.</td></tr>
+<tr><td class="dim">49</td><td>Rol cet besar</td><td class="num">Rp 35.000</td><td>pcs</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">15</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">50</td><td>Rol cet kapal</td><td class="num">Rp 15.000</td><td>pcs</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">14</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">51</td><td>Saklar broco</td><td class="num">Rp 22.000</td><td>bh</td><td class="dim">Listrik</td><td class="dim nowrap">18</td><td class="wrap dim">Belum dipastikan apakah termasuk &quot;elektronik&quot; yang tidak bisa dikembalikan (C8).</td></tr>
+<tr><td class="dim">52</td><td>Saringan wc pvc</td><td class="num">Rp 12.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">54</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">53</td><td>Saringan wc stainles</td><td class="num">Rp 25.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">55</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">54</td><td>Sealtape</td><td class="num">Rp 5.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">34</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">55</td><td>Seiv 1kg</td><td class="num">Rp 85.000</td><td>—</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">8</td><td class="wrap dim">Merek atau jenis? Belum terjawab (S8).</td></tr>
+<tr><td class="dim">56</td><td>Selang PE 1/2&quot;</td><td class="num">Rp 6.500</td><td>mtr</td><td class="dim">Lain-lain</td><td class="dim nowrap">33</td><td class="wrap dim">Ditulis tanpa &quot;rb&quot;, dibaca Rp 6.500 per meter. T12: selang air tidak bisa dikembalikan; belum dipastikan apakah Selang PE termasuk.</td></tr>
+<tr><td class="dim">57</td><td>Selot jendela</td><td class="num">Rp 8.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">64</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">58</td><td>Selot pintu</td><td class="num">Rp 15.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">65</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">59</td><td>Selot pvc</td><td class="num">Rp 5.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">66</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">60</td><td>Semen hebel</td><td class="num">Rp 85.000</td><td>sak</td><td class="dim">Material</td><td class="dim nowrap">5</td><td class="wrap dim">Kemungkinan sama dengan &quot;Bata Ringan&quot; (semen perekat) di opname, belum dipastikan.</td></tr>
+<tr><td class="dim">61</td><td>Semen tiga roda</td><td class="num">Rp 77.000</td><td>—</td><td class="dim">Material</td><td class="dim nowrap">1</td><td class="wrap dim">Sak 50 kg, harga jual Rp 77.000 (terkonfirmasi 8 Nov). Satuan tidak tertulis di daftar. Belum masuk opname.</td></tr>
+<tr><td class="dim">62</td><td>Sendok tembok</td><td class="num">Rp 15.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">48</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
+<tr><td class="dim">63</td><td>Sikat kawat</td><td class="num">Rp 15.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">50</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">64</td><td>Sikat kuningan</td><td class="num">Rp 15.000</td><td>—</td><td class="dim">Perkakas (batch 2)</td><td class="dim nowrap">51</td><td class="wrap dim">Pembeda ukuran/bahan: kandidat kolom pengelompokan.</td></tr>
+<tr><td class="dim">65</td><td>Soda api</td><td class="num">Rp 15.000</td><td>bh</td><td class="dim">Lain-lain</td><td class="dim nowrap">40</td><td class="wrap dim"></td></tr>
+<tr><td class="dim">66</td><td>Thiner botol</td><td class="num">Rp 10.000</td><td>—</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">9</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
+<tr><td class="dim">67</td><td>Thiner nd 1ltr</td><td class="num">Rp 35.000</td><td>—</td><td class="dim">Cat besi kayu</td><td class="dim nowrap">10</td><td class="wrap dim">Satuan belum tertulis.</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="small-note">Kolom Catatan berisi tanda dari Chat 1: singkatan yang belum diketahui, satuan yang belum tertulis, dan kandidat varian. Itu bukan data dari toko. Kelompok mengikuti judul di catatan mahasiswa ("Cet besi kayu" ditulis "Cat besi kayu" di sini, isinya sama).</p>
+    <p class="small-note">Kolom Catatan berisi tanda dari Chat 1 dan hasil kunjungan 8 Nov, bukan tulisan asli dari toko. Daftar ini tidak digabung dengan stok opname (tab 13) karena beberapa pasangannya belum pasti (misalnya Polytur dx dan Palitur, Semen hebel dan Bata Ringan). Kelompok mengikuti judul di catatan mahasiswa ("Cet besi kayu" ditulis "Cat besi kayu" di sini, isinya sama).</p>
   </section>
 
   <!-- PANEL 10 — STATUS KEPUTUSAN -->
   <section class="panel" id="panel-10">
     <div class="eyebrow">Pembeda Fakta, Keputusan, dan Asumsi</div>
     <h2 class="panel-title">Status Keputusan</h2>
-    <p class="lede dim">Aturan project: jangan menganggap semua yang dibahas sebagai requirement final, dan jangan diam-diam mengambil keputusan penting. Tabel ini membuat batasnya terlihat. Kalau ada konflik antar dokumen, yang berstatus RESMI menang, lalu yang terbaru.</p>
+    <p class="lede dim">Aturan project: jangan menganggap semua yang dibahas sebagai requirement final, dan jangan diam-diam mengambil keputusan penting. Dokumen ini diperbarui 11 Nov 2026 setelah kunjungan 8 Nov. Kalau ada konflik antar dokumen, yang berstatus RESMI menang, lalu yang terbaru. Jawaban pemilik yang masih ditandai ⚠️ atau ambigu tidak ditaruh di bagian terkonfirmasi.</p>
 
-    <div class="table-wrap">
-      <table class="preview-table price-table">
-        <thead><tr><th>Hal</th><th>Status</th><th>Catatan</th></tr></thead>
-        <tbody>
-          <tr><td class="wrap">Cakupan MVP: toko utama saja, cabang di luar scope</td><td><span class="status-pill ok">Resmi</span></td><td class="wrap dim">Satu-satunya yang ditulis eksplisit sebagai keputusan resmi.</td></tr>
+    <div class="eyebrow">Keputusan Resmi</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Hal</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="wrap">Cakupan MVP: toko utama saja, cabang di luar scope</td><td><span class="status-pill ok">Resmi</span></td><td class="wrap">Satu-satunya yang ditulis eksplisit sebagai keputusan resmi. Tidak berubah. Catatan 8 Nov: stok toko utama bisa diisi dari cabang. Usulan kolom "sumber" pada barang masuk (K7) tidak mengubah keputusan ini.</td></tr>
+</tbody></table></div>
 
-          <tr><td class="wrap">Stack: Laravel, MySQL, Blade + Tailwind, Alpine.js, Chart.js, Git/GitHub</td><td><span class="status-pill info">Tertulis</span></td><td class="wrap dim">Tertulis di rancangan, belum ditandai resmi. Versi belum dipilih, cek dokumentasi resmi saat setup.</td></tr>
-          <tr><td class="wrap">Job 2 (internal) dulu, Job 1 (katalog publik) menyusul</td><td><span class="status-pill info">Tertulis</span></td><td class="wrap dim">Job 1 tidak ada di tabel jadwal 18 minggu.</td></tr>
-          <tr><td class="wrap">Pencarian barang utama by nama, kode barang hanya identitas data</td><td><span class="status-pill info">Tertulis</span></td><td class="wrap dim">Berdasar observasi: karyawan menyebut nama, bukan kode.</td></tr>
-          <tr><td class="wrap">Jadwal 4 tahap, 18 minggu (7 Sep 2026 – 9 Jan 2027)</td><td><span class="status-pill info">Draft</span></td><td class="wrap dim">Periode KP dari mahasiswa. Pembagian minggu per tahap adalah usulan dan belum dikirim ke dosen pembimbing per 30 Okt.</td></tr>
+    <div class="eyebrow" style="margin-top:36px;">Menunggu Keputusan Mahasiswa dan Chat 1</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Hal</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="wrap"><b>K1</b> · Hutang ke supplier: (i) penuh, (ii) sederhana (per bon: tanggal, supplier, nominal, status, bayar sebagian; tanpa rincian barang), (iii) ditunda</td><td><span class="status-pill warn">Menunggu keputusan</span></td><td class="wrap">Chat 3 menyarankan (ii); perkiraan waktunya +3–4 hari untuk (ii) dan +1,5–2 minggu untuk (i). Chat 1 setuju (ii) sebagai minimum yang menjawab permintaan pemilik, dengan syarat K5 diselesaikan dulu supaya tidak menjadi pekerjaan ganda. Perkiraan waktu belum diuji.</td></tr>
+<tr><td class="wrap"><b>K2</b> · Stok semen: (A) satuan dasar kg, tampilan menerjemahkan ke sak; (B) dua barang terpisah dengan menu "bongkar sak"</td><td><span class="status-pill warn">Menunggu keputusan</span></td><td class="wrap">Chat 3 menyarankan (A) hanya untuk barang yang kemasannya dipecah. Chat 1 setuju, karena (B) menaruh ketepatan stok pada ingatan kasir di jam sibuk. Luas pemakaian pola ini menunggu S1.</td></tr>
+<tr><td class="wrap"><b>K3</b> · Koreksi transaksi: hapus langsung (kebiasaan toko) atau tandai "dibatalkan" dengan stok kembali otomatis</td><td><span class="status-pill warn">Menunggu keputusan</span></td><td class="wrap">Chat 3 menyarankan tandai dibatalkan, hanya pemilik. Chat 1 setuju soal tandai dan stok kembali. Bagian "hanya pemilik" belum jelas: jawab C2 dulu, karena kasir yang salah tulis nota tidak bisa menunggu pemilik.</td></tr>
+<tr><td class="wrap"><b>K4</b> · Cetak nota tanpa printer: jadikan "nota siap cetak" (halaman A5 yang bisa dicetak kalau nanti ada printer)</td><td><span class="status-pill warn">Menunggu keputusan</span></td><td class="wrap">Chat 3 mengusulkan, Chat 1 setuju. Di laporan, tulis sebagai penyesuaian terhadap kondisi lapangan, bukan fitur yang dipotong. Saat uji coba kasir tetap menulis nota tangan. Rencana beli printer: S16.</td></tr>
+<tr><td class="wrap"><b>K5</b> · Pekerjaan ganda: nota tetap ditulis tangan dan pemilik menolak mencatat barang masuk dua kali. Bagaimana sistem tetap terisi?</td><td><span class="status-pill warn">Menunggu keputusan</span></td><td class="wrap">Usulan Chat 1, belum dibahas Chat 3. Jawab C3 dan C5 dulu. Prinsip: setiap input harus menghasilkan sesuatu yang diminta pemilik (stok tersisa, omzet harian, hutang supplier). Kalau tidak, sistem akan ditinggalkan.</td></tr>
+<tr><td class="wrap"><b>K6</b> · Tempat menjalankan sistem untuk uji coba dan serah terima, termasuk siapa yang menyimpan cadangan data</td><td><span class="status-pill warn">Menunggu keputusan</span></td><td class="wrap">Usulan Chat 1. Laptop mahasiswa hanya sementara. Bergantung pada S14 dan S15.</td></tr>
+<tr><td class="wrap"><b>K7</b> · Usulan murah Chat 3: (a) teks rekap piutang siap disalin ke WhatsApp, (b) kolom "sumber" (supplier atau cabang) pada barang masuk, (c) tiga penanda per barang</td><td><span class="status-pill warn">Menunggu keputusan</span></td><td class="wrap">Chat 1: (a) setuju sebagai Tambahan prioritas atas, tanpa integrasi WhatsApp. (b) setuju, tidak mengubah keputusan resmi soal cabang, tapi hanya berarti kalau ada modul barang masuk (K5). (c) hanya penanda "stok dihitung" yang berfungsi di MVP; "bisa dikembalikan" dan "bisa dijual satuan" belum punya pemakai karena fitur retur tidak dibangun.</td></tr>
+</tbody></table></div>
 
-          <tr><td class="wrap">Kasbon: tanpa bunga, approval hanya pemilik, batas bayar maksimal 1 minggu untuk semua yang berhutang</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap dim">Kunjungan lanjutan.</td></tr>
-          <tr><td class="wrap">"Kolom 2" buku harian = uang yang belum masuk tas fisik (kasbon atau transfer belum dicek)</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap dim">Dua hal berbeda dalam satu kolom.</td></tr>
-          <tr><td class="wrap">Harga jual berbeda per pelanggan (jarak, kadang lupa harga minggu lalu)</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap dim">Penyebabnya terkonfirmasi. Mekanisme di sistem (manual atau daftar tetap) belum diputuskan.</td></tr>
-          <tr><td class="wrap">Semen kresek kecil 5 kg, Rp 13.000</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap dim">Berbeda dari sak. Hubungan stok sak dan kresek belum diketahui.</td></tr>
-          <tr><td class="wrap">Besi 6 mm dan 8 mm adalah SKU terpisah</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap dim">Lewat observasi buku catatan.</td></tr>
-          <tr><td class="wrap">Alamat pengiriman sebagian tertulis di nota, belum konsisten</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap dim">Dasar fitur pencatatan alamat.</td></tr>
-          <tr><td class="wrap">Pemilik meminta fitur Hutang &amp; Piutang dan Cek Stok, dan setuju transisi digital</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap dim">Dua permintaan langsung pemilik.</td></tr>
+    <div class="eyebrow" style="margin-top:36px;">Keputusan Teknis Mahasiswa, 8 Nov (Dicatat Chat 3)</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Hal</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="wrap">Frontend: Bootstrap (template admin Zoyothemes), bukan Tailwind</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M2. Sisa Tailwind dari Breeze masih ada di halaman autentikasi. Cek lisensi template sebelum repo dipublikasikan (M-e).</td></tr>
+<tr><td class="wrap">Registrasi publik ditutup, akun dibuat oleh pemilik</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M3.</td></tr>
+<tr><td class="wrap">Kode verifikasi email saat login dicabut</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M4. Alasan "internet toko belum pasti stabil" belum terverifikasi (S15), jadi jangan ditulis sebagai fakta di laporan. Penggantinya: registrasi ditutup, kebijakan password, hak akses per peran.</td></tr>
+<tr><td class="wrap">Dua peran: pemilik dan kasir</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M5. Berdasar T7. Siapa pemilik dan apakah dua kasir memakai akun terpisah masih terbuka (C1, S5).</td></tr>
+<tr><td class="wrap">Skema produk: satu tabel barang + kolom pengelompokan</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M6. Kasus semen (satu persediaan, dua bentuk jual) menunggu K2.</td></tr>
+<tr><td class="wrap">Nama tabel dan kolom bahasa Inggris, label antarmuka bahasa Indonesia</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M7.</td></tr>
+<tr><td class="wrap">Harga bilangan bulat rupiah, kuantitas desimal</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M8.</td></tr>
+<tr><td class="wrap">Modul baru memakai resource controller Laravel</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M9.</td></tr>
+<tr><td class="wrap">67 baris harga dipakai sebagai seeder contoh, bukan data produksi</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M10.</td></tr>
+<tr><td class="wrap">Sistem dijalankan di laptop mahasiswa untuk sementara</td><td><span class="status-pill info">Keputusan mahasiswa</span></td><td class="wrap">M11. Cukup untuk pengembangan. Untuk uji coba dan serah terima perlu tempat menjalankan yang bisa dipakai toko; belum diputuskan (K6).</td></tr>
+<tr><td class="wrap">Tugas IMK</td><td><span class="status-pill open">Belum pasti</span></td><td class="wrap">M12. Di luar proyek KP, tidak dibahas di dokumen ini.</td></tr>
+</tbody></table></div>
 
-          <tr><td class="wrap">Fast moving (semen, pasir, cat, besi beton, bata ringan, margin 2,5–7%) vs slow moving (sisanya, margin 30–100%)</td><td><span class="status-pill warn">Perkiraan</span></td><td class="wrap dim">Dari ingatan pemilik. Bukan data penjualan.</td></tr>
-          <tr><td class="wrap">Daftar harga (tab 09) adalah harga jual</td><td><span class="status-pill warn">Asumsi</span></td><td class="wrap dim">Belum dikonfirmasi.</td></tr>
-          <tr><td class="wrap">Buy &amp; return tidak berlaku untuk barang curah</td><td><span class="status-pill warn">Asumsi</span></td><td class="wrap dim">Durasi maksimal juga belum diketahui.</td></tr>
-          <tr><td class="wrap">Modal = stok × harga beli, dihitung otomatis</td><td><span class="status-pill warn">Sementara</span></td><td class="wrap dim">Belum dikonfirmasi pemilik.</td></tr>
-          <tr><td class="wrap">Autentikasi dan role (minimal pemilik dan kasir)</td><td><span class="status-pill warn">Turunan</span></td><td class="wrap dim">Diturunkan dari "approval kasbon hanya pemilik". Jumlah karyawan dan hak akses belum diketahui.</td></tr>
-          <tr><td class="wrap">Data pelanggan dan status pembayaran (tunai, transfer belum dicek, kasbon)</td><td><span class="status-pill warn">Turunan</span></td><td class="wrap dim">Diturunkan dari temuan kasbon dan Kolom 2. Kolom persisnya belum diputuskan.</td></tr>
-          <tr><td class="wrap">Pencatatan barang masuk dengan opsi sederhana (tanggal, barang, jumlah, harga beli, supplier opsional)</td><td><span class="status-pill warn">Rekomendasi</span></td><td class="wrap dim">Kebiasaan toko belum ditanyakan. Pembelian lengkap dengan faktur dan hutang supplier dinilai terlalu berat untuk sisa waktu.</td></tr>
-          <tr><td class="wrap">Skema produk induk + varian untuk barang multi-kemasan</td><td><span class="status-pill warn">Rekomendasi</span></td><td class="wrap dim">Belum diputuskan. Jangan mulai migration sebelum ini beres.</td></tr>
+    <div class="eyebrow" style="margin-top:36px;">Terkonfirmasi Pemilik atau Observasi</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Hal</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="wrap">Daftar 67 baris adalah harga jual</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T2. Harga beli belum diketahui untuk satu barang pun.</td></tr>
+<tr><td class="wrap">Sak semen tiga roda 50 kg, Rp 77.000</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T4. Menggantikan 40 kg di v4.0.</td></tr>
+<tr><td class="wrap">"kol" = kolbak (muatan satu mobil kolbak), bisa dijual ¼ dan ½</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T3. Tidak ada konversi ke kg atau m3. Pembulatan ¼ belum ditanyakan (S3).</td></tr>
+<tr><td class="wrap">Kresek 5 kg dibongkar dari sak oleh toko sendiri</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T5. 1 sak = 10 kresek. Dibungkus lebih dulu atau saat ada pembeli belum diketahui (S1).</td></tr>
+<tr><td class="wrap">Barang masuk tidak dicatat; yang ada bon dari supplier</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T1. Pemilik menolak pekerjaan ganda (K5).</td></tr>
+<tr><td class="wrap">Pengguna: 8 orang (6 karyawan lapangan, 2 kasir); yang boleh mengubah: pemilik saja</td><td><span class="status-pill ok">Sebagian</span></td><td class="wrap">T7. Siapa pemilik, apa yang dimaksud "mengubah", dan akun kasir belum jelas (C1, C2, S5, S6).</td></tr>
+<tr><td class="wrap">Data pelanggan: nama, alamat, nomor telepon</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T8. Jumlah pelanggan kasbon aktif belum diketahui (M-b).</td></tr>
+<tr><td class="wrap">Laporan yang diinginkan: stok barang tersisa, omzet harian, hutang ke supplier</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T9. Tidak ada grafik di ketiganya.</td></tr>
+<tr><td class="wrap">Stok barang curah (pasir) tidak dihitung</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T10. Dikecualikan dari notifikasi stok menipis.</td></tr>
+<tr><td class="wrap">Pemilik ingin hutang ke supplier masuk sistem</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T11. Bentuknya menunggu K1.</td></tr>
+<tr><td class="wrap">Buy &amp; return: tidak ada batas waktu; tidak bisa dikembalikan: elektronik, selang air, seng talang, talang karpet, fiber pagar, aneka tambang, aneka kawat</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">T12. Pasir dan semen tidak disebut. Itu belum berarti boleh dikembalikan, karena belum jelas daftarnya lengkap. Fitur tetap tambahan dan tidak dibangun.</td></tr>
+<tr><td class="wrap">Harga jarang berubah (pemicu: harga minyak dan kurs dolar)</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">B2.</td></tr>
+<tr><td class="wrap">Tawar-menawar ada tapi jarang; pembulatan ke bawah</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">B4. Kelipatan pembulatan belum diketahui (C4).</td></tr>
+<tr><td class="wrap">Satu nota boleh banyak barang; tambahan setelah nota ditulis dibuat nota baru; nota ditulis tangan, tidak bernomor, tanpa printer</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">B5, B7, L1. Jumlah nota tidak sama dengan jumlah pembeli.</td></tr>
+<tr><td class="wrap">Salah catat dibetulkan dengan dihapus atau diubah langsung di buku</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">B6. Siapa yang membetulkan belum diketahui (C2).</td></tr>
+<tr><td class="wrap">Kasbon dicatat per nota, bisa bayar sebagian; rekap lewat WhatsApp tiap Sabtu; transfer dicek pemilik sendiri</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">B8, B9, B10.</td></tr>
+<tr><td class="wrap">Stok habis tapi ada pembeli: ambil ke toko cabang atau supplier terdekat; toko tutup 16.30</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">B11, B12.</td></tr>
+<tr><td class="wrap">Singkatan: GG = gagang, WD = nama merek, K (dalam "K besi") = kunci, Paku seri = ukuran 5, 7, 10, 12</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Arti "k" di bagian lain buku belum dipastikan. "Seiv" dan "kinik" belum terjawab.</td></tr>
+<tr><td class="wrap">Kasbon: tanpa bunga, approval hanya pemilik, batas bayar maksimal 1 minggu untuk semua yang berhutang</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Kunjungan lanjutan sebelumnya.</td></tr>
+<tr><td class="wrap">"Kolom 2" buku harian = uang yang belum masuk tas fisik (kasbon atau transfer belum dicek)</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Kunjungan lanjutan sebelumnya.</td></tr>
+<tr><td class="wrap">Semen kresek kecil 5 kg, Rp 13.000; besi 6 mm dan 8 mm SKU terpisah; alamat sebagian tertulis di nota</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Kunjungan lanjutan dan observasi buku catatan.</td></tr>
+<tr><td class="wrap">Pemilik meminta Hutang &amp; Piutang dan Cek Stok, dan setuju transisi digital</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Kunjungan lanjutan sebelumnya.</td></tr>
+</tbody></table></div>
 
-          <tr><td class="wrap">Ukuran "kol", ukuran sak semen, singkatan (gg, wd, kinik, K besi, Paku seri, Seiv), konversi sak ke kresek, hutang supplier, "Pesanan A/B", durasi buy &amp; return, role pengguna, mekanisme harga khusus</td><td><span class="status-pill open">Belum terjawab</span></td><td class="wrap dim">Daftar tanya lengkap di tab 07. Jangan dijadikan asumsi di kode atau di laporan.</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="eyebrow" style="margin-top:36px;">Perkiraan, Interpretasi, dan Jawaban yang Perlu Dicek Ulang</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Hal</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="wrap">Fast moving (semen, pasir, cat, besi beton, bata ringan; margin 2,5–7%) vs slow moving (sisanya; margin 30–100%)</td><td><span class="status-pill warn">Perkiraan</span></td><td class="wrap">Dari ingatan pemilik, bukan data penjualan.</td></tr>
+<tr><td class="wrap">Harga khusus pelanggan: manual, "kadang ingat", kurang dari 10 orang</td><td><span class="status-pill warn">Konfirmasi ulang</span></td><td class="wrap">T6. Mahasiswa menandai sendiri jawaban ini mungkin tidak akurat.</td></tr>
+<tr><td class="wrap">Ongkir untuk yang jauh "dicatat di notanya"</td><td><span class="status-pill warn">Ambigu</span></td><td class="wrap">B3. Baris sendiri, atau dilebur ke harga barang? (S2). Berbeda dari catatan lama bahwa ongkir disisipkan ke harga.</td></tr>
+<tr><td class="wrap">Satuan jual per kardus atau satuan</td><td><span class="status-pill warn">Salah paham</span></td><td class="wrap">B1. Pertanyaan dimaksudkan untuk sisi beli dari supplier, tapi ditanyakan sisi jual. Jawaban "tergantung" tetap berguna. Satuan beli belum terjawab (S4).</td></tr>
+<tr><td class="wrap">Modal = stok × harga beli, dihitung otomatis</td><td><span class="status-pill warn">Sementara</span></td><td class="wrap">Harga beli belum diketahui, jadi belum bisa dihitung untuk barang mana pun.</td></tr>
+<tr><td class="wrap">Selisih harga jual per kg kresek vs sak (+68,8%) adalah imbalan jasa pengemasan ulang</td><td><span class="status-pill info">Interpretasi Chat 3</span></td><td class="wrap">Aritmetika sudah dicek ulang Chat 1. Penjelasannya belum dikonfirmasi pemilik dan jangan ditulis sebagai margin.</td></tr>
+<tr><td class="wrap">Alasan pengecualian buy &amp; return: barang dipotong atau diukur per meter, dan tidak bisa dibuktikan rusak karena siapa</td><td><span class="status-pill info">Interpretasi Chat 3</span></td><td class="wrap">Pemilik hanya menjelaskan alasan untuk elektronik. Tanyakan sebelum ditulis di laporan (C8).</td></tr>
+<tr><td class="wrap">"Supplier terdekat" adalah toko cabang</td><td><span class="status-pill info">Interpretasi mahasiswa</span></td><td class="wrap">B11. Belum dipastikan.</td></tr>
+<tr><td class="wrap">Stok barang dicatat pemilik versi sederhana, atau hanya diingat</td><td><span class="status-pill info">Interpretasi mahasiswa</span></td><td class="wrap">T9, T10 ("hebatnya beliau ingat"). Belum dipastikan.</td></tr>
+</tbody></table></div>
 
-    <div class="eyebrow" style="margin-top:36px;">Yang Dibereskan Dari v4.0</div>
+    <div class="eyebrow" style="margin-top:36px;">Belum Terjawab</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Hal</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="wrap">Ukuran dan perlakuan: pembulatan ¼ kolbak; ongkir; satuan beli supplier; stok semen tiga roda; stok bata ringan; harga besi beton, cat tembok, cat batu alam; "Seiv" dan "kinik"; data kembar di opname</td><td><span class="status-pill open">Belum terjawab</span></td><td class="wrap">Daftar lengkap dan kode pertanyaan di tab 07.</td></tr>
+<tr><td class="wrap">Siapa pemilik, apa yang dimaksud "mengubah", akun kasir, akses karyawan lapangan</td><td><span class="status-pill open">Belum terjawab</span></td><td class="wrap">C1, C2, S5, S6.</td></tr>
+<tr><td class="wrap">Profil toko, pembimbing lapangan, izin nama toko, batas laporan dan sidang, persetujuan kampus</td><td><span class="status-pill open">Belum terjawab</span></td><td class="wrap">S18, S19, M-f. Menghambat laporan, bukan coding.</td></tr>
+<tr><td class="wrap">"Pesanan A/B"</td><td><span class="status-pill open">Belum terjawab</span></td><td class="wrap">M-d. Belum jadi dasar struktur tabel transaksi.</td></tr>
+</tbody></table></div>
+
+    <div class="eyebrow" style="margin-top:36px;">Dikoreksi</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Hal</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="wrap">"k" = kawat</td><td><span class="status-pill fix">Dikoreksi</span></td><td class="wrap">"K besi" = kunci besi (pemilik). Hanya baris itu yang terjawab, jadi arti "k" di bagian lain buku belum dipastikan. Tab 03, tab 09, dan daftar-harga-draft.md sudah disesuaikan.</td></tr>
+<tr><td class="wrap">Sak semen 40 kg (v4.0)</td><td><span class="status-pill fix">Dikoreksi</span></td><td class="wrap">50 kg.</td></tr>
+<tr><td class="wrap">Buy &amp; return tidak berlaku untuk barang curah</td><td><span class="status-pill fix">Dikoreksi</span></td><td class="wrap">Tidak sesuai daftar pemilik (T12). Pasir dan semen tidak disebut, tetapi itu belum membuktikan boleh dikembalikan.</td></tr>
+<tr><td class="wrap">Usulan asumsi tab 12 lama: kresek dan sak stok terpisah</td><td><span class="status-pill fix">Dikoreksi</span></td><td class="wrap">Arah salah. Kresek dibongkar dari sak (T5), jadi satu persediaan.</td></tr>
+<tr><td class="wrap">Blade + Tailwind CSS (tab 05 dan 10 v5.0)</td><td><span class="status-pill fix">Dikoreksi</span></td><td class="wrap">Bootstrap (Zoyothemes) menurut M2.</td></tr>
+<tr><td class="wrap">Ringkasan opname di dokumen Chat 3: 14 baris</td><td><span class="status-pill fix">Dikoreksi</span></td><td class="wrap">Tabelnya memuat 16 baris (3 semen, 7 cat, 6 besi beton). Ringkasan Chat 3 perlu diperbaiki.</td></tr>
+<tr><td class="wrap">Mockup tab 08: sak 40 kg, harga beli kresek terpisah, margin 5,5%</td><td><span class="status-pill fix">Dikoreksi</span></td><td class="wrap">Sak 50 kg, kresek tanpa harga beli sendiri, margin dihapus. Lihat tab 08.</td></tr>
+</tbody></table></div>
+
+    <div class="eyebrow" style="margin-top:36px;">Riwayat Perubahan</div>
     <ul class="done-list" style="text-decoration:none;">
-      <li style="text-decoration:none;">Timeline 8–12 minggu diganti 18 minggu dengan tanggal nyata (tab 06).</li>
-      <li style="text-decoration:none;">Fitur turunan yang sebelumnya hilang dari backlog ditambahkan dan diberi label turunan: autentikasi dan role, data pelanggan, status pembayaran, barang masuk (24 menjadi 28 fitur).</li>
-      <li style="text-decoration:none;">Besi dan harga khusus tidak lagi tercatat ganda sebagai "perlu klarifikasi" sekaligus "selesai". Yang terjawab dan yang masih keputusan desain dipisah.</li>
-      <li style="text-decoration:none;">Mockup: semen memakai harga jual 77rb dari data, ukuran sak tidak lagi ditulis 40 kg, kartu piutang disesuaikan dengan tabelnya, dan tanggal contoh tidak lagi Agustus.</li>
-      <li style="text-decoration:none;">"Cakupan buy &amp; return" dan "modal otomatis" dipindah dari "sudah selesai" ke "keputusan sementara", karena keduanya bukan konfirmasi.</li>
-      <li style="text-decoration:none;">Posisi proyek per 31 Okt dan status tiap tahap ditambahkan (tab 01 dan 06).</li>
+      <li style="text-decoration:none;">v5.0, 31 Okt 2026: timeline 18 minggu, backlog 28 fitur, tab 09 sampai 12, mockup disesuaikan.</li>
+      <li style="text-decoration:none;">11 Nov 2026: hasil kunjungan 8 Nov (tab 12), stock opname batch 1 (tab 13), harga diurutkan A–Z (tab 09), tab 10 disusun ulang, pertanyaan susulan (tab 07), posisi minggu ke-10 (tab 01 dan 06), stack Bootstrap (tab 05), mockup (tab 08).</li>
     </ul>
   </section>
 
@@ -1339,7 +1389,7 @@
   <section class="panel" id="panel-11">
     <div class="eyebrow">Untuk Chat Lain dalam Project BANGUNAN</div>
     <h2 class="panel-title">Panduan Chat Coding &amp; Chat Dokumentasi KP</h2>
-    <p class="lede dim">Chat 1 (Konsultasi &amp; Arahan) tidak bisa mengirim pesan ke chat lain. Dokumen ini dibaca langsung oleh chat tersebut dari project. File acuan: <span class="path">index-v5.0.html</span> (menggantikan v4.0), <span class="path">daftar-harga-draft.md</span>, dan <span class="path">handoff-chat-coding.md</span>.</p>
+    <p class="lede dim">Chat 1 (Konsultasi &amp; Arahan) tidak bisa mengirim pesan ke chat lain. Dokumen ini dibaca langsung oleh chat tersebut dari project. File acuan: <span class="path">index-v5.0.html</span> (diperbarui 11 Nov, menggantikan v4.0), <span class="path">hasil-kunjungan-08-nov-2026.md</span>, <span class="path">daftar-harga-draft.md</span>, dan <span class="path">handoff-chat-coding.md</span>.</p>
 
     <div class="grid-2">
       <div class="clip-card guide-card">
@@ -1347,27 +1397,29 @@
         <h3>Untuk Chat Coding</h3>
         <h5>Baca dulu</h5>
         <ul>
-          <li>Tab 10 (status keputusan), tab 09 (data harga), tab 04 (fitur), tab 05 (arsitektur).</li>
+          <li>Tab 10 (status keputusan, terutama K1–K7), tab 12 (hasil kunjungan), tab 13 (opname), tab 09 (harga A–Z), tab 07 (pertanyaan susulan).</li>
         </ul>
-        <h5>Sudah pasti dari data</h5>
+        <h5>Sudah pasti dari pemilik (8 Nov)</h5>
         <ul>
-          <li>Kuantitas harus bisa desimal (per meter, kg, m3).</li>
-          <li>Satu nama barang bisa punya beberapa satuan jual dan harga sendiri.</li>
-          <li>Harga jual perlu disimpan per transaksi, karena harga berbeda per pelanggan. Pencarian barang by nama, kode hanya internal.</li>
-          <li>Pembayaran minimal membedakan tunai, transfer belum dicek, dan kasbon.</li>
-          <li>Kasbon: tanpa bunga, approval hanya pemilik, maksimal 1 minggu, saldo per pelanggan.</li>
+          <li>Harga di tab 09 adalah harga jual. Harga beli belum diketahui untuk satu barang pun.</li>
+          <li>Sak semen tiga roda 50 kg, Rp 77.000. Kresek 5 kg dibongkar dari sak (1 sak = 10 kresek). Pasir dijual per kolbak, ¼, atau ½.</li>
+          <li>Kuantitas harus bisa desimal. Harga jual disimpan per baris nota karena ada harga khusus (kurang dari 10 pelanggan).</li>
+          <li>Nota ditulis tangan, tidak bernomor, tanpa printer. Satu nota boleh banyak barang; tambahan setelah nota ditulis dibuat nota baru.</li>
+          <li>Kasbon dicatat per nota, bisa bayar sebagian, transfer dicek pemilik. Pelanggan: nama, alamat, telepon.</li>
+          <li>Stok curah (pasir) tidak dihitung. Stok nol tidak boleh membuat transaksi ditolak, cukup peringatan.</li>
+          <li>Laporan yang diminta: stok tersisa, omzet harian, hutang ke supplier. Tanpa grafik.</li>
         </ul>
         <h5>Jangan dijadikan asumsi di kode</h5>
         <ul>
-          <li>Harga di tab 09 sebagai harga resmi, ukuran sak semen, arti "kol", arti singkatan yang belum diketahui.</li>
-          <li>Konversi stok sak ke kresek, mekanisme harga khusus, hutang supplier, hak akses kasir, istilah "Pesanan A/B".</li>
+          <li>Ongkir (baris sendiri atau dilebur), pembulatan ¼ kolbak, kelipatan pembulatan, satuan beli supplier.</li>
+          <li>Siapa pemilik, apa yang dimaksud "mengubah", akun terpisah dua kasir, akses karyawan lapangan.</li>
+          <li>Mekanisme harga khusus (jawaban masih ⚠️), "k" di luar "K besi", arti "Seiv" dan "kinik", harga paku per ukuran.</li>
           <li>Kalau terpaksa memakai satu, tandai sebagai asumsi di kode dan dokumentasi.</li>
         </ul>
         <h5>Urutan kerja</h5>
         <ul>
-          <li>Skema produk induk + varian diputuskan bersama mahasiswa dulu, baru ERD, baru migration. Jangan ubah arsitektur besar tanpa membahas konsekuensinya.</li>
-          <li>Versi Laravel, PHP, MySQL dipilih dari dokumentasi resmi saat setup.</li>
-          <li>Tahap 2 hanya 5 minggu (draft): sederhana lebih baik daripada lengkap. Data tab 09 cukup untuk seeder contoh, bukan data produksi.</li>
+          <li>Modul autentikasi dan role bisa dilanjutkan sekarang. Skema barang, stok, dan hutang supplier menunggu K1, K2, dan K5. Jangan ubah arsitektur besar tanpa membahas konsekuensinya.</li>
+          <li>Data tab 09 dan 13 cukup untuk seeder contoh, bukan data produksi. Opname punya data kembar dan perkiraan; baca tab 13 sebelum memakainya.</li>
           <li>Tab 08 adalah mockup ilustrasi, bukan spesifikasi.</li>
         </ul>
       </div>
@@ -1377,27 +1429,29 @@
         <h3>Untuk Chat Dokumentasi KP</h3>
         <h5>Fakta dasar</h5>
         <ul>
-          <li>Periode KP 7 September 2026 – 9 Januari 2027, sekitar 18 minggu. Empat tahap sesuai tab 06, dan itu <b>draft</b> yang belum dikirim ke dosen pembimbing per 30 Okt.</li>
-          <li>Tempat KP: toko bangunan milik keluarga mahasiswa. Nama toko, nama pemilik, dan pembimbing lapangan belum ada di dokumen mana pun, jadi jangan dikarang.</li>
+          <li>Periode KP 7 September 2026 – 9 Januari 2027, sekitar 18 minggu. Empat tahap sesuai tab 06, dan itu <b>draft</b>: per 30 Okt belum dikirim ke dosen pembimbing, status terbarunya belum diketahui.</li>
+          <li>Toko bangunan milik keluarga mahasiswa, 8 orang (6 karyawan lapangan, 2 kasir), tutup 16.30, punya satu toko cabang. Nama toko, nama pemilik, dan pembimbing lapangan belum ada di dokumen mana pun, jadi jangan dikarang.</li>
         </ul>
-        <h5>Status pengerjaan (31 Okt 2026)</h5>
+        <h5>Status pengerjaan (11 Nov 2026)</h5>
         <ul>
-          <li>Sudah: observasi hari 1–2, kunjungan lanjutan, pemeriksaan buku catatan, pendataan harga, backlog fitur.</li>
-          <li>Belum: stock opname, ERD, semua modul, dashboard, uji coba. Tulis dengan kalimat rencana, jangan seolah sudah selesai.</li>
-          <li>Kalau jadwal nanti bergeser, laporan menjelaskan apa adanya dan alasannya.</li>
+          <li>Sudah: observasi, kunjungan lanjutan, kunjungan 8 Nov, pendataan harga, opname batch 1, backlog fitur.</li>
+          <li>Menurut catatan Chat 3: repo dasar sudah jalan. Belum ada ERD, modul barang, stok, transaksi, kasbon, dashboard, uji coba. Tulis dengan kalimat rencana, jangan seolah sudah selesai.</li>
+          <li>Tahap 1 melewati tanggal rencana (7 Nov). Kalau jadwal bergeser, laporan menjelaskan apa adanya dan alasannya.</li>
         </ul>
         <h5>Bahan yang sudah ada</h5>
         <ul>
-          <li>Latar belakang dan masalah: pencatatan manual (buku harian dan mingguan), cek stok manual tiap sore, harga dari ingatan, alamat kirim bergantung ingatan.</li>
-          <li>Analisis sistem berjalan: alur transaksi, kolom 2, kasbon, kemasan tidak seragam (tab 02, 03).</li>
-          <li>Analisis kebutuhan: MVP, tambahan, dan dicoret beserta alasannya (tab 04). Batasan ruang lingkup: toko utama saja, katalog publik di luar jadwal, absensi, GPS, dan WhatsApp otomatis dicoret.</li>
+          <li>Latar belakang dan masalah: pencatatan manual, cek stok manual tiap sore, harga dari ingatan, alamat kirim bergantung ingatan, nota tulis tangan tanpa nomor.</li>
+          <li>Analisis sistem berjalan: alur transaksi, kolom 2, kasbon dan rekap WhatsApp mingguan, kemasan tidak seragam, semen dibongkar dari sak (tab 03 dan 12).</li>
+          <li>Analisis kebutuhan: MVP, tambahan, dan dicoret beserta alasannya (tab 04). Tiga laporan yang diminta pemilik tidak berupa grafik.</li>
+          <li>Pembahasan metodologis yang layak ditulis: dugaan "k = kawat" ternyata hanya terjawab untuk "K besi" (kunci); pencabutan kode verifikasi email karena kondisi operasional (alasan internet belum terverifikasi); aturan validasi stok yang mengikuti kenyataan toko; nota tulis tangan tanpa printer sebagai penyesuaian, bukan fitur yang dipotong.</li>
           <li>Ini usulan pemetaan, sesuaikan dengan sistematika laporan kampus.</li>
         </ul>
         <h5>Jangan diklaim</h5>
         <ul>
-          <li>Harga di tab 09 dan semua angka tab 08 bukan data resmi toko.</li>
-          <li>Pembagian fast/slow moving dan margin adalah perkiraan pemilik, bukan hasil analisis data penjualan.</li>
-          <li>Persetujuan kampus untuk toko keluarga dan batas laporan atau sidang belum diketahui.</li>
+          <li>Angka di tab 08 bukan data toko. Selisih harga kresek dan sak (+68,8%) bukan margin; harga beli belum diketahui.</li>
+          <li>Pembagian fast/slow moving dan margin 2,5–7% adalah perkiraan pemilik.</li>
+          <li>Alasan pengecualian buy &amp; return selain elektronik adalah interpretasi Chat 3, bukan kata pemilik.</li>
+          <li>Persetujuan kampus untuk toko keluarga, batas laporan atau sidang, dan lisensi template belum diketahui.</li>
         </ul>
       </div>
     </div>
@@ -1406,83 +1460,102 @@
 
   <!-- PANEL 12 — KUNJUNGAN TERAKHIR -->
   <section class="panel" id="panel-12">
-    <div class="eyebrow">Bekal Pengumpulan Data — Anggap Kunjungan Terakhir</div>
-    <h2 class="panel-title">Kunjungan Terakhir ke Toko</h2>
-    <p class="lede dim">Tujuannya satu: setelah kunjungan ini, ERD dan skema database bisa disusun tanpa perlu kembali bertanya. Pertanyaan diurutkan dari yang paling menentukan skema. Kalau waktu terbatas, kerjakan dari atas ke bawah.</p>
+    <div class="eyebrow">Kunjungan 8 November 2026 · Sumber: Laporan Mahasiswa, Dicatat Chat 3</div>
+    <h2 class="panel-title">Hasil Kunjungan ke Toko</h2>
+    <p class="lede dim">Jawaban atas pertanyaan tab 12 versi sebelumnya (T1–T12) dan pertanyaan tambahan Chat 3 (B1–B12, L1). Data mentahnya ada di <span class="path">hasil-kunjungan-08-nov-2026.md</span>. Kolom "Jawaban" adalah laporan mahasiswa; kolom "Catatan Chat 1" adalah analisis, bukan perkataan pemilik.</p>
 
     <div class="insight-box" style="margin-top:0; margin-bottom:24px;">
-      <b>Cara bertanya:</b> tanyakan kebiasaan dan minta contoh nyata, bukan fitur. Contohnya "Kalau barang datang dari supplier, dicatat di mana?", bukan "Mau ada fitur pembelian?". Catat kata-kata pemilik apa adanya, dan catat siapa yang menjawab (pemilik atau karyawan).
+      <b>Cara membaca status:</b> <span class="status-pill ok">Terkonfirmasi</span> dijawab langsung oleh pemilik. <span class="status-pill warn">Konfirmasi ulang</span> atau <span class="status-pill warn">Ambigu</span> belum boleh jadi fakta di laporan. <span class="status-pill open">Belum ditanyakan</span> belum ada jawabannya.
     </div>
 
-    <div class="eyebrow">1 · Menentukan Skema Database (Wajib Terjawab)</div>
-    <div class="table-wrap">
-      <table class="preview-table price-table">
-        <thead><tr><th>No</th><th>Pertanyaan</th><th>Cara tanya / cara cek</th><th>Kalau tidak terjawab (usulan asumsi)</th></tr></thead>
-        <tbody>
-          <tr><td class="dim">☐ 1</td><td class="wrap"><b>Barang masuk:</b> kalau barang datang dari supplier, dicatat di mana? Apa saja yang dicatat (tanggal, barang, jumlah, harga beli, nama supplier)?</td><td class="wrap dim">Tanyakan kebiasaannya, jangan tanya mau fitur apa. Minta lihat catatan atau nota supplier terakhir, lalu foto.</td><td class="wrap dim">Pakai pencatatan sederhana (tanggal, barang, jumlah, harga beli). Tandai asumsi.</td></tr>
-          <tr><td class="dim">☐ 2</td><td class="wrap">Daftar harga yang kamu catat itu <b>harga jual atau harga beli</b>?</td><td class="wrap dim">Cocokkan 2–3 barang dengan nota penjualan atau nota supplier.</td><td class="wrap dim">Tetap diperlakukan harga jual (asumsi sekarang).</td></tr>
-          <tr><td class="dim">☐ 3</td><td class="wrap"><b>"Kol"</b> pasir itu ukurannya apa, dan bisa dijual setengah?</td><td class="wrap dim">Lihat sendiri wadah atau takarannya, ukur kalau bisa, foto.</td><td class="wrap dim">Simpan "kol" sebagai satuan apa adanya tanpa konversi.</td></tr>
-          <tr><td class="dim">☐ 4</td><td class="wrap"><b>Sak semen</b> tiga roda berapa kg?</td><td class="wrap dim">Baca tulisan di kemasan, tidak perlu bertanya. Foto kemasannya.</td><td class="wrap dim">Tulis "ukuran belum dikonfirmasi".</td></tr>
-          <tr><td class="dim">☐ 5</td><td class="wrap"><b>Kresek 5 kg</b>: dibongkar dari sak, atau dibeli sudah terkemas?</td><td class="wrap dim">"Kresek ini isinya dari sak, Pak/Bu, atau memang sudah dari sananya?"</td><td class="wrap dim">Perlakukan dua barang terpisah dengan stok terpisah. Tandai asumsi.</td></tr>
-          <tr><td class="dim">☐ 6</td><td class="wrap"><b>Harga khusus pelanggan:</b> dihitung manual tiap transaksi, atau ada daftar tetap per pelanggan? Berapa pelanggan yang begitu?</td><td class="wrap dim">Minta contoh dua pelanggan dan harga yang berbeda untuk barang sama.</td><td class="wrap dim">Harga jual disimpan per transaksi dan bisa diubah. Tanpa daftar tetap.</td></tr>
-          <tr><td class="dim">☐ 7</td><td class="wrap"><b>Pengguna:</b> berapa karyawan, siapa yang jadi kasir, siapa yang boleh ubah harga, ubah stok, atau batalkan transaksi?</td><td class="wrap dim">Tanya siapa yang biasa memegang buku dan uang.</td><td class="wrap dim">Dua peran saja: pemilik dan kasir. Tandai asumsi turunan.</td></tr>
-          <tr><td class="dim">☐ 8</td><td class="wrap"><b>Pelanggan:</b> data apa yang biasa dicatat (nama, telepon, alamat)? Berapa pelanggan kasbon yang aktif sekarang?</td><td class="wrap dim">Lihat buku kasbon. Jangan foto nama pelanggan tanpa disamarkan.</td><td class="wrap dim">Nama, telepon, alamat sebagai usulan. Tandai asumsi.</td></tr>
-          <tr><td class="dim">☐ 9</td><td class="wrap"><b>Laporan:</b> laporan apa yang dilihat pemilik sekarang, dan apa yang ingin dilihat (harian, mingguan, bulanan; omzet, kasbon, stok)?</td><td class="wrap dim">Minta lihat buku mingguan. Tanya "kalau minta satu angka tiap sore, apa yang paling ingin Bapak/Ibu tahu?"</td><td class="wrap dim">Rekap penjualan harian, mingguan, bulanan sesuai backlog.</td></tr>
-          <tr><td class="dim">☐ 10</td><td class="wrap"><b>Barang curah</b> (pasir, semen curah): apakah stoknya dihitung?</td><td class="wrap dim">Tanya cara tahu pasir hampir habis.</td><td class="wrap dim">Tandai belum diputuskan, jangan dibuat di MVP.</td></tr>
-          <tr><td class="dim">☐ 11</td><td class="wrap"><b>Hutang ke supplier</b> ikut dicatat di sistem atau urusan terpisah?</td><td class="wrap dim">Tanya langsung.</td><td class="wrap dim">Tidak masuk MVP. Tetap fitur perlu klarifikasi.</td></tr>
-          <tr><td class="dim">☐ 12</td><td class="wrap"><b>Buy &amp; return:</b> batas berapa hari, dan barang apa yang dikecualikan?</td><td class="wrap dim">Tanya sambil lalu, prioritas rendah.</td><td class="wrap dim">Tetap fitur tambahan, tidak dibangun.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="small-note">Kolom terakhir adalah usulan Chat 1 agar kamu tidak pulang dengan lubang kosong. Itu bukan keputusan dan bukan data toko, jadi tandai sebagai asumsi kalau dipakai.</p>
+    <div class="eyebrow">Pertanyaan Tab 12 Lama (T1–T12)</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Kode</th><th>Pertanyaan</th><th>Jawaban (apa adanya)</th><th>Status</th><th>Catatan Chat 1</th></tr></thead><tbody>
+<tr><td class="code">T1</td><td class="wrap">Barang masuk dari supplier: dicatat di mana?</td><td class="wrap">Tidak dicatat di buku toko. Yang ada adalah bon dari supplier. Kata pemilik, kurang lebih: "beliau sudah punya bonnya, kenapa harus dicatat lagi?"</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Pemilik menolak pekerjaan ganda, padahal laporan stok yang ia minta bergantung pada barang masuk. Ketegangan ini belum terjawab (K5).</td></tr>
+<tr><td class="code">T2</td><td class="wrap">Daftar 67 baris: harga jual atau beli?</td><td class="wrap">Harga jual.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Harga beli belum diketahui untuk satu barang pun.</td></tr>
+<tr><td class="code">T3</td><td class="wrap">Ukuran "kol" pasir</td><td class="wrap">"kol" = kolbak, yaitu mobil kolbak. Bisa dijual ¼ dan ½ kolbak.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Tidak ada konversi ke kg atau m3. Belum ditanyakan: ¼ kolbak persis seperempat harga atau dibulatkan (S3).</td></tr>
+<tr><td class="code">T4</td><td class="wrap">Ukuran sak semen tiga roda</td><td class="wrap">50 kg, harga jual saat ini Rp 77.000.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Menggantikan 40 kg (v4.0) dan "belum dikonfirmasi" (v5.0 awal).</td></tr>
+<tr><td class="code">T5</td><td class="wrap">Kresek 5 kg: dibongkar dari sak atau terkemas?</td><td class="wrap">Dibongkar dari sak oleh toko sendiri.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Hitungan dicek ulang Chat 1: 1 sak 50 kg = 10 kresek; Rp 1.540/kg (sak) vs Rp 2.600/kg (kresek), selisih +68,8%; 10 kresek = Rp 130.000 vs 1 sak Rp 77.000 (selisih Rp 53.000). Ini selisih antar harga jual, bukan margin. Belum diketahui: dibungkus lebih dulu atau saat ada pembeli (S1).</td></tr>
+<tr><td class="code">T6</td><td class="wrap">Harga khusus pelanggan</td><td class="wrap">"Kadang ingat". Kurang dari 10 orang mendapat harga khusus.</td><td><span class="status-pill warn">Konfirmasi ulang</span></td><td class="wrap">Mahasiswa menandai sendiri: "saya bingung soal ini, jawaban bisa miss". Siapa yang boleh mengubah harga saat transaksi belum terjawab.</td></tr>
+<tr><td class="code">T7</td><td class="wrap">Karyawan dan hak akses</td><td class="wrap">8 orang: 6 karyawan lapangan dan 2 kasir (dua kasir termasuk "om" keluarga, om X dan om Y). Yang boleh mengubah: pemilik saja.</td><td><span class="status-pill ok">Sebagian</span></td><td class="wrap">Belum jelas: siapa pemilik, apa yang dimaksud "mengubah" (harga, stok, atau pembatalan?), apakah karyawan lapangan membuka sistem, dan apakah dua kasir pakai akun terpisah (C1, C2, S5, S6). Jawaban mahasiswa 7 Nov ("om dan kadang istri beliau") berbeda; yang dipakai jawaban pemilik.</td></tr>
+<tr><td class="code">T8</td><td class="wrap">Data pelanggan yang dicatat</td><td class="wrap">Nama, alamat, nomor telepon.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Jumlah pelanggan kasbon aktif belum diketahui; hitung dari buku kasbon (M-b).</td></tr>
+<tr><td class="code">T9</td><td class="wrap">Laporan</td><td class="wrap">Dilihat sekarang tiap hari: omzet penjualan, pembayaran supplier, stok barang. Diinginkan: laporan stok barang tersisa, omzet penjualan harian, laporan hutang ke supplier.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Tidak ada grafik di tiga permintaan itu. Hutang supplier muncul di kedua daftar. Apakah stok sekarang dicatat sederhana atau hanya diingat belum dipastikan (interpretasi mahasiswa).</td></tr>
+<tr><td class="code">T10</td><td class="wrap">Stok barang curah dihitung?</td><td class="wrap">Tidak dihitung ("hebatnya beliau ingat").</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Pasir dan barang curah dikecualikan dari stok dan notifikasi stok menipis.</td></tr>
+<tr><td class="code">T11</td><td class="wrap">Hutang ke supplier masuk sistem?</td><td class="wrap">Pemilik ingin ini masuk sistem. Yang diinginkan: tahu hutang ke supplier berapa saja.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Bentuknya menunggu K1.</td></tr>
+<tr><td class="code">T12</td><td class="wrap">Buy &amp; return</td><td class="wrap">Tidak ada batas waktu (sudah bayar penuh, kalau tidak dikembalikan dianggap beli). Tidak bisa dikembalikan: elektronik (contoh: lampu dicoba menyala di toko, satu jam kemudian mati, tidak bisa), selang air, seng talang, talang karpet, fiber pagar, aneka tambang, aneka kawat.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Pasir dan semen tidak disebut. Itu belum berarti boleh dikembalikan, karena belum jelas daftarnya lengkap. Asumsi lama "barang curah dikecualikan" tidak sesuai daftar ini. Alasan pengecualian selain elektronik tidak disebut pemilik.</td></tr>
+</tbody></table></div>
 
-    <div class="grid-2" style="margin-top:34px;">
-      <div class="clip-card">
-        <span class="tag-small mono">2 · Untuk Laporan KP</span>
-        <h3>Profil Toko &amp; Pembimbing</h3>
-        <ul><li>☐ Nama resmi toko, alamat lengkap, tahun berdiri, dan jenis usaha.</li><li>☐ Jumlah karyawan dan pembagian tugas (pemilik, kasir, gudang, pengantar).</li><li>☐ Jam operasional dan hari paling ramai.</li><li>☐ Pembimbing lapangan: nama, jabatan, dan nomor yang bisa dihubungi. Siapa yang menilai dan menandatangani.</li><li>☐ Izin menyebut nama toko di laporan dan izin memotret dokumen. Tanyakan juga data apa yang tidak boleh ditulis.</li><li>☐ Surat pengantar KP dan format penilaian dari kampus (kalau ada): bawa, dan tanyakan apakah toko bersedia mengisinya.</li></ul>
-      </div>
-      <div class="clip-card">
-        <span class="tag-small mono">3 · Untuk Pemasangan &amp; Uji Coba</span>
-        <h3>Lingkungan di Toko</h3>
-        <ul><li>☐ Perangkat yang ada: komputer, laptop, atau HP? Siapa yang akan memakainya?</li><li>☐ Internet di toko: ada, stabil, atau sering mati? Listrik sering padam?</li><li>☐ Cara cetak nota sekarang: ditulis tangan, printer apa, atau tidak ada printer?</li><li>☐ Waktu yang paling sepi untuk uji coba (hari dan jam), dan siapa yang bersedia mencoba.</li><li>☐ Siapa yang akan memasukkan data awal barang, dan seberapa banyak jenis barang di toko (perkiraan).</li></ul>
-      </div>
-    </div>
+    <div class="eyebrow" style="margin-top:36px;">Pertanyaan Tambahan Chat 3 (B1–B12, L1)</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Kode</th><th>Pertanyaan</th><th>Jawaban (apa adanya)</th><th>Status</th><th>Catatan Chat 1</th></tr></thead><tbody>
+<tr><td class="code">B1</td><td class="wrap">Satuan jual per kardus atau satuan</td><td class="wrap">"Tergantung. Ada barang yang memang khusus sekardus, dan ada yang bisa dijual satuan."</td><td><span class="status-pill warn">Salah paham</span></td><td class="wrap">Pertanyaan dimaksudkan untuk sisi beli dari supplier, tapi ditanyakan sisi jual. Jawabannya tetap berguna untuk sisi jual. Satuan beli belum terjawab (S4).</td></tr>
+<tr><td class="code">B2</td><td class="wrap">Frekuensi perubahan harga</td><td class="wrap">Jarang berubah. Pemicu menurut pemilik: harga minyak dan kurs dolar.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Harga jual tetap disimpan per baris nota karena harga khusus, bukan karena harga sering berubah.</td></tr>
+<tr><td class="code">B3</td><td class="wrap">Ongkir</td><td class="wrap">Dekat gratis. Kalau jauh, dicatat di notanya.</td><td><span class="status-pill warn">Ambigu</span></td><td class="wrap">Bisa berarti baris sendiri di nota, atau dilebur ke harga barang. Berbeda dari catatan tab 03 lama (disisipkan ke harga). Perlu satu kalimat konfirmasi (S2).</td></tr>
+<tr><td class="code">B4</td><td class="wrap">Tawar-menawar dan pembulatan</td><td class="wrap">Ada tawar-menawar, tapi jarang. Pembulatan ke bawah. Pengamatan mahasiswa: pembeli menawar, pemilik menaikkan sedikit dari harga tawaran.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Kelipatan pembulatan dan apakah pada total nota belum diketahui (C4).</td></tr>
+<tr><td class="code">B5</td><td class="wrap">Satu nota banyak barang; penambahan setelah nota ditulis</td><td class="wrap">Tidak ada batas jumlah barang per nota. Kalau pembeli menambah setelah nota ditulis, dibuat nota baru yang terpisah.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Jumlah nota tidak sama dengan jumlah pembeli.</td></tr>
+<tr><td class="code">B6</td><td class="wrap">Memperbaiki salah catat</td><td class="wrap">Dihapus dan diubah langsung di buku.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Siapa yang membetulkan belum diketahui (C2). Terkait K3.</td></tr>
+<tr><td class="code">B7</td><td class="wrap">Nomor nota</td><td class="wrap">Nota tidak bernomor.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Sistem perlu nomor sendiri untuk mencocokkan catatan sistem dengan nota tulisan tangan.</td></tr>
+<tr><td class="code">B8</td><td class="wrap">Bentuk pencatatan kasbon</td><td class="wrap">Dicatat per pembelian atau per nota. Pemilik memberi tahu pelanggan lewat WhatsApp setiap Sabtu (rekapnya).</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Dasar usulan teks rekap siap salin (K7a).</td></tr>
+<tr><td class="code">B9</td><td class="wrap">Bayar sebagian</td><td class="wrap">Bisa bayar sebagian.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Perlu tabel pembayaran, bisa dipakai ulang untuk hutang supplier.</td></tr>
+<tr><td class="code">B10</td><td class="wrap">Pengecekan uang transfer</td><td class="wrap">Pemilik sendiri yang mengecek.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Status "transfer belum dicek" butuh tindakan verifikasi khusus pemilik (implikasi Chat 1).</td></tr>
+<tr><td class="code">B11</td><td class="wrap">Stok habis tapi ada pembeli</td><td class="wrap">Ambil ke toko cabang, atau ke supplier terdekat.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Mahasiswa belum yakin "supplier terdekat" itu cabang atau toko lain (interpretasi). Usulan Chat 3 (Chat 1 setuju): sistem memberi peringatan, tidak menolak transaksi saat stok nol.</td></tr>
+<tr><td class="code">B12</td><td class="wrap">Jam tutup</td><td class="wrap">Tutup 16.30.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Dasar jadwal uji coba dan rekap sore.</td></tr>
+<tr><td class="code">L1</td><td class="wrap">Cara mencetak nota</td><td class="wrap">Nota ditulis tangan. Tidak ada printer di toko.</td><td><span class="status-pill ok">Terkonfirmasi</span></td><td class="wrap">Lihat K4 dan S16.</td></tr>
+</tbody></table></div>
 
-    <div class="grid-2" style="margin-top:34px;">
-      <div class="clip-card">
-        <span class="tag-small mono">4 · Amati &amp; Foto</span>
-        <h3>Tanpa Perlu Bertanya</h3>
-        <ul><li>☐ <b>Nota penjualan:</b> foto 3–5 contoh (samarkan nama pelanggan). Lihat apakah nota diberi nomor dan di mana alamat ditulis.</li><li>☐ <b>Nota supplier / barang masuk:</b> foto satu atau dua contoh.</li><li>☐ <b>Buku harian dan mingguan:</b> foto satu halaman tiap jenis, termasuk contoh kolom 2.</li><li>☐ <b>"Pesanan A/B":</b> cari di buku catatan asli. Ada atau tidak, apa tulisan persisnya?</li><li>☐ <b>Singkatan yang belum diketahui:</b> gg (Kape gg, Kran gg besi), wd (Cutting wd), kinik, "K besi", "Paku seri", "Seiv". Tanyakan ke karyawan, jangan ditebak.</li><li>☐ <b>Kemasan:</b> sak semen (berat tertulis), kresek 5 kg, takaran paku kecil.</li><li>☐ <b>Takaran pasir:</b> wadah atau alat untuk satu "kol".</li><li>☐ <b>Label harga di rak:</b> foto satu dua, cukup untuk melihat format, tanpa perlu mengerti kode rahasianya.</li></ul>
-        <p class="small-note">Samarkan nama dan nomor pelanggan, terutama di buku kasbon, sebelum foto disimpan atau dimasukkan ke laporan.</p>
-      </div>
-      <div class="clip-card">
-        <span class="tag-small mono">5 · Kerjakan di Tempat</span>
-        <h3>Stock Opname Barang Fast Moving</h3>
-        <ul><li>☐ Barang fast moving yang sudah disebut pemilik: semen, pasir, cat, besi beton, bata ringan.</li><li>☐ Catat tiap baris dengan nama persis seperti yang ditulis toko, kemasan atau satuan, jumlah, tanggal dan jam hitung, dan siapa yang menghitung.</li><li>☐ Kalau satuannya tidak jelas, tulis apa yang kamu lihat, jangan diseragamkan sendiri.</li><li>☐ Besi 6 mm dan 8 mm dihitung terpisah (sudah terkonfirmasi SKU terpisah).</li></ul>
-      </div>
-    </div>
+    <div class="eyebrow" style="margin-top:36px;">Bagian Tab 12 Lama yang Belum Selesai</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Bagian</th><th>Isi</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="wrap">Bagian 2</td><td class="wrap">Profil toko dan pembimbing lapangan</td><td><span class="status-pill open">Belum ditanyakan</span></td><td class="wrap">Nama toko, alamat, tahun berdiri, pembimbing lapangan, izin menyebut nama toko, surat pengantar (S18, S19). Yang sudah diketahui: 8 orang, tutup 16.30.</td></tr>
+<tr><td class="wrap">Bagian 3</td><td class="wrap">Perangkat, internet, listrik, waktu uji</td><td><span class="status-pill open">Belum ditanyakan</span></td><td class="wrap">Hanya printer yang terjawab (L1). Sisanya S14–S17.</td></tr>
+<tr><td class="wrap">Bagian 4</td><td class="wrap">Foto nota, buku, kemasan, takaran</td><td><span class="status-pill open">Belum dilaporkan</span></td><td class="wrap">Belum ada foto atau salinan yang tercatat di project.</td></tr>
+<tr><td class="wrap">Bagian 5</td><td class="wrap">Stock opname</td><td><span class="status-pill warn">Sebagian</span></td><td class="wrap">Batch 1 masuk (16 baris), lihat tab 13. Pasir tidak dihitung (T10). Semen tiga roda dan bata ringan belum.</td></tr>
+</tbody></table></div>
+    <p class="small-note">Pertanyaan susulan lewat WhatsApp (S1–S19, C1–C8) ada di tab 07. Bekal kunjungan versi sebelumnya (cara bertanya, daftar foto, daftar bawaan) diganti oleh tabel ini; bagian yang belum selesai di atas tetap berlaku.</p>
+  </section>
 
-    <div class="clip-card" style="margin-top:34px;">
-      <span class="tag-small mono">6 · Sebelum Pulang</span>
-      <h3>Kunci Kunjungan</h3>
-      <ul><li>☐ Baca ulang jawaban penting ke pemilik, dua menit cukup, supaya yang kamu catat memang yang dimaksud.</li><li>☐ Beri tanda <b>belum terjawab</b> pada setiap pertanyaan yang kosong, lalu tulis asumsinya. Jangan dikosongkan.</li><li>☐ Minta izin bertanya pendek lewat pesan kalau ada yang terlewat, sebagai pengganti kunjungan baru.</li><li>☐ Ingat: ini kunjungan terakhir untuk <b>pengumpulan data</b>. Tahap 4 (uji coba di toko, 28 Des – 9 Jan) tetap butuh datang lagi, jadi sampaikan itu ke pemilik sekarang.</li></ul>
+<section class="panel" id="panel-13">
+    <div class="eyebrow">Data Lapangan — Batch 1, 8 November 2026</div>
+    <h2 class="panel-title">Stock Opname Batch 1</h2>
+    <p class="lede dim">Disalin apa adanya dari catatan mahasiswa lewat Chat 3: nama barang tidak dirapikan dan satuan tidak ditebak. Ini data toko yang sebenarnya, bukan ilustrasi, tapi belum semuanya valid (lihat status). Jumlah baris: 16 (3 semen, 7 cat, 6 besi beton). Ringkasan di dokumen Chat 3 menulis 14, tabelnya sendiri memuat 16.</p>
+
+    <div class="insight-box" style="margin-top:0; margin-bottom:24px;">
+      <b>Jangan dipakai sebagai stok awal sebelum dicek.</b> Hanya baris berstatus "Tercatat" yang tidak punya masalah, dan itu pun belum punya harga.
     </div>
 
-    <div class="eyebrow" style="margin-top:36px;">Yang Harus Kamu Bawa Pulang</div>
-    <ul class="done-list" style="text-decoration:none;">
-      <li style="text-decoration:none;">Jawaban tertulis untuk tabel bagian 1, dengan status terjawab atau belum terjawab di tiap baris.</li>
-      <li style="text-decoration:none;">Foto: nota penjualan, nota supplier, halaman buku harian dan mingguan, kemasan sak semen, takaran pasir.</li>
-      <li style="text-decoration:none;">Hasil stock opname fast moving.</li>
-      <li style="text-decoration:none;">Profil toko dan kontak pembimbing lapangan.</li>
-      <li style="text-decoration:none;">Kepanjangan singkatan yang belum diketahui, atau catatan bahwa belum ada yang tahu.</li>
-    </ul>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>No</th><th>Kelompok</th><th>Barang (apa adanya)</th><th>Kemasan</th><th>Stok</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="dim">1</td><td class="wrap">Semen</td><td class="wrap">Bata Ringan</td><td class="wrap">sak</td><td class="wrap">30 sak</td><td><span class="status-pill warn">Perlu dicek</span></td><td class="wrap">Semen instan (perekat bata ringan), bukan bata ringannya. Kemungkinan sama dengan "Semen hebel 85rb/sak", belum dipastikan. Angka 30 muncul tiga kali: hitungan atau perkiraan?</td></tr>
+<tr><td class="dim">2</td><td class="wrap">Semen</td><td class="wrap">Keramik</td><td class="wrap">sak</td><td class="wrap">30 sak</td><td><span class="status-pill warn">Perlu dicek</span></td><td class="wrap">Semen instan (perekat keramik).</td></tr>
+<tr><td class="dim">3</td><td class="wrap">Semen</td><td class="wrap">Pasangan</td><td class="wrap">sak</td><td class="wrap">30 sak</td><td><span class="status-pill warn">Perlu dicek</span></td><td class="wrap">Semen instan (pasangan).</td></tr>
+<tr><td class="dim">4</td><td class="wrap">Cat</td><td class="wrap">Tembok</td><td class="wrap">Galon / 5 kg</td><td class="wrap">245 galon</td><td><span class="status-pill warn">Perlu dicek</span></td><td class="wrap">Harga belum ada. Angka 245 sama dengan cat besi/kayu 1 kg: periksa catatan asli (M-a).</td></tr>
+<tr><td class="dim">5</td><td class="wrap">Cat</td><td class="wrap">Tembok</td><td class="wrap">Pail / 25 kg</td><td class="wrap">18 pail</td><td><span class="status-pill ok">Tercatat</span></td><td class="wrap">Harga belum ada.</td></tr>
+<tr><td class="dim">6</td><td class="wrap">Cat</td><td class="wrap">Besi/Kayu</td><td class="wrap">1/2 kg</td><td class="wrap">≤ 225 kaleng</td><td><span class="status-pill warn">Perkiraan</span></td><td class="wrap">Ditulis dengan "≤". Gabungan Avian dan Seiv.</td></tr>
+<tr><td class="dim">7</td><td class="wrap">Cat</td><td class="wrap">Besi/Kayu</td><td class="wrap">1 kg</td><td class="wrap">≤ 245 kaleng</td><td><span class="status-pill warn">Perkiraan</span></td><td class="wrap">Ditulis dengan "≤". Gabungan Avian dan Seiv. Angka 245 sama dengan cat tembok galon.</td></tr>
+<tr><td class="dim">8</td><td class="wrap">Cat</td><td class="wrap">Batu alam</td><td class="wrap">1 kg</td><td class="wrap">30 kaleng</td><td><span class="status-pill fix">Konflik</span></td><td class="wrap">Tercatat dua kali dengan angka berbeda (30 dan 45). Dua merek atau warna yang belum dibedakan, atau salah tulis. Jangan dipakai sebagai stok awal (S12). Harga belum ada.</td></tr>
+<tr><td class="dim">9</td><td class="wrap">Cat</td><td class="wrap">Palitur</td><td class="wrap">1 kg</td><td class="wrap">60 kaleng</td><td><span class="status-pill ok">Tercatat</span></td><td class="wrap">Kemungkinan sama dengan "Polytur dx 55rb/klg", belum dipastikan.</td></tr>
+<tr><td class="dim">10</td><td class="wrap">Cat</td><td class="wrap">Batu alam</td><td class="wrap">1 kg</td><td class="wrap">45 kaleng</td><td><span class="status-pill fix">Konflik</span></td><td class="wrap">Lihat baris Batu alam sebelumnya.</td></tr>
+<tr><td class="dim">11</td><td class="wrap">Besi beton</td><td class="wrap">6 ml</td><td class="wrap">—</td><td class="wrap">150 brg</td><td><span class="status-pill ok">Tercatat</span></td><td class="wrap">"ml" kemungkinan mm, "brg" kemungkinan batang. Harga belum ada.</td></tr>
+<tr><td class="dim">12</td><td class="wrap">Besi beton</td><td class="wrap">8 ml</td><td class="wrap">—</td><td class="wrap">100 brg</td><td><span class="status-pill ok">Tercatat</span></td><td class="wrap">Harga belum ada. SKU terpisah dari 6 mm (terkonfirmasi).</td></tr>
+<tr><td class="dim">13</td><td class="wrap">Besi beton</td><td class="wrap">10 ml</td><td class="wrap">—</td><td class="wrap">180 brg</td><td><span class="status-pill ok">Tercatat</span></td><td class="wrap">Harga belum ada.</td></tr>
+<tr><td class="dim">14</td><td class="wrap">Besi beton</td><td class="wrap">12 ml</td><td class="wrap">—</td><td class="wrap">50 brg</td><td><span class="status-pill ok">Tercatat</span></td><td class="wrap">Harga belum ada.</td></tr>
+<tr><td class="dim">15</td><td class="wrap">Besi beton</td><td class="wrap">13 uril</td><td class="wrap">—</td><td class="wrap">30 brg</td><td><span class="status-pill ok">Tercatat</span></td><td class="wrap">"uril" kemungkinan ulir (permukaan bergerigi), berbeda dari besi polos. Harga belum ada.</td></tr>
+<tr><td class="dim">16</td><td class="wrap">Besi beton</td><td class="wrap">16 uril</td><td class="wrap">—</td><td class="wrap">20 brg</td><td><span class="status-pill ok">Tercatat</span></td><td class="wrap">Lihat baris 13 uril.</td></tr>
+</tbody></table></div>
+
+    <div class="eyebrow" style="margin-top:36px;">Kelengkapan Opname</div>
+    <div class="table-wrap"><table class="preview-table price-table"><thead><tr><th>Hal</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
+<tr><td class="wrap">Barang fast moving: pasir</td><td><span class="status-pill ok">Wajar</span></td><td class="wrap">Stok barang curah tidak dihitung (T10).</td></tr>
+<tr><td class="wrap">Barang fast moving: semen tiga roda</td><td><span class="status-pill warn">Terlewat?</span></td><td class="wrap">Tidak ada di opname, padahal satu-satunya semen dengan ukuran terkonfirmasi (50 kg). Terlewat atau tidak dihitung? (S11)</td></tr>
+<tr><td class="wrap">Barang fast moving: bata ringan (hebel, per m3)</td><td><span class="status-pill warn">Belum</span></td><td class="wrap">Baris "Bata Ringan" di opname adalah semen perekat, bukan bata ringannya. Dihitung atau tidak? (C6)</td></tr>
+<tr><td class="wrap">Baris yang stoknya ada tapi harganya belum ada</td><td><span class="status-pill warn">Perlu harga</span></td><td class="wrap">10 baris: 6 besi beton, 2 cat tembok, 2 cat batu alam (S9, S10).</td></tr>
+<tr><td class="wrap">Baris dengan konflik data</td><td><span class="status-pill fix">Konflik</span></td><td class="wrap">2 baris (Batu alam 1 kg, 30 dan 45 kaleng).</td></tr>
+<tr><td class="wrap">Angka kembar yang mencurigakan</td><td><span class="status-pill warn">Cek asli</span></td><td class="wrap">245 (cat tembok galon dan cat besi/kayu 1 kg), 30 (tiga semen dan satu batu alam).</td></tr>
+<tr><td class="wrap">Tingkat rincian stok vs harga (cat)</td><td><span class="status-pill warn">Perlu diputuskan</span></td><td class="wrap">Opname per kemasan, harga per merek (Avian, Seiv). Kalau sistem meminta stok per merek sementara toko menghitung per kemasan, stok cat selalu salah (S13).</td></tr>
+</tbody></table></div>
+    <p class="small-note">Istilah "ml", "brg", dan "uril" belum dipastikan, jadi tidak diseragamkan. Opname berikutnya: semen tiga roda, bata ringan, dan perbaikan data cat. Pasangan nama barang dengan daftar harga (tab 09) belum digabung karena beberapa belum pasti.</p>
   </section>
 
 </main>
 
 <footer class="foot">
-  <span>Rancangan Sistem Informasi Manajemen — v5.0 (final Chat 1), 31 Okt 2026. Fakta, asumsi, dan pertanyaan terbuka dibedakan di tab 10.</span>
+  <span>Rancangan Sistem Informasi Manajemen — v5.0, diperbarui 11 Nov 2026 setelah kunjungan 8 Nov. Fakta, asumsi, dan pertanyaan terbuka dibedakan di tab 10.</span>
   <span>Gunakan tombol panah kiri/kanan atau klik tab di atas untuk berpindah bagian.</span>
 </footer>
 

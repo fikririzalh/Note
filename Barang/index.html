@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daftar Harga TB. Bintek</title>
+<style>
+:root{--bg:#f1f4f3;--card:#fff;--ink:#1c2927;--mute:#5d6e6a;--line:#d5dedb;--acc:#1f6f5c;--accbg:#dff0ea;--warn:#8a5a00;--warnbg:#fdf0d5;--danger:#a32d2d}
+@media (prefers-color-scheme:dark){:root{--bg:#141b1a;--card:#1c2625;--ink:#e6efed;--mute:#9bb0ab;--line:#2f3d3b;--acc:#5fc4a8;--accbg:#1f3a33;--warn:#f0c36a;--warnbg:#3a3014;--danger:#f08a8a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:22px;margin:0 0 2px}
+.sub{color:var(--mute);margin:0 0 16px;font-size:13px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+input,select,button,textarea{font:inherit;color:inherit}
+input,select,textarea{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+#q{flex:1 1 220px}
+button{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:7px 12px;cursor:pointer}
+button.main{background:var(--acc);border-color:var(--acc);color:#fff}
+button.sm{padding:3px 8px;font-size:13px}
+button.del{color:var(--danger)}
+.letters{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.letters button{padding:2px 8px;font-size:13px}
+.letters button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.stat{font-size:13px;color:var(--mute);margin:6px 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:12px}
+.box[hidden]{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.grid label{font-size:12px;color:var(--mute);display:flex;flex-direction:column;gap:3px}
+.grid .wide{grid-column:1/-1}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:720px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:13px;color:var(--mute);font-weight:600;position:sticky;top:0;background:var(--card)}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.ok td{background:var(--accbg)}
+.note{display:block;font-size:12px;color:var(--warn);background:var(--warnbg);border-radius:4px;padding:1px 6px;margin-top:3px;width:fit-content}
+.empty{color:var(--mute)}
+.act{white-space:nowrap}
+.foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Daftar Harga TB. Bintek</h1>
+  <p class="sub">Harga jual, diurutkan A-Z. Data disimpan di browser ini. Centang kolom "Dicek" saat sudah diverifikasi.</p>
+
+  <div class="bar">
+    <input id="q" type="search" placeholder="Cari nama, satuan, atau catatan..." aria-label="Cari barang">
+    <select id="f" aria-label="Filter status">
+      <option value="all">Semua</option>
+      <option value="todo">Belum dicek</option>
+      <option value="done">Sudah dicek</option>
+      <option value="nounit">Satuan kosong</option>
+      <option value="note">Ada catatan</option>
+      <option value="nobuy">Harga beli kosong</option>
+    </select>
+    <button class="main" id="add">Tambah barang</button>
+  </div>
+
+  <div class="box" id="fb" hidden>
+    <form id="form" onsubmit="return false">
+      <div class="grid">
+        <label class="wide">Nama barang<input id="fn" required></label>
+        <label>Harga jual (Rp)<input id="fh" type="number" min="0" step="any"></label>
+        <label>Satuan<input id="fs" placeholder="/bh, /mtr, /sak..."></label>
+        <label>Harga beli (Rp)<input id="fb2" type="number" min="0" step="any"></label>
+        <label class="wide">Catatan<input id="fc"></label>
+      </div>
+      <div class="bar" style="margin:10px 0 0">
+        <button class="main" id="save">Simpan</button>
+        <button id="cancel" type="button">Batal</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="letters" id="letters"></div>
+  <div class="stat" id="stat"></div>
+
+  <div class="tw">
+    <table>
+      <thead><tr>
+        <th>Dicek</th><th>Nama barang</th><th class="n">Harga jual</th><th>Satuan</th><th class="n">Harga beli</th><th></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="foot">
+    <button id="csv">Unduh CSV</button>
+    <button id="reset">Kembalikan data awal</button>
+  </div>
+</div>
+
+<script>
+const RAW = `Semen tiga roda|77000|/sak 50 kg|1|1 sak = 10 kresek 5 kg
+Pasir pasang|165000|/kol|2|kol = kolbak, bisa dijual 1/4 dan 1/2
+Pasir cor|185000|/kol|3|kol = kolbak, bisa dijual 1/4 dan 1/2
+Hebel|650000|/m3|4|
+Semen hebel|85000|/sak|5|
+Avian 1/2kg|55000||6|
+Avian 1kg|92000||7|
+Seiv 1kg|85000||8|Arti "Seiv" belum terjawab
+Thiner botol|10000||9|
+Thiner nd 1ltr|35000||10|
+Polytur dx|55000|/klg|11|
+Amplas|10000|/meter|12|
+Paku seri|20000|/kg|13|Ukuran 5, 7, 10, 12. Harga per ukuran belum pasti
+Rol cet kapal|15000|/pcs|14|
+Rol cet besar|35000|/pcs|15|
+Bak cet|10000|/pcs|16|
+Isolasi listrik nitto|15000|/bh|17|
+Saklar broco|22000|/bh|18|
+Colokan broco|15000|/bh|19|
+Fiting lampu broco|18000|/bh|20|
+Pipa listrik|10000|/btg|21|
+Fox klg 1/4kg|13000||22|
+Pacul cap ayam|95000|/pcs|23|
+Gagang pacul|20000|/bh|24|
+Kaso alba 2.5mtr|10000|/btg|25|
+Papan alba 2.5mtr|16000|/lbr|26|
+Grc|50000|/lbr|27|
+Papan gypsum|62000|/lbr|28|
+Karpet talang 55cm|10000|/mtr|29|
+Karpet tang 90cm|15000|/mtr|30|Kemungkinan salah ketik dari "talang", belum pasti
+Fiber pager|25000|/mtr|31|
+Lem pvc tangit|13000|/bh|32|
+Selang PE 1/2"|6500|/mtr|33|
+Sealtape|5000|/bh|34|
+Benang peniti|15000|/bh|35|
+Kran 1/2 pvc|10000|/buah|36|
+Kran model onda|15000|/buah|37|
+Kran gg besi|25000|/buah|38|gg = gagang
+Karbit buah|8000|/bh|39|
+Soda api|15000|/bh|40|
+Kaporit|15000|/bh|41|
+Gembok kecil|15000|/bh|42|
+Gembok sedang|25000|/bh|43|
+Gembok besar|40000|/bh|44|
+Pilox|30000|/bh|45|
+Lem kaca botol|35000|/bh|46|
+Obeng|15000||47|
+Sendok tembok|15000||48|
+Kape gg|20000||49|gg = gagang
+Sikat kawat|15000||50|
+Sikat kuningan|15000||51|
+K besi (Kunci besi)|15000||52|K = kunci (koreksi 8 Nov)
+Pahat beton|25000||53|
+Saringan wc pvc|12000||54|
+Saringan wc stainles|25000||55|
+Meteran 3m|15000||56|
+Meteran 5m|25000||57|
+Meteran 7m|35000||58|
+Kunci pintu|55000||59|
+Gantungan burung|1500||60|Ditulis 1500 tanpa "rb", jadi Rp 1.500
+Amplas bulat|2000||61|
+Cutting wd|5000||62|wd = nama merek
+Kinik potong|15000||63|Arti "kinik" belum terjawab
+Selot jendela|8000||64|
+Selot pintu|15000||65|
+Selot pvc|5000||66|
+Engsel pvc|12000||67|`;
+
+const KEY = 'tb-bintek-harga-v1';
+const $ = id => document.getElementById(id);
+const rp = n => (n === '' || n == null) ? '-' : Number(n).toLocaleString('id-ID');
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function seed() {
+  return RAW.split('\n').map(l => {
+    const [nama, harga, satuan, asal, catatan] = l.split('|');
+    return { id: 'a' + asal, nama, harga: Number(harga), satuan, beli: '', catatan: catatan || '', dicek: false };
+  });
+}
+function load() {
+  try { const d = JSON.parse(localStorage.getItem(KEY)); if (Array.isArray(d)) return d; } catch (e) {}
+  return seed();
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+
+let data = load(), editId = null, letter = '';
+const sortFn = (a, b) => a.nama.localeCompare(b.nama, 'id', { sensitivity: 'base' });
+
+function match(d) {
+  const q = $('q').value.trim().toLowerCase();
+  if (q && !(d.nama + ' ' + d.satuan + ' ' + d.catatan).toLowerCase().includes(q)) return false;
+  if (letter && d.nama[0].toUpperCase() !== letter) return false;
+  switch ($('f').value) {
+    case 'todo': return !d.dicek;
+    case 'done': return d.dicek;
+    case 'nounit': return !d.satuan;
+    case 'note': return !!d.catatan;
+    case 'nobuy': return d.beli === '' || d.beli == null;
+  }
+  return true;
+}
+
+function render() {
+  const all = [...data].sort(sortFn);
+  const letters = [...new Set(all.map(d => d.nama[0].toUpperCase()))];
+  $('letters').innerHTML = '<button data-l="" class="' + (letter ? '' : 'on') + '">Semua</button>' +
+    letters.map(l => '<button data-l="' + l + '" class="' + (letter === l ? 'on' : '') + '">' + l + '</button>').join('');
+  const list = all.filter(match);
+  $('rows').innerHTML = list.length ? list.map(d => (
+    '<tr class="' + (d.dicek ? 'ok' : '') + '">' +
+    '<td><input type="checkbox" data-c="' + d.id + '"' + (d.dicek ? ' checked' : '') + ' aria-label="Sudah dicek: ' + esc(d.nama) + '"></td>' +
+    '<td>' + esc(d.nama) + (d.catatan ? '<span class="note">' + esc(d.catatan) + '</span>' : '') + '</td>' +
+    '<td class="n">' + rp(d.harga) + '</td>' +
+    '<td>' + (d.satuan ? esc(d.satuan) : '<span class="empty">-</span>') + '</td>' +
+    '<td class="n">' + rp(d.beli) + '</td>' +
+    '<td class="act"><button class="sm" data-e="' + d.id + '">Ubah</button> <button class="sm del" data-d="' + d.id + '">Hapus</button></td></tr>'
+  )).join('') : '<tr><td colspan="6" class="empty">Tidak ada barang yang cocok. Ubah kata kunci atau filter.</td></tr>';
+  const done = data.filter(d => d.dicek).length;
+  $('stat').textContent = 'Menampilkan ' + list.length + ' dari ' + data.length + ' barang. Sudah dicek: ' + done + '.';
+}
+
+function openForm(d) {
+  editId = d ? d.id : null;
+  $('fn').value = d ? d.nama : '';
+  $('fh').value = d ? d.harga : '';
+  $('fs').value = d ? d.satuan : '';
+  $('fb2').value = d && d.beli !== '' ? d.beli : '';
+  $('fc').value = d ? d.catatan : '';
+  $('fb').hidden = false;
+  $('fn').focus();
+}
+function closeForm() { $('fb').hidden = true; editId = null; }
+
+$('add').onclick = () => openForm(null);
+$('cancel').onclick = closeForm;
+$('save').onclick = () => {
+  const nama = $('fn').value.trim();
+  if (!nama) { $('fn').focus(); return; }
+  const rec = {
+    nama, harga: $('fh').value === '' ? '' : Number($('fh').value),
+    satuan: $('fs').value.trim(), beli: $('fb2').value === '' ? '' : Number($('fb2').value),
+    catatan: $('fc').value.trim()
+  };
+  if (editId) Object.assign(data.find(d => d.id === editId), rec);
+  else data.push({ id: 'n' + Date.now(), dicek: false, ...rec });
+  save(); closeForm(); render();
+};
+$('q').oninput = render;
+$('f').onchange = render;
+$('letters').onclick = e => { if (e.target.dataset.l !== undefined) { letter = e.target.dataset.l; render(); } };
+$('rows').onclick = e => {
+  const t = e.target;
+  if (t.dataset.e) openForm(data.find(d => d.id === t.dataset.e));
+  if (t.dataset.d) {
+    const d = data.find(x => x.id === t.dataset.d);
+    if (confirm('Hapus "' + d.nama + '"?')) { data = data.filter(x => x.id !== d.id); save(); render(); }
+  }
+};
+$('rows').onchange = e => {
+  if (e.target.dataset.c) { data.find(d => d.id === e.target.dataset.c).dicek = e.target.checked; save(); render(); }
+};
+$('reset').onclick = () => {
+  if (confirm('Kembalikan ke 67 data awal? Perubahan dan barang tambahan akan hilang.')) { data = seed(); save(); render(); }
+};
+$('csv').onclick = () => {
+  const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const rows = [['Nama', 'Harga jual', 'Satuan', 'Harga beli', 'Catatan', 'Dicek']].concat(
+    [...data].sort(sortFn).map(d => [d.nama, d.harga, d.satuan, d.beli, d.catatan, d.dicek ? 'ya' : 'belum']));
+  const blob = new Blob(['\ufeff' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'harga-tb-bintek.csv'; a.click();
+};
+
+render();
+</script>
+</body>
+</html>
