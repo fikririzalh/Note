@@ -164,21 +164,119 @@ Selot pvc|5000||66|
 Engsel pvc|12000||67|`;
 
 const KEY = 'tb-bintek-harga-v1';
+const VER_KEY = 'tb-bintek-seedver';
 const $ = id => document.getElementById(id);
 const rp = n => (n === '' || n == null) ? '-' : Number(n).toLocaleString('id-ID');
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-function seed() {
+const RAW2 = `Kabel serabut|6000|/meter|
+Kabel 2x 1 1/2 biasa|9000|/meter|
+Kabel 3x 1 1/2 biasa|15000|/meter|Tertulis "basa", diduga "biasa"
+Kabel transparan|5000|/meter|
+Tambang 4 mm|1500|/meter|
+Tambang 6 mm|2500|/meter|
+Tambang 9 mm|4500|/meter|
+Engsel pintu 3 inch|15000|/pasang|
+Engsel pintu 4 inch|40000|/pasang|
+Selang 1/2|6000|/meter|Selang PE 1/2" di daftar awal 6500/mtr. Satu barang atau dua?
+Selang 3/4|8000|/meter|
+Ember cor orange kecil|14000||
+Ember cor orange besar|18000||
+Ember cor hijau kecil|8000||
+Ember cor hijau besar|12000||
+Keni 1/2|4000|/biji|Nama dibaca "Keni" (foto: KEN). Jenis barang belum tertulis
+Keni 3/4|5000|/biji|
+Keni 1"|6000|/biji|
+Keni 1 1/2|6000|/biji|Harga sama dengan 1", cek
+Keni 2|8000|/biji|
+Keni 2 1/2|12000|/biji|
+Keni 3|15000|/biji|
+Keni 4|25000|/biji|
+T 1/2|5000|/biji|Jenis barang belum tertulis
+T 3/4|6000|/biji|
+T 1"|7000|/biji|
+T 1 1/2|8000|/biji|
+T 2|12000|/biji|
+T 2 1/2|15000|/biji|
+T 3|20000|/biji|
+T 4|28000|/biji|
+Soket 1/2|4000|/biji|Satuan tidak tertulis, diduga biji. Jenis barang belum tertulis
+Soket 3/4|5000|/biji|
+Soket 1"|6000|/biji|
+Soket 1 1/2|5000|/biji|Lebih murah dari 1" (6000), cek
+Soket 2|7000|/biji|
+Soket 2 1/2|10000|/biji|
+Soket 3|13000|/biji|Tulisan tindih: 13000 atau 15000, cek
+Soket 4|20000|/biji|
+Kuas 1"|5000|/biji|
+Kuas 1 1/2|6000|/biji|
+Kuas 2|7000|/biji|
+Kuas 2 1/2|8000|/biji|
+Kuas 3|10000|/biji|
+Kuas 4|15000|/biji|
+Triplek 3|50000|/lbr|Foto tanpa nol (50), dibaca ribuan. Ukuran diduga mm. Angka 5 tebal, bisa 30
+Triplek 4|60000|/lbr|
+Triplek 6|80000|/lbr|
+Triplek 9|110000|/lbr|Angka 9 tindih, bisa 8
+Triplek 12|170000|/lbr|
+Triplek 15|205000|/lbr|
+Triplek 18|240000|/lbr|
+Besi 6|33000|/btg|Diameter diduga mm. Jenis besi belum tertulis
+Besi 8|47000|/btg|
+Besi 10|70000|/btg|Nol banyak, dibaca 70000, cek
+Besi 12|105000|/btg|
+Fiber gelombang 180x80|60000|/lbr|
+Fiber gelombang 210x80|70000|/lbr|
+Fiber gelombang 240x80|80000|/lbr|
+Fiber gelombang 300x80|90000|/lbr|
+Asbes 180x80|50000|/lbr|
+Asbes 210x105|70000|/lbr|Lebar 105 mirip 125 di foto, dibaca 105
+Asbes 240x105|80000|/lbr|
+Asbes 300x105|115000|/lbr|Lompat jauh dari 240x105 (80000), cek
+Reng Borneo 2x3x4|15000|/btg|Nama dibaca "Borneo". x4 diduga 4 mtr. Angka 3 tindih, bisa 2x2
+Reng Borneo 3x4x4|28000|/btg|
+Kaso Borneo 4x6x4|50000|/btg|
+Kaso Borneo 5x7x4|65000|/btg|
+Balok Borneo 5x10x4|85000|/btg|
+Balok Borneo 6x12x4|135000|/btg|
+Papan Borneo 3x20x4|125000|/lbr|
+Pipa PVC 1/2"|18000|/btg|Jenis pipa (AW/D) belum tertulis
+Pipa PVC 3/4"|20000|/btg|
+Pipa PVC 1"|30000|/btg|
+Pipa PVC 1 1/2"|50000|/btg|Angka tertimpa, bisa 40000
+Pipa PVC 2"|80000|/btg|
+Pipa PVC 2 1/2"|90000|/btg|
+Pipa PVC 3"|135000|/btg|
+Pipa PVC 4"|170000|/btg|`;
+
+function seed1() {
   return RAW.split('\n').map(l => {
     const [nama, harga, satuan, asal, catatan] = l.split('|');
     return { id: 'a' + asal, nama, harga: Number(harga), satuan, beli: '', catatan: catatan || '', dicek: false };
   });
 }
-function load() {
-  try { const d = JSON.parse(localStorage.getItem(KEY)); if (Array.isArray(d)) return d; } catch (e) {}
-  return seed();
+function seed2() {
+  return RAW2.split('\n').map((l, i) => {
+    const [nama, harga, satuan, catatan] = l.split('|');
+    return { id: 'b' + (i + 1), nama, harga: Number(harga), satuan, beli: '', catatan: catatan || '', dicek: false };
+  });
 }
-function save() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+function seed() { return seed1().concat(seed2()); }
+function load() {
+  let d = null;
+  try { const x = JSON.parse(localStorage.getItem(KEY)); if (Array.isArray(x)) d = x; } catch (e) {}
+  if (!d) return seed();
+  let ver = null;
+  try { ver = localStorage.getItem(VER_KEY); } catch (e) {}
+  if (ver !== '2') {
+    const have = new Set(d.map(x => x.id));
+    seed2().forEach(x => { if (!have.has(x.id)) d.push(x); });
+  }
+  return d;
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(data)); localStorage.setItem(VER_KEY, '2'); } catch (e) {}
+}
 
 let data = load(), editId = null, letter = '';
 const sortFn = (a, b) => a.nama.localeCompare(b.nama, 'id', { sensitivity: 'base' });
@@ -257,7 +355,7 @@ $('rows').onchange = e => {
   if (e.target.dataset.c) { data.find(d => d.id === e.target.dataset.c).dicek = e.target.checked; save(); render(); }
 };
 $('reset').onclick = () => {
-  if (confirm('Kembalikan ke 67 data awal? Perubahan dan barang tambahan akan hilang.')) { data = seed(); save(); render(); }
+  if (confirm('Kembalikan ke ' + seed().length + ' data awal? Perubahan dan barang tambahan akan hilang.')) { data = seed(); save(); render(); }
 };
 $('csv').onclick = () => {
   const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
@@ -268,6 +366,7 @@ $('csv').onclick = () => {
   a.href = URL.createObjectURL(blob); a.download = 'harga-tb-bintek.csv'; a.click();
 };
 
+save();
 render();
 </script>
 </body>
